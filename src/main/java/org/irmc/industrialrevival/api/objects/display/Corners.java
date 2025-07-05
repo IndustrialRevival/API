@@ -95,4 +95,8 @@ public class Corners {
     public float getDistanceZ() {
         return Math.abs(maxZ - minZ);
     }
+
+    public Location center() {
+        return new Location(getWorld(), (minX + maxX) / 2, (minY + maxY) / 2, (minZ + maxZ) / 2);
+    }
 }
