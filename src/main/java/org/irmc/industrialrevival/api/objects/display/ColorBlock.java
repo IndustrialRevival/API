@@ -6,17 +6,21 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.TextDisplay;
+import org.bukkit.metadata.MetadataValue;
 import org.irmc.industrialrevival.api.objects.display.builder.TextModelBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -138,6 +142,7 @@ public enum ColorBlock {
         float scaleX = corners.getDistanceX();
         float scaleY = corners.getDistanceY();
         float scaleZ = corners.getDistanceZ();
+        Location center = corners.center();
         var builder = new TextModelBuilder()
                 .setLeftRotation(leftRotation)
                 .setRightRotation(rightRotation)
@@ -146,7 +151,8 @@ public enum ColorBlock {
                 .backgroundColor(color)
                 .text(this.getBaseString())
                 .textOpacity((byte) 5)
-                .brightness(new Display.Brightness(15, 15));
+                .brightness(new Display.Brightness(15, 15))
+                .fixedMetaData(IndustrialRevival.getInstance(), "center", center.getX() + ";" + center.getY() + ";" + center.getZ());
 
         if (textureHandler != null) {
             textureHandler.accept(corners, builder);
@@ -202,5 +208,44 @@ public enum ColorBlock {
         }
 
         return builder.buildAt(location);
+    }
+
+    public static void connect(TextDisplay display1, TextDisplay display2, Consumer<Corners> consumer) {
+        List<MetadataValue> values1 = display1.getMetadata("center");
+        List<MetadataValue> values2 = display2.getMetadata("center");
+        if (values1 == null || values2 == null || values1.isEmpty() || values2.isEmpty()) {
+            return;
+        }
+
+        String scenter1 = values1.get(0).asString();
+        String scenter2 = values2.get(0).asString();
+        String[] split1 = scenter1.split(";");
+        String[] split2 = scenter2.split(";");
+
+        if (split1.length != 3 || split2.length != 3) {
+            return;
+        }
+
+        World world = display1.getWorld();
+
+        Location center1 = new Location(world, Double.parseDouble(split1[0]), Double.parseDouble(split1[1]), Double.parseDouble(split1[2]));
+        Location center2 = new Location(world, Double.parseDouble(split2[0]), Double.parseDouble(split2[1]), Double.parseDouble(split2[2]));
+
+        Corners corners = Corners.of(center1, center2);
+        consumer.accept(corners);
+    }
+
+    @ParametersAreNonnullByDefault
+    public static void connect(TextDisplay display1, TextDisplay display2, Color color) {
+        connect(display1, display2, (corners) -> {
+            makeSurface(corners, color);
+        });
+    }
+
+    @ParametersAreNonnullByDefault
+    public static void connect(TextDisplay display1, TextDisplay display2, Color color, TextureHandler handler) {
+        connect(display1, display2, (corners) -> {
+            makeSurface(corners, color, handler);
+        });
     }
 }
