@@ -21,18 +21,22 @@ import org.irmc.pigeonlib.items.CustomItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Getter
 public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
-    protected MatrixMenuDrawer drawer;
+    public static NamespacedKey GROUP_KEY = KeyUtil.customKey("group");
+    public static NamespacedKey ITEM_KEY = KeyUtil.customKey("item");
     private final Player player;
     private final PlayerProfile playerProfile;
     private final int currentPage;
     private final List<T> items;
     private final Map<Integer, PageableMenu<T>> pages;
+    protected char objSymbol = 'i';
+    protected MatrixMenuDrawer drawer;
 
     public PageableMenu(Component title, Player player, PlayerProfile playerProfile, int currentPage, List<T> items, Map<Integer, PageableMenu<T>> pages) {
         super(title);
@@ -57,6 +61,59 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
         this.items = menu.items;
         this.pages = menu.pages;
         this.drawer = getDrawer();
+    }
+
+    public static ItemStack getDisplayItem0(IndustrialRevivalItem item) {
+        var icon = item.getIcon();
+        var meta = icon.getItemMeta();
+        if (meta == null) {
+            return null;
+        }
+
+        return new CustomItemStack(icon)
+                .setPDCData(ITEM_KEY, PersistentDataType.STRING, item.getKey().toString())
+                .getBukkit();
+    }
+
+    public static ItemStack getDisplayItemInSearch0(IndustrialRevivalItem item) {
+        var icon = item.getIcon();
+        var meta = icon.getItemMeta();
+        if (meta == null) {
+            return null;
+        }
+
+        List<Component> lore = new ArrayList<>();
+        var e = meta.lore();
+        if (e != null) {
+            lore.addAll(e);
+        }
+
+        if (item.getGroup().size() == 1) {
+            var group = item.getGroup().stream().findFirst().get();
+            lore.add(Component.text().append(Component.text(item.getAddon().getName(), TextColor.color(0xea645d))).append(Component.text(" - ", TextColor.color(0x7f7f7f))).append(group.getIcon().displayName()).build());
+        } else {
+            lore.add(Component.text(item.getAddon().getName(), TextColor.color(0xea645d)));
+            for (var group : item.getGroup()) {
+                lore.add(Component.text().append(Component.text(" - ", TextColor.color(0x7f7f7f))).append(group.getIcon().displayName()).build());
+            }
+        }
+        lore.add(Component.text("点击打开", TextColor.color(0x4abfa0)));
+
+        return new CustomItemStack(icon)
+                .lore(lore)
+                .setPDCData(ITEM_KEY, PersistentDataType.STRING, item.getKey().toString())
+                .getBukkit();
+    }
+
+    public static ItemStack getDisplayItem0(ItemGroup group) {
+        return new CustomItemStack(group.getIcon())
+                .lore(List.of(Component.text("点击打开", TextColor.color(0x4abfa0))))
+                .setPDCData(GROUP_KEY, PersistentDataType.STRING, group.getKey().toString())
+                .getBukkit();
+    }
+
+    public static <K> ItemStack getDisplayItem0(Player player, PlayerProfile profile, PlayerSettings<K> clazz) {
+        return clazz.getIcon().apply(profile.getGuideSettings(clazz));
     }
 
     public void recordPage(int page) {
@@ -102,6 +159,7 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void previousPage(Player player, PlayerProfile profile, int currentPage) {
         if (currentPage > 1) {
             var menu = getByPage(currentPage - 1);
@@ -112,6 +170,7 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void nextPage(Player player, PlayerProfile profile, int currentPage) {
         if (currentPage <= maxPage()) {
             var menu = getByPage(currentPage + 1);
@@ -122,7 +181,7 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
     }
 
     public int objsLength() {
-        return this.drawer.getCharPositions("i").length;
+        return this.drawer.getCharPositions(objSymbol).length;
     }
 
     public int maxPage() {
@@ -136,63 +195,6 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
     }
 
     public abstract ItemStack getDisplayItem(T item);
-
-
-    public static ItemStack getDisplayItem0(IndustrialRevivalItem item) {
-        var icon = item.getIcon();
-        var meta = icon.getItemMeta();
-        if (meta == null) {
-            return null;
-        }
-
-        return new CustomItemStack(icon)
-                .setPDCData(ITEM_KEY, PersistentDataType.STRING, item.getKey().toString())
-                .getBukkit();
-    }
-
-    public static ItemStack getDisplayItemInSearch0(IndustrialRevivalItem item) {
-        var icon = item.getIcon();
-        var meta = icon.getItemMeta();
-        if (meta == null) {
-            return null;
-        }
-
-        List<Component> lore = new ArrayList<>();
-        var e = meta.lore();
-        if (e != null) {
-            lore.addAll(e);
-        }
-
-        if (item.getGroup().size() == 1) {
-            var group = item.getGroup().stream().findFirst().get();
-            lore.add(Component.text().append(Component.text(item.getAddon().getName(), TextColor.color(0xea645d))).append(Component.text(" - ", TextColor.color(0x7f7f7f))).append(group.getIcon().displayName()).build());
-        } else {
-            lore.add(Component.text(item.getAddon().getName(), TextColor.color(0xea645d)));
-            for (var group : item.getGroup()) {
-                lore.add(Component.text().append(Component.text(" - ", TextColor.color(0x7f7f7f))).append(group.getIcon().displayName()).build());
-            }
-        }
-        lore.add(Component.text("点击打开", TextColor.color(0x4abfa0)));
-
-        return new CustomItemStack(icon)
-                .lore(lore)
-                .setPDCData(ITEM_KEY, PersistentDataType.STRING, item.getKey().toString())
-                .getBukkit();
-    }
-
-    public static NamespacedKey GROUP_KEY = KeyUtil.customKey("group");
-    public static NamespacedKey ITEM_KEY = KeyUtil.customKey("item");
-
-    public static ItemStack getDisplayItem0(ItemGroup group) {
-        return new CustomItemStack(group.getIcon())
-                .lore(List.of(Component.text("点击打开", TextColor.color(0x4abfa0))))
-                .setPDCData(GROUP_KEY, PersistentDataType.STRING, group.getKey().toString())
-                .getBukkit();
-    }
-
-    public static <K> ItemStack getDisplayItem0(Player player, PlayerProfile profile, PlayerSettings<K> clazz) {
-        return clazz.getIcon().apply(profile.getGuideSettings(clazz));
-    }
 
     public MatrixMenuDrawer getDrawer() {
         if (drawer != null) {

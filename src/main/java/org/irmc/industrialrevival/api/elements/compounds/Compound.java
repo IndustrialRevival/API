@@ -21,10 +21,6 @@ public interface Compound extends Keyed {
     String ELEMENT_NAMESPACE = "element";
     String CHEMICAL_NAMESPACE = "chemical";
 
-    double getMolarMass();
-
-    Map<ElementType, Double> toAtomic();
-
     @Nullable
     static Compound fromKey(NamespacedKey key) {
         for (CompoundReader reader : COMPOUND_READERS) {
@@ -35,4 +31,8 @@ public interface Compound extends Keyed {
 
         return null;
     }
+
+    double getMolarMass();
+
+    Map<ElementType, Double> toAtomic();
 }

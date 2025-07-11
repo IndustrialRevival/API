@@ -10,7 +10,6 @@ import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.menu.handlers.MenuCloseHandler;
 import org.irmc.industrialrevival.api.menu.handlers.MenuOpenHandler;
 import org.irmc.industrialrevival.api.objects.enums.ItemFlow;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;

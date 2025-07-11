@@ -8,10 +8,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.irmc.industrialrevival.api.objects.enums.GuideMode;
 import org.irmc.industrialrevival.core.guide.GuideHistory;
 import org.irmc.industrialrevival.core.guide.GuideSettings;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,11 +36,6 @@ public class PlayerProfile {
 
     @Getter
     private final GuideSettings guideSettings;
-
-    public <T> T getGuideSettings(PlayerSettings<T> clazz) {
-        return getGuideSettings().getPlayerSettings(clazz).get();
-    }
-
     private final Map<NamespacedKey, Boolean> researchStatus;
 
     protected PlayerProfile(
@@ -66,31 +59,6 @@ public class PlayerProfile {
     public static PlayerProfile getProfile(String playerName) {
         return IRDock.getPlugin().getRegistry().getPlayerProfiles().get(playerName);
     }
-
-    /*
-    public void research(NamespacedKey key) {
-        if (hasResearched(key)) {
-            return;
-        }
-
-        Research research = Research.getResearch(key);
-        if (research == null) {
-            return;
-        }
-
-        if (player.getExpToLevel() < research.getRequiredExpLevel()) {
-            IRDock.getPlugin().getLanguageManager().sendMessage(player, "research.not_enough_exp");
-            return;
-        }
-
-        player.giveExpLevels(-research.getRequiredExpLevel());
-        researchStatus.put(key, true);
-
-        IRDock.getPlugin()
-                .getLanguageManager()
-                .sendMessage(player, "research.success", new MessageReplacement("%name%", research.getName()));
-    }
-     */
 
     @NotNull
     @CanIgnoreReturnValue
@@ -123,6 +91,35 @@ public class PlayerProfile {
         IRDock.getPlugin().getRegistry().getPlayerProfiles().put(name, profile);
 
         return profile;
+    }
+
+    /*
+    public void research(NamespacedKey key) {
+        if (hasResearched(key)) {
+            return;
+        }
+
+        Research research = Research.getResearch(key);
+        if (research == null) {
+            return;
+        }
+
+        if (player.getExpToLevel() < research.getRequiredExpLevel()) {
+            IRDock.getPlugin().getLanguageManager().sendMessage(player, "research.not_enough_exp");
+            return;
+        }
+
+        player.giveExpLevels(-research.getRequiredExpLevel());
+        researchStatus.put(key, true);
+
+        IRDock.getPlugin()
+                .getLanguageManager()
+                .sendMessage(player, "research.success", new MessageReplacement("%name%", research.getName()));
+    }
+     */
+
+    public <T> T getGuideSettings(PlayerSettings<T> clazz) {
+        return getGuideSettings().getPlayerSettings(clazz).get();
     }
 
     public boolean hasResearched(NamespacedKey key) {

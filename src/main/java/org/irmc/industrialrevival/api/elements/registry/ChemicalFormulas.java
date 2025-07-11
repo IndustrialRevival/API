@@ -17,6 +17,7 @@ public class ChemicalFormulas {
 
         return null;
     }
+
     public static void setup() {
         int id = 148000;
         new ChemicalFormula(

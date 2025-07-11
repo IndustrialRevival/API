@@ -12,7 +12,6 @@ import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.menu.MachineMenu;
 import org.irmc.industrialrevival.api.menu.MachineMenuPreset;
 import org.irmc.industrialrevival.api.objects.IRBlockData;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -220,7 +219,7 @@ public class DataUtil {
      * Retrieves the value associated with the specified key from the PersistentDataContainer (PDC).
      *
      * @param itemStack The ItemStack to retrieve the data from.
-     * @param key    The key to retrieve the value for.
+     * @param key       The key to retrieve the value for.
      * @return The value associated with the key, or null if the key does not exist.
      */
     @Nullable

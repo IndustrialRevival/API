@@ -8,7 +8,6 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
 import org.irmc.industrialrevival.api.IndustrialRevivalAddon;
 import org.irmc.industrialrevival.api.objects.display.builder.AbstractModelBuilder;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.jetbrains.annotations.NotNull;
 

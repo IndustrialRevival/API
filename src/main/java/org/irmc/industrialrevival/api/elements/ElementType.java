@@ -148,7 +148,7 @@ public enum ElementType {
     public static final ElementType Tin = Sn;
     public static final ElementType Antimony = Sb;
     public static final ElementType Tungsten = W;
-    public static final ElementType Wolfram   = W;
+    public static final ElementType Wolfram = W;
 
     private final String symbol;
     private final double relativeAtomicMass;

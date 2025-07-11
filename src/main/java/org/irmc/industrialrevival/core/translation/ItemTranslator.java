@@ -7,20 +7,16 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.Debug;
 import org.irmc.industrialrevival.utils.KeyUtil;
 
 public class ItemTranslator {
     public static final NamespacedKey TRANSLATE_KEY = KeyUtil.customKey("ir_translate_key");
+
     public static void setup() {
         IRDock.getPlugin().getProtocolManager().addPacketListener(new PacketAdapter(
                 IRDock.getPlugin(),
@@ -36,8 +32,8 @@ public class ItemTranslator {
                 Debug.log("modifiers: " + packet.getModifier());
                 Debug.log("array: " + packet.getItemArrayModifier());
                 Debug.log("slots:" + packet.getItemSlots());
-                Debug.log("items: "+ packet.getItemModifier());
-                if  (packet.getItemArrayModifier().size() > 0) {
+                Debug.log("items: " + packet.getItemModifier());
+                if (packet.getItemArrayModifier().size() > 0) {
                     Debug.log("Translating 2");
                     ItemStack[] items = packet.getItemArrayModifier().read(0);
 
@@ -49,7 +45,7 @@ public class ItemTranslator {
                     }
 
                     packet.getItemArrayModifier().write(0, items);
-                 }
+                }
             }
         });
     }

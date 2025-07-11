@@ -5,7 +5,6 @@ import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.elements.melt.MeltedType;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerType;
 import org.irmc.industrialrevival.api.items.attributes.TinkerProduct;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 
 @Getter
 public class TinkerProductItem extends IndustrialRevivalItem implements TinkerProduct {

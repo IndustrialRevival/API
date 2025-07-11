@@ -18,6 +18,9 @@ public class ReactOperation implements IOperation {
     private final Map<ChemicalCompound, Double> consume;
     private final Map<ChemicalCompound, Double> produce;
 
+    public static ReactOperation warp(ReactResult reactResult) {
+        return new ReactOperation(reactResult.formula(), reactResult.getConsume(), reactResult.getProduce());
+    }
 
     @Override
     public void tick() {
@@ -35,9 +38,5 @@ public class ReactOperation implements IOperation {
     @Override
     public int getTotalProgress() {
         return 0;
-    }
-
-    public static ReactOperation warp(ReactResult reactResult) {
-        return new ReactOperation(reactResult.formula(), reactResult.getConsume(), reactResult.getProduce());
     }
 }

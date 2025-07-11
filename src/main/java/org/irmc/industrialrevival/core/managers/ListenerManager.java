@@ -16,9 +16,7 @@ import org.irmc.industrialrevival.core.listeners.MultiblockTicker;
 import org.irmc.industrialrevival.core.listeners.NotPlaceableListener;
 import org.irmc.industrialrevival.core.listeners.PlayerJoinListener;
 import org.irmc.industrialrevival.core.listeners.RespondTimingListener;
-import org.irmc.industrialrevival.core.listeners.TranslateUpdater;
 import org.irmc.industrialrevival.core.listeners.UnusableItemListener;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 
 import java.util.ArrayList;
 import java.util.List;

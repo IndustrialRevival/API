@@ -31,7 +31,7 @@ import org.irmc.industrialrevival.api.recipes.methods.BlockDropMethod;
 import org.irmc.industrialrevival.api.recipes.methods.MeltMethod;
 import org.irmc.industrialrevival.api.recipes.methods.MobDropMethod;
 import org.irmc.industrialrevival.api.recipes.methods.ProduceMethod;
-import org.irmc.industrialrevival.api.IndustrialRevival;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Debug;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -64,9 +64,6 @@ public final class IRRegistry {
     private final Set<ProduceMethod> produceMethods;
     private final Map<MeltedType, Map<TinkerType, TinkerProduct>> tinkerMap;
     private final Map<Integer, ChemicalFormula> chemicalFormulas;
-    public ChemicalFormula getById(int id) {
-        return chemicalFormulas.get(id);
-    }
 
     public IRRegistry() {
         itemGroups = new HashMap<>();
@@ -84,6 +81,14 @@ public final class IRRegistry {
         produceMethods = new HashSet<>();
         tinkerMap = new HashMap<>();
         chemicalFormulas = new HashMap<>();
+    }
+
+    public static IRRegistry getInstance() {
+        return IRDock.getPlugin().getRegistry();
+    }
+
+    public ChemicalFormula getById(int id) {
+        return chemicalFormulas.get(id);
     }
 
     public void registerMultiBlock(MultiBlock multiBlock) {

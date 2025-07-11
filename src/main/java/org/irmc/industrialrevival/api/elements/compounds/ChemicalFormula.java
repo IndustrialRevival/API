@@ -3,7 +3,6 @@ package org.irmc.industrialrevival.api.elements.compounds;
 import com.google.common.base.Preconditions;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.SneakyThrows;
 import lombok.ToString;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -11,7 +10,6 @@ import org.irmc.industrialrevival.api.elements.reaction.ReactCondition;
 import org.irmc.industrialrevival.api.machines.process.Environment;
 import org.irmc.industrialrevival.api.objects.CiFunction;
 import org.irmc.industrialrevival.api.objects.exceptions.UnknownChemicalCompoundException;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.irmc.industrialrevival.utils.Debug;
 import org.irmc.industrialrevival.utils.NumberUtil;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +21,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.BiFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -39,11 +36,12 @@ import java.util.stream.Collectors;
 public class ChemicalFormula {
     public static final Pattern NUMBER_PATTERN = Pattern.compile("^(\\d+)");
     private final int id;
+    private @Nullable
+    final ConditionSensor conditionSensor;
+    private final @NotNull String rawFormula;
     private @NotNull Map<ChemicalCompound, Integer> input; // molar mass of each compound
     private @NotNull Map<ChemicalCompound, Integer> output; // molar mass of each compound
-    private @Nullable final ConditionSensor conditionSensor;
     private @NotNull Set<ReactCondition> conditions;
-    private final @NotNull String rawFormula;
 
     public ChemicalFormula(int id, @NotNull String formula) {
         this(id, formula, new HashSet<>());
@@ -52,7 +50,7 @@ public class ChemicalFormula {
     /**
      * Constructor.
      *
-     * @param id     the id of the formula
+     * @param id      the id of the formula
      * @param formula the chemical formula string
      */
     public ChemicalFormula(int id, @NotNull String formula, @NotNull ReactCondition condition) {
@@ -62,7 +60,7 @@ public class ChemicalFormula {
     /**
      * Constructor.
      *
-     * @param id     the id of the formula
+     * @param id      the id of the formula
      * @param formula the chemical formula string
      */
     public ChemicalFormula(int id, @NotNull String formula, @NotNull ReactCondition... conditions) {
@@ -72,7 +70,7 @@ public class ChemicalFormula {
     /**
      * Constructor.
      *
-     * @param id     the id of the formula
+     * @param id      the id of the formula
      * @param formula the chemical formula string
      */
     public ChemicalFormula(int id, @NotNull String formula, @NotNull Set<ReactCondition> conditions) {
@@ -82,7 +80,7 @@ public class ChemicalFormula {
     /**
      * Constructor.
      *
-     * @param id        the key of the formula
+     * @param id         the key of the formula
      * @param formula    the chemical formula string
      * @param conditions the conditions for the reaction
      * @apiNote The conditions are optional and can be null.

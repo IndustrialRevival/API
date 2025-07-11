@@ -29,8 +29,13 @@ import java.util.List;
 @Getter
 public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
     public static final NamespacedKey PAGE_KEY = KeyUtil.customKey("current_page");
+
     public SimpleRecipeDisplayMenu(Player player, IndustrialRevivalItem item) {
-        this(item.getItemName(), player, PlayerProfile.getProfile(player), 1, RecipeContents.getRecipeContents(item.getId()));
+        this(player, item, 1);
+    }
+
+    public SimpleRecipeDisplayMenu(Player player, IndustrialRevivalItem item, int page) {
+        this(item.getItemName(), player, PlayerProfile.getProfile(player), page, RecipeContents.getRecipeContents(item.getId()));
     }
 
     public SimpleRecipeDisplayMenu(Component title, Player p, PlayerProfile playerProfile, int currentPage, List<RecipeContent> contents) {

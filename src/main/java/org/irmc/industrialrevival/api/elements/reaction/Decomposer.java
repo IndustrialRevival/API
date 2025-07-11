@@ -3,8 +3,6 @@ package org.irmc.industrialrevival.api.elements.reaction;
 import lombok.Data;
 import org.bukkit.Location;
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalCompound;
-import org.irmc.industrialrevival.api.elements.tinker.IRTinkerType;
-import org.irmc.industrialrevival.api.elements.tinker.TinkerType;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerTypes;
 import org.irmc.industrialrevival.api.items.attributes.CompoundContainerHolder;
 

@@ -11,8 +11,8 @@ import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.api.IndustrialRevival;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Constants;
 import org.jetbrains.annotations.NotNull;
 

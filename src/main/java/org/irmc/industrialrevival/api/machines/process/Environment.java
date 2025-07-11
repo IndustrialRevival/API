@@ -31,22 +31,14 @@ public class Environment implements Cloneable {
         return (double) data.getOrDefault(TEMPERATURE_KEY, DEFAULT_VALUE);
     }
 
-    public double getPressure() {
-        return (double) data.getOrDefault(PRESSURE_KEY, DEFAULT_VALUE);
-    }
-
-    public double getHumidity() {
-        return (double) data.getOrDefault(HUMIDITY_KEY, DEFAULT_VALUE);
-    }
-
-    public double getRadiation() {
-        return (double) data.getOrDefault(RADIATION_KEY, DEFAULT_VALUE);
-    }
-
     @CanIgnoreReturnValue
     public Environment setTemperature(double temperature) {
         data.put(TEMPERATURE_KEY, temperature);
         return this;
+    }
+
+    public double getPressure() {
+        return (double) data.getOrDefault(PRESSURE_KEY, DEFAULT_VALUE);
     }
 
     @CanIgnoreReturnValue
@@ -55,10 +47,18 @@ public class Environment implements Cloneable {
         return this;
     }
 
+    public double getHumidity() {
+        return (double) data.getOrDefault(HUMIDITY_KEY, DEFAULT_VALUE);
+    }
+
     @CanIgnoreReturnValue
     public Environment setHumidity(double humidity) {
         data.put(HUMIDITY_KEY, humidity);
         return this;
+    }
+
+    public double getRadiation() {
+        return (double) data.getOrDefault(RADIATION_KEY, DEFAULT_VALUE);
     }
 
     public Environment setRadiation(double radiation) {

@@ -43,6 +43,14 @@ public class BlockRecord {
     @Column
     private String data;
 
+    public static BlockRecord warp(Location location, NamespacedKey id) {
+        return new BlockRecord(id.toString(), location.getWorld().getName(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), "");
+    }
+
+    public static BlockRecord warp(IRBlockData blockData) {
+        return new BlockRecord(blockData.getId().toString(), blockData.getLocation().getWorld().getName(), blockData.getLocation().getBlockX(), blockData.getLocation().getBlockY(), blockData.getLocation().getBlockZ(), blockData.getData().saveToString());
+    }
+
     public Location getLocation() {
         World bk = Bukkit.getWorld(world);
         return bk == null ? new Location(null, x, y, z) : new Location(bk, x, y, z);
@@ -62,13 +70,5 @@ public class BlockRecord {
     public ConfigurationSection getData() {
         StringReader reader = new StringReader(data);
         return YamlConfiguration.loadConfiguration(reader);
-    }
-
-    public static BlockRecord warp(Location location, NamespacedKey id) {
-        return new BlockRecord(id.toString(), location.getWorld().getName(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), "");
-    }
-
-    public static BlockRecord warp(IRBlockData blockData) {
-        return new BlockRecord(blockData.getId().toString(), blockData.getLocation().getWorld().getName(), blockData.getLocation().getBlockX(), blockData.getLocation().getBlockY(), blockData.getLocation().getBlockZ(), blockData.getData().saveToString());
     }
 }

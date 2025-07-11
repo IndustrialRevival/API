@@ -7,7 +7,6 @@ import org.irmc.industrialrevival.api.elements.melt.MeltedTank;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.attributes.TankFuel;
 import org.irmc.industrialrevival.api.recipes.methods.MeltMethod;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.irmc.pigeonlib.items.ItemUtils;
 import org.jetbrains.annotations.NotNull;
 

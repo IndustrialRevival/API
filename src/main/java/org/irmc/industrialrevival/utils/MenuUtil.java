@@ -476,6 +476,7 @@ public class MenuUtil {
 
     /**
      * Gets a previous page button for the specified page.
+     *
      * @param player  The player to get the button for.
      * @param page    The page to get the button for.
      * @param maxPage The maximum page.
@@ -493,9 +494,10 @@ public class MenuUtil {
 
     /**
      * Gets a next page button for the specified page.
-     * @param player   The player to get the button for.
-     * @param page     The page to get the button for.
-     * @param maxPage  The maximum page.
+     *
+     * @param player  The player to get the button for.
+     * @param page    The page to get the button for.
+     * @param maxPage The maximum page.
      * @return The next page button.
      */
     @NotNull

@@ -66,8 +66,8 @@ public class ReactHelper {
     /**
      * React the reactables with the conditions
      *
-     * @param conditions    the conditions of the reaction
-     * @param reactants the masses of the reactants
+     * @param conditions the conditions of the reaction
+     * @param reactants  the masses of the reactants
      * @return the getProduce of the reaction
      */
     @NotNull
@@ -94,8 +94,8 @@ public class ReactHelper {
     /**
      * React the reactables with the conditions
      *
-     * @param conditions    the conditions of the reaction
-     * @param reactants the masses of the reactants
+     * @param conditions the conditions of the reaction
+     * @param reactants  the masses of the reactants
      * @return the getProduce of the reaction
      */
     @NotNull
@@ -164,9 +164,9 @@ public class ReactHelper {
     /**
      * Calculate the output of a reaction
      *
-     * @param conditions    the conditions of the reaction
-     * @param reactants the masses of the reactants
-     * @param formula       the chemical formula of the reaction
+     * @param conditions the conditions of the reaction
+     * @param reactants  the masses of the reactants
+     * @param formula    the chemical formula of the reaction
      * @return the getProduce of the reaction
      */
     @NotNull
@@ -177,10 +177,10 @@ public class ReactHelper {
     /**
      * Calculate the output of a reaction
      *
-     * @param conditions    the conditions of the reaction
-     * @param reactants the masses of the reactants
-     * @param formula       the chemical formula of the reaction
-     * @param reactAll      if true, the reaction will react all the reactants
+     * @param conditions the conditions of the reaction
+     * @param reactants  the masses of the reactants
+     * @param formula    the chemical formula of the reaction
+     * @param reactAll   if true, the reaction will react all the reactants
      * @return the getProduce of the reaction
      */
     @NotNull
