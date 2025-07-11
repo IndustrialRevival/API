@@ -2,7 +2,7 @@ package org.irmc.industrialrevival.utils;
 
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
+import org.irmc.industrialrevival.api.IndustrialRevival;
 
 /**
  * This utility class provides methods for creating custom {@link NamespacedKey} instances.

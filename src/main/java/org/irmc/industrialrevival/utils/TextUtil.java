@@ -4,7 +4,7 @@ import lombok.experimental.UtilityClass;
 import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
+import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.jetbrains.annotations.Contract;
 
 import javax.annotation.Nonnull;

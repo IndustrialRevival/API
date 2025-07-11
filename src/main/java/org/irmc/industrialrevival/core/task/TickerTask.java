@@ -13,7 +13,7 @@ import org.irmc.industrialrevival.api.objects.events.ir.BlockTickEvent;
 import org.irmc.industrialrevival.api.objects.events.ir.TickDoneEvent;
 import org.irmc.industrialrevival.api.objects.events.ir.TickStartEvent;
 import org.irmc.industrialrevival.core.data.BlockRecord;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
+import org.irmc.industrialrevival.api.IndustrialRevival;
 
 import java.util.HashMap;
 import java.util.Map;

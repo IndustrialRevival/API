@@ -11,6 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.metadata.MetadataValue;
+import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.irmc.industrialrevival.api.objects.display.builder.TextModelBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;

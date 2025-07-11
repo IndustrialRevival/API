@@ -18,7 +18,7 @@ import org.irmc.industrialrevival.api.menu.gui.SimpleRecipeDisplayMenu;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
 import org.irmc.industrialrevival.core.guide.GuideHistory;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
+import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.irmc.pigeonlib.items.CustomItemStack;
 
 /**
