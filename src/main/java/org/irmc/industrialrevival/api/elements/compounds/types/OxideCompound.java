@@ -1,9 +1,9 @@
 package org.irmc.industrialrevival.api.elements.compounds.types;
 
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalCompound;
-import org.irmc.industrialrevival.api.elements.registry.ChemicalCompounds;
 import org.irmc.industrialrevival.api.elements.compounds.Compound;
 import org.irmc.industrialrevival.api.elements.compounds.classes.Oxide;
+import org.irmc.industrialrevival.api.elements.registry.ChemicalCompounds;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;

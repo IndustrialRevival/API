@@ -4,7 +4,6 @@ import com.tcoded.folialib.wrapper.task.WrappedTask;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.irmc.industrialrevival.api.objects.events.ir.IndustrialRevivalFinalizedEvent;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
 
 import java.util.ArrayList;
 import java.util.List;

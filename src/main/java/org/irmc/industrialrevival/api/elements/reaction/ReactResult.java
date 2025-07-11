@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * The getProduce of a chemical reaction.
  *
- * @param formula The formula of the reaction.
+ * @param formula    The formula of the reaction.
  * @param getConsume The consumed compounds.
  * @param getProduce The product of the reaction.
  * @author lijinhong11

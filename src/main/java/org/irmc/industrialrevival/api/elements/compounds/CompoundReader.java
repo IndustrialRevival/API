@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class CompoundReader {
     public abstract boolean adapter(@NotNull NamespacedKey key);
+
     @NotNull
     public abstract Compound read(@NotNull NamespacedKey key);
 

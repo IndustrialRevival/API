@@ -1,39 +1,43 @@
 package org.irmc.industrialrevival.api.menu.gui;
 
+import lombok.Getter;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.groups.ItemGroup;
+import org.irmc.industrialrevival.api.items.groups.NestedItemGroup;
 import org.irmc.industrialrevival.api.menu.MatrixMenuDrawer;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
-import org.irmc.industrialrevival.core.services.IRRegistry;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainMenu extends PageableMenu<ItemGroup> {
-    public MainMenu(Player player) {
-        this(player, 1);
+@Getter
+public class NestedGroupMenu extends PageableMenu<ItemGroup> {
+    private NestedItemGroup itemGroup;
+
+    public NestedGroupMenu(Player player, NestedItemGroup itemGroup) {
+        this(player, itemGroup, 1);
     }
 
-    public MainMenu(Player player, int page) {
-        this(Component.text("工业复兴指南书", TextColor.color(0xFF5700)), player, PlayerProfile.getProfile(player), page, getDisplayableItemGroups(player), new HashMap<>());
+    public NestedGroupMenu(Player player, NestedItemGroup itemGroup, int page) {
+        this(itemGroup.getIcon().displayName(), player, PlayerProfile.getProfile(player), page, itemGroup.getSubItemGroups(), new HashMap<>());
+        this.itemGroup = itemGroup;
     }
 
-    public MainMenu(Component title, Player player, PlayerProfile playerProfile, int currentPage, List<ItemGroup> items, Map<Integer, PageableMenu<ItemGroup>> pages) {
+    public NestedGroupMenu(Component title, Player player, PlayerProfile playerProfile, int currentPage, List<ItemGroup> items, Map<Integer, PageableMenu<ItemGroup>> pages) {
         super(title, player, playerProfile, currentPage, items, pages);
-        drawer.addExplain(objSymbol, "Item group");
+        drawer.addExplain(objSymbol, "Item");
 
         ClickHandler clickHandler = (p, i, s, m, t) -> {
             var n = NamespacedKey.fromString(DataUtil.getPDC(i.getItemMeta(), PageableMenu.GROUP_KEY, PersistentDataType.STRING));
@@ -47,50 +51,32 @@ public class MainMenu extends PageableMenu<ItemGroup> {
         };
 
         List<ItemGroup> cropped = crop(currentPage);
-        for (var item : cropped) {
-            if (!insertFirstEmpty(getDisplayItem(item), clickHandler, drawer.getCharPositions(objSymbol))) {
+        for (var sub : cropped) {
+            if (!insertFirstEmpty(getDisplayItem(sub), clickHandler, drawer.getCharPositions(objSymbol))) {
                 break;
             }
         }
 
+        GuideUtil.addToHistory(playerProfile.getGuideHistory(), this);
     }
 
-    public static List<ItemGroup> getDisplayableItemGroups(Player player) {
-        List<ItemGroup> itemGroups = new ArrayList<>();
-        for (var i : IRRegistry.getInstance().getItemGroups().values()) {
-            if (!i.isOnlyVisibleByAdmins() || player.isOp()) {
-                itemGroups.add(i);
-            }
-        }
-
-        return itemGroups;
-    }
-
-    @Override
-    public void open(Player... players) {
-        for (Player p : players) {
-            open(p);
-        }
-    }
-
-    public void open(Player player) {
-        GuideUtil.addToHistory(PlayerProfile.getProfile(player).getGuideHistory(), this);
-        super.open(player);
+    public ItemStack getDisplayItem(ItemGroup sub) {
+        return PageableMenu.getDisplayItem0(sub);
     }
 
     @Override
     public PageableMenu<ItemGroup> newMenu(PageableMenu<ItemGroup> menu, int newPage) {
-        return new MainMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems(), menu.getPages());
+        return new NestedGroupMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems(), menu.getPages());
     }
 
-    public ItemStack getDisplayItem(ItemGroup group) {
-        return PageableMenu.getDisplayItem0(group);
+    public ItemStack getDisplayItem(IndustrialRevivalItem item) {
+        return PageableMenu.getDisplayItem0(item);
     }
 
     @Nonnull
     public MatrixMenuDrawer newDrawer() {
         this.drawer = new MatrixMenuDrawer(54)
-                .addLine("BTBBBBBSB")
+                .addLine("BbBBBBBSB")
                 .addLine("iiiiiiiii")
                 .addLine("iiiiiiiii")
                 .addLine("iiiiiiiii")

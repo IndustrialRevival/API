@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.handlers.BlockTicker;
 import org.irmc.industrialrevival.api.objects.ChunkPosition;
@@ -13,7 +14,6 @@ import org.irmc.industrialrevival.api.objects.events.ir.BlockTickEvent;
 import org.irmc.industrialrevival.api.objects.events.ir.TickDoneEvent;
 import org.irmc.industrialrevival.api.objects.events.ir.TickStartEvent;
 import org.irmc.industrialrevival.core.data.BlockRecord;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
 
 import java.util.HashMap;
 import java.util.Map;

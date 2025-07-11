@@ -1,6 +1,5 @@
 package org.irmc.industrialrevival.api.player;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -75,7 +74,7 @@ public class PlayerSettings<T> implements ClickHandler, Cloneable {
     public boolean onClick(@NotNull Player player, @Nullable ItemStack clickedItem, @Range(from = 0, to = 53) int clickedSlot, @NotNull SimpleMenu clickedMenu, @NotNull ClickType clickType) {
         var profile = PlayerProfile.getProfile(player);
         if (value instanceof Boolean b) {
-            profile.getGuideSettings().setGuideSettings(this, (T) (Boolean)!b);
+            profile.getGuideSettings().setGuideSettings(this, (T) (Boolean) !b);
         }
 
         if (value instanceof GuideMode gm) {

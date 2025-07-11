@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
-import org.bukkit.permissions.ServerOperator;
 import org.irmc.industrialrevival.api.objects.enums.GuideMode;
 import org.irmc.industrialrevival.api.player.PlayerSettings;
 import org.irmc.industrialrevival.utils.KeyUtil;
@@ -70,18 +69,6 @@ public class GuideSettings {
 
     public final Map<NamespacedKey, PlayerSettings<?>> settings;
 
-    public <T> PlayerSettings<T> getPlayerSettings(PlayerSettings<T> clazz) {
-        return (PlayerSettings<T>) settings.get(clazz.getKey());
-    }
-
-    public <T> PlayerSettings<T> getPlayerSettings(NamespacedKey key) {
-        return (PlayerSettings<T>) settings.get(key);
-    }
-
-    public <T> void setGuideSettings(PlayerSettings<T> clazz, T value) {
-        getPlayerSettings(clazz).setValue(value);
-    }
-
     public GuideSettings(Map<NamespacedKey, PlayerSettings<?>> settings) {
         this.settings = settings;
     }
@@ -97,5 +84,17 @@ public class GuideSettings {
         }
 
         return of(map);
+    }
+
+    public <T> PlayerSettings<T> getPlayerSettings(PlayerSettings<T> clazz) {
+        return (PlayerSettings<T>) settings.get(clazz.getKey());
+    }
+
+    public <T> PlayerSettings<T> getPlayerSettings(NamespacedKey key) {
+        return (PlayerSettings<T>) settings.get(key);
+    }
+
+    public <T> void setGuideSettings(PlayerSettings<T> clazz, T value) {
+        getPlayerSettings(clazz).setValue(value);
     }
 }

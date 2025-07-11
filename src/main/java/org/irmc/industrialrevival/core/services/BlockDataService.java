@@ -3,13 +3,11 @@ package org.irmc.industrialrevival.core.services;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.irmc.industrialrevival.api.menu.MachineMenu;
 import org.irmc.industrialrevival.api.menu.MachineMenuPreset;
 import org.irmc.industrialrevival.api.objects.IRBlockData;
 import org.irmc.industrialrevival.core.data.BlockRecord;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
 import org.irmc.industrialrevival.utils.Debug;
 
 import java.util.HashMap;

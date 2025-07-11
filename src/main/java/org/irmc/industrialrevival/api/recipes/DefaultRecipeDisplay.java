@@ -12,11 +12,11 @@ import org.irmc.industrialrevival.api.items.attributes.RecipeDisplayItem;
 import org.irmc.industrialrevival.api.menu.SimpleMenu;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.objects.CustomItemStack;
-import org.irmc.industrialrevival.core.guide.IRGuideImplementation;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
-import org.irmc.industrialrevival.implementation.guide.SurvivalGuideImplementation;
+import org.irmc.industrialrevival.api.player.PlayerProfile;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.CleanedItemGetter;
 import org.irmc.industrialrevival.utils.Constants;
+import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.pigeonlib.items.ItemUtils;
 
 import java.util.ArrayList;
@@ -34,9 +34,8 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
 
     @Override
     public void display(Player p, SimpleMenu sm, IndustrialRevivalItem item) {
-        IRGuideImplementation guide = SurvivalGuideImplementation.INSTANCE;
         sm.setItem(0, Constants.Buttons.BACK_BUTTON.apply(p), ((player, _, _, _, _) -> {
-            guide.goBack(player);
+            PlayerProfile.getProfile(p).getGuideHistory().goBack();
             return false;
         }));
 
@@ -63,7 +62,7 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
         }
 
         sm.setItem(28, Constants.Buttons.ADD_TO_BOOKMARK_BUTTON.apply(p), (player, _, _, _, _) -> {
-            SurvivalGuideImplementation.INSTANCE.addBookmark(player, item);
+            GuideUtil.addBookmark(player, item);
             return false;
         });
 
@@ -201,11 +200,9 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
             }
         }
 
-        IRGuideImplementation guide = SurvivalGuideImplementation.INSTANCE;
-
         if (allAvailableRecipeContents.isEmpty()) {
             sm.setItem(0, Constants.Buttons.BACK_BUTTON.apply(p), ((player, _, _, _, _) -> {
-                guide.goBack(player);
+                PlayerProfile.getProfile(p).getGuideHistory().goBack();
                 return false;
             }));
             sm.setItem(Constants.ItemStacks.BACKGROUND_ITEM, ClickHandler.DEFAULT, 1, 2, 3, 4, 5, 6, 7, 8);
@@ -278,9 +275,8 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
     }
 
     private void setBorder(SimpleMenu sm, Player p, RecipeContent rc) {
-        IRGuideImplementation guide = SurvivalGuideImplementation.INSTANCE;
         sm.setItem(0, Constants.Buttons.BACK_BUTTON.apply(p), ((player, _, _, _, _) -> {
-            guide.goBack(player);
+            PlayerProfile.getProfile(p).getGuideHistory().goBack();
             pageRecord.remove(player.getUniqueId());
             return false;
         }));

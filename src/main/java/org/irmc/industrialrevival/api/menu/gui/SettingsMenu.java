@@ -29,9 +29,10 @@ public class SettingsMenu extends PageableMenu<PlayerSettings<?>> {
 
     public SettingsMenu(Component title, Player p, PlayerProfile playerProfile, int currentPage, List<PlayerSettings<?>> settings, Map<Integer, PageableMenu<PlayerSettings<?>>> pages) {
         super(title, p, playerProfile, currentPage, settings, pages);
+        drawer.addExplain(objSymbol, "Settings");
 
-        ClickHandler clickHandler = (p2 ,i, s, m, t) -> {
-            int[] slots = getDrawer().getCharPositions('i');
+        ClickHandler clickHandler = (p2, i, s, m, t) -> {
+            int[] slots = getDrawer().getCharPositions(objSymbol);
             int index = 0;
             for (var s2 : slots) {
                 if (s2 != s) {

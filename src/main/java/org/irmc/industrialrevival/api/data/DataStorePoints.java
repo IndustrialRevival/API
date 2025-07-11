@@ -2,7 +2,9 @@ package org.irmc.industrialrevival.api.data;
 
 import com.google.common.base.Preconditions;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DataStorePoints {

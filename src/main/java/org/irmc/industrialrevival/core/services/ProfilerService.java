@@ -13,7 +13,6 @@ import org.irmc.industrialrevival.api.objects.ChunkPosition;
 import org.irmc.industrialrevival.api.objects.PerformanceSummary;
 import org.irmc.industrialrevival.api.objects.TimingViewRequest;
 import org.irmc.industrialrevival.core.task.TickerTask;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
 import org.irmc.industrialrevival.utils.NumberUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

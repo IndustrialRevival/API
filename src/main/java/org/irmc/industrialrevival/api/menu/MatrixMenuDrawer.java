@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// todo: add item flow control
-
 /**
  * Provides a matrix-based menu creation system for defining inventory layouts using character mappings.
  * Allows creation of interactive menus by associating characters with items and click handlers.
@@ -98,6 +96,7 @@ public class MatrixMenuDrawer implements Cloneable {
 
     /**
      * Maps character to click handler
+     *
      * @param s       String representing menu row (should match inventory row length)
      * @param comment hard coded comment for reviewers
      * @return This drawer instance for chaining
@@ -108,8 +107,9 @@ public class MatrixMenuDrawer implements Cloneable {
 
     /**
      * Maps character to click handler
-     * @param c         Matrix character to define
-     * @param comment   hard coded comment for reviewers
+     *
+     * @param c            Matrix character to define
+     * @param comment      hard coded comment for reviewers
      * @param clickHandler click handler for the item
      * @return This drawer instance for chaining
      */

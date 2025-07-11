@@ -22,7 +22,6 @@ import org.irmc.industrialrevival.api.objects.events.vanilla.PistonExtendIRBlock
 import org.irmc.industrialrevival.api.objects.events.vanilla.PistonRetractIRBlockEvent;
 import org.irmc.industrialrevival.api.objects.events.vanilla.PlayerBucketEmptyToIRBlockEvent;
 import org.irmc.industrialrevival.api.objects.events.vanilla.PlayerRightClickEvent;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.Debug;
 

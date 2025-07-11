@@ -8,12 +8,10 @@ import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.menu.MatrixMenuDrawer;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
-import org.irmc.industrialrevival.core.services.IRRegistry;
-import org.irmc.industrialrevival.implementation.IndustrialRevival;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
 import org.irmc.pigeonlib.chat.ChatInput;
-import org.w3c.dom.Text;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -24,26 +22,26 @@ import java.util.function.Consumer;
 public class SearchMenu extends PageableMenu<IndustrialRevivalItem> {
     private final String searchTerm;
 
-    public static void openSearch(Player player, Consumer<SearchMenu> call) {
-        player.closeInventory();
-        player.sendMessage(Component.text("搜索: ", TextColor.color(0xb0f05f)));
-        ChatInput.waitForPlayer(IRDock.getPlugin(), player, s -> {
-            call.accept(new SearchMenu(getTitle(s), s, player, PlayerProfile.getProfile(player), 1));
-        });
-    }
-
     public SearchMenu(Component title, String searchTerm, Player player, PlayerProfile playerProfile, int currentPage) {
         super(title, player, playerProfile, currentPage, searchItems(player, searchTerm), new HashMap<>());
         this.searchTerm = searchTerm;
-        drawer.addExplain("i", "Item");
+        drawer.addExplain(objSymbol, "Item");
         List<IndustrialRevivalItem> cropped = crop(currentPage);
         for (var item : cropped) {
-            if (!insertFirstEmpty(getDisplayItemInSearch0(item), drawer.getCharPositions('i'))) {
+            if (!insertFirstEmpty(getDisplayItemInSearch0(item), drawer.getCharPositions(objSymbol))) {
                 break;
             }
         }
 
         GuideUtil.addToHistory(playerProfile.getGuideHistory(), this);
+    }
+
+    public static void openSearch(Player player, Consumer<SearchMenu> call) {
+        player.closeInventory();
+        player.sendMessage(Component.text("搜索: ", TextColor.color(0xb0f05f)));
+        ChatInput.waitForPlayer(IRDock.getPlugin().getPlugin(), player, s -> {
+            call.accept(new SearchMenu(getTitle(s), s, player, PlayerProfile.getProfile(player), 1));
+        });
     }
 
     public static Component getTitle(String searchTerm) {
@@ -53,7 +51,7 @@ public class SearchMenu extends PageableMenu<IndustrialRevivalItem> {
     public static List<IndustrialRevivalItem> searchItems(Player player, String searchTerm) {
         var c = Component.text(searchTerm);
         List<IndustrialRevivalItem> items = new ArrayList<>();
-        for (var item : IRRegistry.getInstance().getItems().values()) {
+        for (var item : IRDock.getPlugin().getRegistry().getItems().values()) {
             if (item.isDisabled()) {
                 continue;
             }

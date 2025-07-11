@@ -12,9 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * A chemical compound, consisting of a name and a map of its constituent compounds and their respective amounts.

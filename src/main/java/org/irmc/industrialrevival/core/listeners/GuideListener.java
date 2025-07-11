@@ -1,15 +1,18 @@
 package org.irmc.industrialrevival.core.listeners;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.objects.enums.GuideMode;
-import org.irmc.industrialrevival.implementation.guide.CheatGuideImplementation;
-import org.irmc.industrialrevival.implementation.guide.SurvivalGuideImplementation;
+import org.irmc.industrialrevival.core.guide.impl.CheatGuide;
+import org.irmc.industrialrevival.core.guide.impl.SurvivalGuide;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Constants;
+import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.pigeonlib.pdc.PersistentDataAPI;
 
 public class GuideListener implements Listener {
@@ -24,13 +27,16 @@ public class GuideListener implements Listener {
                 }
 
                 GuideMode mode = GuideMode.valueOf(smode);
+                Player player = e.getPlayer();
                 switch (mode) {
                     case SURVIVAL -> {
-                        SurvivalGuideImplementation.INSTANCE.open(e.getPlayer());
+                        IRDock.setGuide(player, SurvivalGuide.instance());
+                        GuideUtil.openMainMenu(player, 1);
                         e.setCancelled(true);
                     }
                     case CHEAT -> {
-                        CheatGuideImplementation.INSTANCE.open(e.getPlayer());
+                        IRDock.setGuide(player, CheatGuide.instance());
+                        GuideUtil.openMainMenu(player, 1);
                         e.setCancelled(true);
                     }
                 }

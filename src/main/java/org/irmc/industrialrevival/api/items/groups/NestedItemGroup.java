@@ -1,21 +1,11 @@
 package org.irmc.industrialrevival.api.items.groups;
 
-import com.google.common.collect.Lists;
 import lombok.Getter;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
-import org.irmc.industrialrevival.api.menu.SimpleMenu;
-import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
-import org.irmc.industrialrevival.api.player.PlayerProfile;
-import org.irmc.industrialrevival.core.guide.GuideHistory;
-import org.irmc.industrialrevival.core.guide.IRGuideImplementation;
-import org.irmc.industrialrevival.implementation.guide.SurvivalGuideImplementation;
-import org.irmc.industrialrevival.utils.CleanedItemGetter;
-import org.irmc.industrialrevival.utils.Constants;
+import org.irmc.industrialrevival.utils.GuideUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -24,7 +14,7 @@ import java.util.List;
 
 @Getter
 public class NestedItemGroup extends ItemGroup {
-    private final List<SubItemGroup> subItemGroups = new ArrayList<>();
+    private final List<ItemGroup> subItemGroups = new ArrayList<>();
 
     public NestedItemGroup(@NotNull NamespacedKey key, @NotNull ItemStack icon) {
         super(key, icon);
@@ -38,90 +28,11 @@ public class NestedItemGroup extends ItemGroup {
         throw new UnsupportedOperationException("Nested item groups can only contain sub item groups");
     }
 
-    public void onClicked(@NotNull Player p, @NotNull SimpleMenu sm, int page) {
-        boolean onlyPageOne = false;
-        IRGuideImplementation guide = SurvivalGuideImplementation.INSTANCE;
-
-        if (!getItems().isEmpty()) {
-            List<List<SubItemGroup>> items =
-                    Lists.partition(subItemGroups.stream().toList(), 36);
-
-            if (items.size() == 1) {
-                onlyPageOne = true;
-            }
-
-            List<SubItemGroup> itemList = items.get(page - 1);
-
-            for (int i = 9; i < 36; i++) {
-                if ((i - 9) >= itemList.size()) {
-                    break;
-                }
-
-                SubItemGroup item = itemList.get(i - 9);
-                if (item != null) {
-                    sm.setItem(
-                            i,
-                            CleanedItemGetter.clean(item.getIcon()),
-                            (player, clickedItem, slot, menu, clickType) -> {
-                                guide.onGroupClicked(player, item, 1);
-                                return false;
-                            });
-                }
-            }
-        } else {
-            onlyPageOne = true;
-        }
-
-        for (int b : Constants.Guide.GUIDE_GROUP_BORDERS) {
-            sm.setItem(b, Constants.ItemStacks.BACKGROUND_ITEM);
-        }
-
-        ItemStack backButton = Constants.Buttons.BACK_BUTTON.apply(p);
-        sm.setItem(2, backButton, ((player, clickedItem, slot, menu, clickType) -> {
-            guide.open(player);
-            return false;
-        }));
-
-        ItemStack previousButton = Constants.Buttons.PREVIOUS_BUTTON.apply(p);
-        ClickHandler previousClickHandler = (player, clickedItem, slot, menu, clickType) -> {
-            guide.onGroupClicked(player, this, page - 1);
-            return false;
-        };
-
-        if (page == 1) {
-            previousButton.setType(Material.BLACK_STAINED_GLASS_PANE);
-            previousButton.editMeta(m -> m.displayName(Component.space()));
-            previousClickHandler = ClickHandler.DEFAULT;
-        }
-
-        sm.setItem(47, previousButton, previousClickHandler);
-
-        ItemStack nextButton = Constants.Buttons.NEXT_BUTTON.apply(p);
-        ClickHandler nextClickHandler = (player, clickedItem, slot, menu, clickType) -> {
-            guide.onGroupClicked(player, this, page + 1);
-            return false;
-        };
-
-        if (onlyPageOne) {
-            nextButton.setType(Material.BLACK_STAINED_GLASS_PANE);
-            nextButton.editMeta(m -> m.displayName(Component.space()));
-            nextClickHandler = ClickHandler.DEFAULT;
-        }
-
-        sm.setItem(51, nextButton, nextClickHandler);
-
-        ItemStack searchButton = Constants.Buttons.SEARCH_BUTTON.apply(p);
-        sm.setItem(6, searchButton, ClickHandler.DEFAULT); // do nothing now
-
-        sm.setSize(54);
-
-        GuideHistory history = PlayerProfile.getOrRequestProfile(p.getName()).getGuideHistory();
-        history.addItemGroup(this, page);
-
-        sm.open(p);
+    public void onOpen(@NotNull Player p, int page) {
+        GuideUtil.openItemGroup(p, this);
     }
 
-    final void addSubItemGroup(@NotNull SubItemGroup group) {
+    final void addSubItemGroup(@NotNull ItemGroup group) {
         checkLocked();
 
         subItemGroups.add(group);
@@ -130,7 +41,7 @@ public class NestedItemGroup extends ItemGroup {
     }
 
     final void tryResort() {
-        List<SubItemGroup> sorted = subItemGroups.stream()
+        List<ItemGroup> sorted = subItemGroups.stream()
                 .sorted(Comparator.comparingInt(ItemGroup::getTier))
                 .toList();
         subItemGroups.clear();
