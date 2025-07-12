@@ -1,4 +1,4 @@
-package org.irmc.industrialrevival.core.services;
+package org.irmc.industrialrevival.core.services.impl;
 
 import com.google.common.base.Preconditions;
 import lombok.Getter;
@@ -31,6 +31,7 @@ import org.irmc.industrialrevival.api.recipes.methods.BlockDropMethod;
 import org.irmc.industrialrevival.api.recipes.methods.MeltMethod;
 import org.irmc.industrialrevival.api.recipes.methods.MobDropMethod;
 import org.irmc.industrialrevival.api.recipes.methods.ProduceMethod;
+import org.irmc.industrialrevival.core.services.IIRRegistry;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Debug;
 import org.jetbrains.annotations.ApiStatus;
@@ -47,7 +48,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
-public final class IRRegistry {
+public final class IRRegistry implements IIRRegistry {
     private final Map<NamespacedKey, ItemGroup> itemGroups;
     private final Map<NamespacedKey, ItemDictionary> dictionaries;
     private final Map<NamespacedKey, DisplayGroup> displayGroups;

@@ -9,7 +9,7 @@ import org.irmc.industrialrevival.api.elements.reaction.ReactCondition;
 import org.irmc.industrialrevival.api.elements.reaction.ReactHelper;
 import org.irmc.industrialrevival.api.elements.reaction.ReactResult;
 import org.irmc.industrialrevival.api.machines.process.Environment;
-import org.irmc.industrialrevival.core.services.IRRegistry;
+import org.irmc.industrialrevival.core.services.impl.IRRegistry;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.irmc.pigeonlib.pdc.PersistentDataAPI;
 import org.jetbrains.annotations.NotNull;

@@ -1,4 +1,4 @@
-package org.irmc.industrialrevival.core.services;
+package org.irmc.industrialrevival.core.services.impl;
 
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
@@ -12,6 +12,7 @@ import org.irmc.industrialrevival.api.ProfiledBlock;
 import org.irmc.industrialrevival.api.objects.ChunkPosition;
 import org.irmc.industrialrevival.api.objects.PerformanceSummary;
 import org.irmc.industrialrevival.api.objects.TimingViewRequest;
+import org.irmc.industrialrevival.core.services.IRunningProfilerService;
 import org.irmc.industrialrevival.core.task.TickerTask;
 import org.irmc.industrialrevival.utils.NumberUtil;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @SuppressWarnings("unused")
-public class ProfilerService {
+public class RunningProfilerService implements IRunningProfilerService {
     private static final int MAX_ITEMS = 20;
     public final Queue<TimingViewRequest> requests = new ConcurrentLinkedQueue<>();
     public final Map<ProfiledBlock, Long> profilingData = new ConcurrentHashMap<>();

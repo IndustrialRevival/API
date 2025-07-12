@@ -1,4 +1,4 @@
-package org.irmc.industrialrevival.core.services;
+package org.irmc.industrialrevival.core.services.impl;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.bukkit.Location;
@@ -8,6 +8,8 @@ import org.irmc.industrialrevival.api.menu.MachineMenu;
 import org.irmc.industrialrevival.api.menu.MachineMenuPreset;
 import org.irmc.industrialrevival.api.objects.IRBlockData;
 import org.irmc.industrialrevival.core.data.BlockRecord;
+import org.irmc.industrialrevival.core.services.IBlockDataService;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Debug;
 
 import java.util.HashMap;
@@ -63,7 +65,7 @@ public class BlockDataService {
         for (IRBlockData data : blockDataMap.values()) {
             BlockRecord blockRecord = BlockRecord.warp(data);
 
-            IRDock.getPlugin().getDataManager().saveBlockRecord(blockRecord);
+            IRDock.getPlugin().getSQLDataManager().saveBlockRecord(blockRecord);
         }
         blockDataMap.clear();
     }

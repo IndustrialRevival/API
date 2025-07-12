@@ -12,6 +12,7 @@ import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.menu.MachineMenu;
 import org.irmc.industrialrevival.api.menu.MachineMenuPreset;
 import org.irmc.industrialrevival.api.objects.IRBlockData;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -92,7 +93,7 @@ public class DataUtil {
      * @param blockData The IRBlockData to associate with the block.
      */
     public static void setBlockData(Location location, IRBlockData blockData) {
-        IRDock.getPlugin().getBlockDataService().getBlockDataMap().put(location, blockData);
+        IRDock.getPlugin().getDataManager().getBlockDataMap().put(location, blockData);
     }
 
     /**

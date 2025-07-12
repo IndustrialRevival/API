@@ -14,6 +14,7 @@ import org.irmc.industrialrevival.api.objects.events.ir.BlockTickEvent;
 import org.irmc.industrialrevival.api.objects.events.ir.TickDoneEvent;
 import org.irmc.industrialrevival.api.objects.events.ir.TickStartEvent;
 import org.irmc.industrialrevival.core.data.BlockRecord;
+import org.irmc.industrialrevival.dock.IRDock;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ import java.util.function.Supplier;
 public class TickerTask implements Consumer<WrappedTask> {
     public static final Map<Location, Integer> bugsCount = new ConcurrentHashMap<>();
     private final Supplier<Map<Location, IRBlockData>> blockDataSupplier =
-            IRDock.getPlugin().getBlockDataService()::getBlockDataMap;
+            IRDock.getPlugin().getDataManager()::getBlockDataMap;
     // TODO: When place or break a block, bugsCount should be reset to 0.
     @Getter
     private final int checkInterval;

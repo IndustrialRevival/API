@@ -23,6 +23,6 @@ public abstract class IRGuide implements IRGuideImplementation {
     @Override
     @ParametersAreNonnullByDefault
     public void displayItem(Player player, ItemStack item, int page) {
-        GuideUtil.lookup(player, item, page);
+        GuideUtil.lookupItem(player, item, page);
     }
 }

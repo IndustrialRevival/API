@@ -2,6 +2,7 @@ package org.irmc.industrialrevival.api.objects.enums;
 
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
+import org.irmc.industrialrevival.dock.IRDock;
 
 public enum RadiationLevel {
     LOW(1, "radiation.level.low"),

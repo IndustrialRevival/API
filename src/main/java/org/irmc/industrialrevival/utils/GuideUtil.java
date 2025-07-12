@@ -29,6 +29,7 @@ import org.irmc.pigeonlib.items.CustomItemStack;
 /**
  * @author balugaq
  */
+@SuppressWarnings({"UnusedReturnValue", "unused", "SameReturnValue"})
 public class GuideUtil {
     public static final NamespacedKey WIKI_KEY = KeyUtil.customKey("wiki");
 
@@ -196,22 +197,22 @@ public class GuideUtil {
     /**
      * Compatible with {@link ClickHandler}
      */
-    public static boolean lookup(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
-        return lookup(player, itemStack);
+    public static boolean lookupItem(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
+        return lookupItem(player, itemStack);
     }
 
-    public static boolean lookup(Player player, ItemStack itemStack) {
-        return lookup(player, itemStack, 1);
+    public static boolean lookupItem(Player player, ItemStack itemStack) {
+        return lookupItem(player, itemStack, 1);
     }
 
-    public static boolean lookup(Player player, ItemStack itemStack, int page) {
+    public static boolean lookupItem(Player player, ItemStack itemStack, int page) {
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return false;
         }
 
         var ir = IndustrialRevivalItem.getByItem(itemStack);
         if (ir != null) {
-            lookup(player, ir, itemStack, page);
+            lookupItem(player, ir, itemStack, page);
         } else {
             openVanillaRecipeDisplayMenu(player, itemStack, page);
         }
@@ -219,7 +220,7 @@ public class GuideUtil {
         return false;
     }
 
-    public static boolean lookup(Player player, IndustrialRevivalItem ir, ItemStack itemStack, int page) {
+    public static boolean lookupItem(Player player, IndustrialRevivalItem ir, ItemStack itemStack, int page) {
         if (ir instanceof RecipeDisplayItem rdi) {
             openComplexRecipeDisplayMenu(player, itemStack, ir, rdi, page);
         } else if (ir != null) {

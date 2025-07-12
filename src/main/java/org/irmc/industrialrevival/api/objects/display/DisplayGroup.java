@@ -1,5 +1,6 @@
 package org.irmc.industrialrevival.api.objects.display;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.entity.Display;
@@ -8,6 +9,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
 import org.irmc.industrialrevival.api.IndustrialRevivalAddon;
 import org.irmc.industrialrevival.api.objects.display.builder.AbstractModelBuilder;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,19 +31,23 @@ public class DisplayGroup {
         this.addon = addon;
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup center(@NotNull Location location) {
         this.center = location.clone().add(0.5D, 0.5D, 0.5D);
         return this;
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup add(@NotNull Display display) {
         return add(display, 0.0D, 0.0D, 0.0D);
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup add(@NotNull Display display, double x, double y, double z) {
         return add(display, new Vector(x, y, z));
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup add(@NotNull Display display, @NotNull Vector offset) {
         if (center == null) {
             throw new UnsupportedOperationException("Center location is not set");
@@ -53,6 +59,7 @@ public class DisplayGroup {
         return this;
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup addDirectly(@NotNull Collection<TextDisplay> displays) {
         for (Display display : displays) {
             addDirectly(display);
@@ -60,6 +67,7 @@ public class DisplayGroup {
         return this;
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup addDirectly(@NotNull Display display) {
         if (center == null) {
             throw new UnsupportedOperationException("Center location is not set");
@@ -70,14 +78,17 @@ public class DisplayGroup {
         return this;
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup add(@NotNull AbstractModelBuilder modelBuilder) {
         return add(modelBuilder, 0.0D, 0.0D, 0.0D);
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup add(@NotNull AbstractModelBuilder modelBuilder, double x, double y, double z) {
         return add(modelBuilder, new Vector(x, y, z));
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup add(@NotNull AbstractModelBuilder modelBuilder, @NotNull Vector offset) {
         if (center == null) {
             throw new UnsupportedOperationException("Center location is not set");
@@ -92,6 +103,7 @@ public class DisplayGroup {
         return add(display);
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup hide() {
         for (Display display : displays) {
             display.setInvisible(true);
@@ -99,6 +111,7 @@ public class DisplayGroup {
         return this;
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup show() {
         for (Display display : displays) {
             display.setInvisible(false);
@@ -106,6 +119,7 @@ public class DisplayGroup {
         return this;
     }
 
+    @CanIgnoreReturnValue
     public @NotNull DisplayGroup remove() {
         for (Display display : displays) {
             display.remove();

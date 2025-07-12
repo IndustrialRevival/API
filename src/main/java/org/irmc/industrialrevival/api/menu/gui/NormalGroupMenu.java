@@ -54,7 +54,7 @@ public class NormalGroupMenu extends PageableMenu<IndustrialRevivalItem> {
                     if (guideMode == GuideMode.CHEAT && p.isOp()) {
                         tryGiveItem(p, item, i, t.isRightClick() ? i.getMaxStackSize() : 1);
                     } else {
-                        GuideUtil.lookup(player, i, 1);
+                        GuideUtil.lookupItem(player, i, 1);
                     }
                 }
             }

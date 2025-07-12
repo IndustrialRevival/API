@@ -2,10 +2,12 @@ package org.irmc.industrialrevival.api.menu.gui;
 
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.persistence.PersistentDataType;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.menu.MatrixMenuDrawer;
@@ -15,11 +17,13 @@ import org.irmc.industrialrevival.api.player.PlayerProfile;
 import org.irmc.industrialrevival.api.recipes.RecipeContent;
 import org.irmc.industrialrevival.api.recipes.RecipeContents;
 import org.irmc.industrialrevival.api.recipes.RecipeType;
+import org.irmc.industrialrevival.api.recipes.VanillaRecipeContent;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
 import org.irmc.pigeonlib.items.CustomItemStack;
+import org.irmc.pigeonlib.items.ItemUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,18 +31,18 @@ import java.util.HashMap;
 import java.util.List;
 
 @Getter
-public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
+public class VanillaRecipeDisplayMenu extends PageableMenu<VanillaRecipeContent> {
     public static final NamespacedKey PAGE_KEY = KeyUtil.customKey("current_page");
 
-    public SimpleRecipeDisplayMenu(Player player, IndustrialRevivalItem item) {
+    public VanillaRecipeDisplayMenu(Player player, ItemStack item) {
         this(player, item, 1);
     }
 
-    public SimpleRecipeDisplayMenu(Player player, IndustrialRevivalItem item, int page) {
-        this(item.getItemName(), player, PlayerProfile.getProfile(player), page, RecipeContents.getRecipeContents(item.getId()));
+    public VanillaRecipeDisplayMenu(Player player, ItemStack item, int page) {
+        this(ItemUtils.getDisplayName(item), player, PlayerProfile.getProfile(player), page, RecipeContents.getVanillaRecipeContents(item));
     }
 
-    public SimpleRecipeDisplayMenu(Component title, Player p, PlayerProfile playerProfile, int currentPage, List<RecipeContent> contents) {
+    public VanillaRecipeDisplayMenu(Component title, Player p, PlayerProfile playerProfile, int currentPage, List<VanillaRecipeContent> contents) {
         super(title, p, playerProfile, currentPage, contents, new HashMap<>());
 
         if (contents.isEmpty()) {
@@ -48,7 +52,6 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
         displayRecipeTypes();
         displayIngredients();
         displayOutput();
-        displayWiki();
 
         GuideUtil.addToHistory(playerProfile.getGuideHistory(), this);
     }
@@ -81,9 +84,13 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
 
     public void displayIngredients() {
         var slots = getDrawer().getCharPositions('i');
-        for (var item : getIngredients()) {
-            if (!insertFirstEmpty(item, slots)) {
-                break;
+        for (var choice : getIngredients()) {
+            if (choice instanceof RecipeChoice.MaterialChoice rmc) {
+                List<ItemStack> itemStacks = rmc.getChoices().stream().map(ItemStack::new).toList();
+                // todo: run task to update gui
+            } else if (choice instanceof RecipeChoice.ExactChoice rec) {
+                List<ItemStack> itemStacks = rec.getChoices();
+                // todo: run task to update gui
             }
         }
     }
@@ -93,15 +100,8 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
         insertFirstEmpty(getDisplayItem0(getOutput()), slots);
     }
 
-    public void displayWiki() {
-        var item = getWikiButton();
-        if (item != null) {
-            insertFirstEmpty(item, getDrawer().getCharPositions('w'));
-        }
-    }
-
     @Nullable
-    public RecipeContent getRecipeContentAt(int index) {
+    public VanillaRecipeContent getRecipeContentAt(int index) {
         var offset = getCurrentPage() * 2 >= getItems().size() ? 0 : getCurrentPage() - 1;
         var f = index + offset;
         if (f >= getItems().size()) {
@@ -111,7 +111,7 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
         return getItems().get(f);
     }
 
-    public RecipeContent getRecipeContent() {
+    public VanillaRecipeContent getRecipeContent() {
         return getItems().get(getCurrentPage() - 1);
     }
 
@@ -125,11 +125,11 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
         }
     }
 
-    public ItemStack[] getIngredients() {
+    public RecipeChoice[] getIngredients() {
         return getRecipeContent().recipe();
     }
 
-    public IndustrialRevivalItem getOutput() {
+    public ItemStack getOutput() {
         return getRecipeContent().result();
     }
 
@@ -137,7 +137,7 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
      * Shut up, compiler
      */
     @Override
-    public ItemStack getDisplayItem(RecipeContent item) {
+    public ItemStack getDisplayItem(VanillaRecipeContent item) {
         return null;
     }
 
@@ -161,19 +161,9 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
                 .addExplain("b", "Back", GuideUtil.getBackButton(getPlayer()), GuideUtil::backHistory)
                 .addExplain("P", "Previous Page", getPreviousPageButton(), getPreviousPageClickHandler())
                 .addExplain("N", "Next Page", getNextPageButton(), getNextPageClickHandler())
-                .addExplain("w", "Wiki", GuideUtil::openWiki)
                 .addExplain("t", "Recipe Type", this::pageJumper)
                 .addExplain("i", "Ingredients", GuideUtil::lookupItem)
                 .addExplain("o", "Output", GuideUtil::lookupItem);
-    }
-
-    public ItemStack getWikiButton() {
-        var s = getOutput().getWikiText();
-        if (s != null) {
-            return GuideUtil.getWikiButton(s);
-        } else {
-            return null;
-        }
     }
 
     public boolean pageJumper(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
@@ -191,7 +181,7 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
     }
 
     @Override
-    public PageableMenu<RecipeContent> newMenu(PageableMenu<RecipeContent> menu, int newPage) {
-        return new SimpleRecipeDisplayMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems());
+    public PageableMenu<VanillaRecipeContent> newMenu(PageableMenu<VanillaRecipeContent> menu, int newPage) {
+        return new VanillaRecipeDisplayMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems());
     }
 }

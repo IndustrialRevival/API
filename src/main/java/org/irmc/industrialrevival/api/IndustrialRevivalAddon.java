@@ -1,5 +1,6 @@
 package org.irmc.industrialrevival.api;
 
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.irmc.pigeonlib.enums.Language;
 import org.jetbrains.annotations.NotNull;
@@ -7,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.logging.Logger;
 
-public interface IndustrialRevivalAddon {
+public interface IndustrialRevivalAddon extends Plugin {
     default String translateKey() {
         return getPlugin().getName().toLowerCase();
     }

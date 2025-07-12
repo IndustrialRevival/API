@@ -22,6 +22,7 @@ import org.irmc.industrialrevival.api.objects.events.vanilla.PistonExtendIRBlock
 import org.irmc.industrialrevival.api.objects.events.vanilla.PistonRetractIRBlockEvent;
 import org.irmc.industrialrevival.api.objects.events.vanilla.PlayerBucketEmptyToIRBlockEvent;
 import org.irmc.industrialrevival.api.objects.events.vanilla.PlayerRightClickEvent;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.Debug;
 
@@ -76,8 +77,7 @@ public class DefaultHandler implements Listener {
         }
 
         //IRDock.getPlugin().getItemTextureService().blockBreaking(event);
-        IRDock.getPlugin().getBlockDataService().handleBlockBreaking(event.getOriginalEvent().getBlock().getLocation());
-        IRDock.getPlugin().getDataManager().handleBlockBreaking(event.getOriginalEvent().getBlock().getLocation());
+        IRDock.getPlugin().getDataManager().breakBlock(event.getOriginalEvent().getBlock().getLocation());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

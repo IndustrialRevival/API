@@ -12,6 +12,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.irmc.industrialrevival.api.IndustrialRevival;
+import org.irmc.industrialrevival.core.services.IIRDataManager;
+import org.irmc.industrialrevival.core.services.ISQLDataManager;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Constants;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //todo: move to implementation
-public class IRDataManager {
+public class IRDataManager implements ISQLDataManager {
     private final DatabaseConnection connection;
     private final Logger LOGGER = IRDock.getPlugin().getLogger();
 
