@@ -2,15 +2,15 @@ package org.irmc.industrialrevival.dock;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.Player;
+import org.irmc.industrialrevival.api.objects.ItemSettings;
 import org.irmc.industrialrevival.core.guide.IRGuideImplementation;
-import org.irmc.industrialrevival.core.services.IBlockDataService;
 import org.irmc.industrialrevival.core.services.IGitHubService;
 import org.irmc.industrialrevival.core.services.IIRDataManager;
 import org.irmc.industrialrevival.core.services.IIRRegistry;
 import org.irmc.industrialrevival.core.services.IItemDataService;
 import org.irmc.industrialrevival.core.services.IMinecraftRecipeService;
-import org.irmc.industrialrevival.core.services.IPlayerProfileService;
 import org.irmc.industrialrevival.core.services.IRunningProfilerService;
+import org.irmc.industrialrevival.core.services.ISQLDataManager;
 import org.irmc.pigeonlib.language.LanguageManager;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,12 +50,12 @@ public class IRDock {
         return getPlugin().getLanguageManager();
     }
 
-    public static @NotNull IIRDataManager getDataManager() {
-        return getPlugin().getDataManager();
+    public static @NotNull ISQLDataManager getSQLDataManager() {
+        return getPlugin().getSQLDataManager();
     }
 
-    public static @NotNull IBlockDataService getBlockDataService() {
-        return getPlugin().getBlockDataService();
+    public static @NotNull IIRDataManager getDataManager() {
+        return getPlugin().getDataManager();
     }
 
     public static @NotNull IIRRegistry getRegistry() {
@@ -70,15 +70,23 @@ public class IRDock {
         return getPlugin().getMinecraftRecipeService();
     }
 
-    public static @NotNull IPlayerProfileService getPlayerProfileService() {
-        return getPlugin().getPlayerProfileService();
-    }
-
     public static @NotNull IRunningProfilerService getRunningProfilerService() {
         return getPlugin().getRunningProfilerService();
     }
 
     public static @NotNull IGitHubService getGitHubService() {
         return getPlugin().getGitHubService();
+    }
+
+    public static @NotNull ItemSettings getItemSettings() {
+        return getPlugin().getItemSettings();
+    }
+
+    public static void runSync(@NotNull Runnable runnable) {
+        getPlugin().runSync(runnable);
+    }
+
+    public static void runAsync(@NotNull Runnable runnable) {
+        getPlugin().runAsync(runnable);
     }
 }

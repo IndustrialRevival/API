@@ -16,9 +16,9 @@ public interface IItemDataService {
     @NotNull Optional<RadiationLevel> getRadiationLevel(@Nullable ItemStack stack);
     void setRadiationLevel(@NotNull ItemStack stack, @NotNull RadiationLevel radiationLevel);
     OptionalInt getCustomModelData(@Nullable ItemStack stack);
-    void setCustomModelData(@NotNull ItemStack stack, int customModelData);
+    void setCustomModelData(@NotNull ItemStack stack, Integer customModelData);
     OptionalDouble getEnergy(@Nullable ItemStack stack);
-    void setEnergy(@NotNull ItemStack stack, double energy);
+    void setEnergy(@NotNull ItemStack stack, Double energy);
     OptionalDouble getMaxEnergy(@Nullable ItemStack stack);
-    void setMaxEnergy(@NotNull ItemStack stack, double maxEnergy);
+    void setMaxEnergy(@NotNull ItemStack stack, Double maxEnergy);
 }

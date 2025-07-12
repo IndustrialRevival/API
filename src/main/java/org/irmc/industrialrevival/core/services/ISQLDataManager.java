@@ -11,5 +11,5 @@ public interface ISQLDataManager {
     @NotNull List<BlockRecord> getAllBlockRecords();
     void saveBlockRecord(@NotNull BlockRecord record);
     @Nullable BlockRecord getBlockRecord(@NotNull Location loc);
-    @Nullable BlockRecord deleteBlockRecord(@NotNull Location loc);
+    void deleteBlockRecord(@NotNull Location loc);
 }

@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Display;
 import org.bukkit.util.Vector;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.pigeonlib.objects.Pair;
 import org.jetbrains.annotations.NotNull;
 

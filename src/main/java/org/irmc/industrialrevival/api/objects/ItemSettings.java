@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.irmc.industrialrevival.dock.IRDock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;

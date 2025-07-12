@@ -11,9 +11,8 @@ import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.irmc.industrialrevival.api.IndustrialRevival;
-import org.irmc.industrialrevival.core.services.IIRDataManager;
 import org.irmc.industrialrevival.core.services.ISQLDataManager;
+import org.irmc.industrialrevival.dock.IIndustrialRevivalPlugin;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Constants;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +28,7 @@ public class IRDataManager implements ISQLDataManager {
     private final DatabaseConnection connection;
     private final Logger LOGGER = IRDock.getPlugin().getLogger();
 
-    public IRDataManager(IndustrialRevival plugin) {
+    public IRDataManager(IIndustrialRevivalPlugin plugin) {
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("storage");
         if (section == null) {
             section = plugin.getConfig().createSection("storage");
@@ -78,7 +77,7 @@ public class IRDataManager implements ISQLDataManager {
         }
     }
 
-    public List<BlockRecord> getAllBlockRecords() {
+    public @NotNull List<BlockRecord> getAllBlockRecords() {
         try {
             return connection.selectMulti(BlockRecord.class);
         } catch (SQLException e) {
@@ -94,7 +93,7 @@ public class IRDataManager implements ISQLDataManager {
         }
     }
 
-    public void saveBlockRecord(BlockRecord record) {
+    public void saveBlockRecord(@NotNull BlockRecord record) {
         try {
             connection.upsertObject(BlockRecord.class, record);
         } catch (SQLException e) {
@@ -115,6 +114,19 @@ public class IRDataManager implements ISQLDataManager {
         }
 
         return null;
+    }
+
+    @Override
+    public void deleteBlockRecord(@NotNull Location loc) {
+        try {
+            connection.deleteObject(BlockRecord.class, Conditions.and(
+                    Conditions.eq("world", loc.getWorld().getName()),
+                    Conditions.eq("x", loc.getBlockX()),
+                    Conditions.eq("y", loc.getBlockY()),
+                    Conditions.eq("z", loc.getBlockZ())));
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to delete block data", e);
+        }
     }
 
     @NotNull

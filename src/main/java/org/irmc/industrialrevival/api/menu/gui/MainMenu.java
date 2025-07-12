@@ -57,7 +57,7 @@ public class MainMenu extends PageableMenu<ItemGroup> {
 
     public static List<ItemGroup> getDisplayableItemGroups(Player player) {
         List<ItemGroup> itemGroups = new ArrayList<>();
-        for (var i : IRRegistry.getInstance().getItemGroups().values()) {
+        for (var i : IRDock.getRegistry().getItemGroups().values()) {
             if (!i.isOnlyVisibleByAdmins() || player.isOp()) {
                 itemGroups.add(i);
             }

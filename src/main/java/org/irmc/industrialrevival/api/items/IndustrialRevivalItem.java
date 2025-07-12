@@ -37,7 +37,7 @@ import org.irmc.industrialrevival.api.recipes.RecipeType;
 import org.irmc.industrialrevival.api.recipes.methods.CraftMethod;
 import org.irmc.industrialrevival.api.recipes.methods.ProduceMethod;
 import org.irmc.industrialrevival.core.translation.ItemTranslator;
-import org.irmc.industrialrevival.implementation.items.IndustrialRevivalItemSetup;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Constants;
 import org.irmc.pigeonlib.items.ItemUtils;
 import org.irmc.pigeonlib.language.LanguageManager;
@@ -704,11 +704,11 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
             IRDock.getPlugin().getRegistry().registerMultiBlock(mb);
         }
         if (this instanceof MobDropItem mdi) {
-            IRDock.getPlugin().getRegistry().registerMobDrop(mdi);
+            IRDock.getPlugin().getRegistry().registerMobDrop((IndustrialRevivalItem & MobDropItem) mdi);
         }
 
         if (this instanceof BlockDropItem bdi) {
-            IRDock.getPlugin().getRegistry().registerBlockDrop(bdi);
+            IRDock.getPlugin().getRegistry().registerBlockDrop((IndustrialRevivalItem & BlockDropItem) bdi);
         }
 
         if (this instanceof VanillaSmeltingItem vsi) {

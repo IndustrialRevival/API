@@ -1,5 +1,6 @@
 package org.irmc.industrialrevival.core.services.impl;
 
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -9,8 +10,12 @@ import org.irmc.industrialrevival.core.services.IItemDataService;
 import org.irmc.industrialrevival.utils.Constants;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.pigeonlib.pdc.PersistentDataAPI;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
 
 public class ItemDataService implements IItemDataService {
     public Optional<NamespacedKey> getId(ItemStack stack) {
@@ -55,11 +60,77 @@ public class ItemDataService implements IItemDataService {
             return;
         }
 
-        if (!stack.hasItemMeta() || stack.getItemMeta() == null) {
+        ItemMeta meta = stack.getItemMeta();
+        if (meta == null) {
             return;
         }
-        ItemMeta meta = stack.getItemMeta();
+
         DataUtil.setPDC(meta, Constants.ItemStackKeys.RADIATION_LEVEL_KEY, radiationLevel.name());
+        stack.setItemMeta(meta);
+    }
+
+    @Override
+    public OptionalInt getCustomModelData(@Nullable ItemStack stack) {
+        if (stack == null || stack.getType() == Material.AIR) {
+            return OptionalInt.empty();
+        }
+
+        ItemMeta meta = stack.getItemMeta();
+        if (meta == null) {
+            return OptionalInt.empty();
+        }
+
+        return OptionalInt.of(meta.getCustomModelData());
+    }
+
+    @Override
+    public void setCustomModelData(@NotNull ItemStack stack, Integer customModelData) {
+        ItemMeta meta = stack.getItemMeta();
+        meta.setCustomModelData(customModelData);
+        stack.setItemMeta(meta);
+    }
+
+    @Override
+    public OptionalDouble getEnergy(@Nullable ItemStack stack) {
+        if (stack == null) {
+            return OptionalDouble.empty();
+        }
+
+        ItemMeta meta = stack.getItemMeta();
+        if (meta == null) {
+            return OptionalDouble.empty();
+        }
+
+        double value = PersistentDataAPI.getDouble(meta, Constants.ItemStackKeys.ENERGY_KEY);
+        return OptionalDouble.of(value);
+    }
+
+    @Override
+    public void setEnergy(@NotNull ItemStack stack, Double energy) {
+        ItemMeta meta = stack.getItemMeta();
+        PersistentDataAPI.setDouble(meta, Constants.ItemStackKeys.ENERGY_KEY, energy);
+        stack.setItemMeta(meta);
+    }
+
+    @Override
+    public OptionalDouble getMaxEnergy(@Nullable ItemStack stack) {
+        if (stack == null) {
+            return OptionalDouble.empty();
+        }
+
+        ItemMeta meta = stack.getItemMeta();
+        if (meta == null) {
+            return OptionalDouble.empty();
+        }
+
+        double value = PersistentDataAPI.getDouble(meta, Constants.ItemStackKeys.MAX_ENERGY_KEY);
+        return OptionalDouble.of(value);
+    }
+
+    @Override
+    public void setMaxEnergy(@NotNull ItemStack stack, Double maxEnergy) {
+        ItemMeta meta = stack.getItemMeta();
+        PersistentDataAPI.set(meta, Constants.ItemStackKeys.MAX_ENERGY_KEY, PersistentDataType.DOUBLE, maxEnergy);
         stack.setItemMeta(meta);
     }
 }

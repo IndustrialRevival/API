@@ -10,12 +10,15 @@ import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.menu.SimpleMenu;
 import org.irmc.industrialrevival.api.objects.CustomItemStack;
 import org.irmc.industrialrevival.api.recipes.methods.CraftMethod;
+import org.irmc.industrialrevival.api.recipes.methods.ProduceMethod;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Constants;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.irmc.pigeonlib.pdc.PersistentDataAPI;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.BiConsumer;
 
 @Getter
@@ -282,14 +285,14 @@ public class RecipeType {
     }
 
     public void registerRecipe(ItemStack[] input, ItemStack output) {
-        IRDock.getPlugin().getRegistry().registerCraftable(this, output);
+        IRDock.getPlugin().getRegistry().registerProduceMethod(this, input, new ItemStack[]{output});
         if (registerRecipeConsumer != null) {
             registerRecipeConsumer.accept(input, output);
         }
     }
 
     public void unregisterRecipe(ItemStack[] input, ItemStack output) {
-        IRDock.getPlugin().getRegistry().unregisterProduceable(this, output);
+        IRDock.getPlugin().getRegistry().unregisterProduceMethod(this, input, new ItemStack[]{output});
         if (unregisterRecipeConsumer != null) {
             unregisterRecipeConsumer.accept(input, output);
         }
@@ -301,6 +304,25 @@ public class RecipeType {
 
     public ItemStack getRecipeTypeIcon() {
         return getIcon();
+    }
+
+    public ProduceMethod warp(@NotNull ItemStack @Nullable [] ingredients, @Nullable ItemStack @NotNull [] outputs) {
+        return new ProduceMethod() {
+            @Override
+            public RecipeType getRecipeType() {
+                return RecipeType.this;
+            }
+
+            @Override
+            public ItemStack[] getIngredients() {
+                return ingredients;
+            }
+
+            @Override
+            public ItemStack[] getOutput() {
+                return outputs;
+            }
+        };
     }
 
     @FunctionalInterface

@@ -3,27 +3,16 @@ package org.irmc.industrialrevival.api.recipes.methods;
 import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalFormula;
-import org.irmc.industrialrevival.api.recipes.RecipeType;
-import org.irmc.industrialrevival.implementation.items.chemistry.OperationTable;
 
 /**
  * @author balugaq
  */
 @Getter
-public class ChemicalMethod implements ProduceMethod {
+public abstract class ChemicalMethod implements ProduceMethod {
     private final ChemicalFormula formula;
 
     public ChemicalMethod(ChemicalFormula formula) {
         this.formula = formula;
-    }
-
-    public static ChemicalMethod of(ChemicalFormula formula) {
-        return new ChemicalMethod(formula);
-    }
-
-    @Override
-    public RecipeType getRecipeType() {
-        return OperationTable.getRecipeType();
     }
 
     @Override

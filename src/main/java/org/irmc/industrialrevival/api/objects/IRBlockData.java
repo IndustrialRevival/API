@@ -57,8 +57,8 @@ public class IRBlockData {
         return new IRBlockData(
                 record.getMachineId(),
                 loc,
-                IRDock.getPlugin().getDataManager().getBlockData(loc),
-                new MachineMenu(loc, IRRegistry.getInstance().getMenuPresets().get(record.getMachineId()))
+                record.getData(),
+                new MachineMenu(loc, IRDock.getRegistry().getMenuPresets().get(record.getMachineId()))
         );
     }
 

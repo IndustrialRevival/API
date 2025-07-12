@@ -5,7 +5,6 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.handlers.BlockTicker;
 import org.irmc.industrialrevival.api.objects.ChunkPosition;
@@ -41,11 +40,11 @@ public class TickerTask implements Consumer<WrappedTask> {
         Map<Location, IRBlockData> blockDataMap = blockDataSupplier.get();
         TickStartEvent startEvent = new TickStartEvent(blockDataMap, checkInterval, ticked);
         TickDoneEvent doneEvent = new TickDoneEvent();
-        IndustrialRevival.runAsync(() -> Bukkit.getPluginManager().callEvent(startEvent));
-        IRDock.getPlugin().getProfilerService().clearProfilingData();
+        IRDock.getPlugin().runAsync(() -> Bukkit.getPluginManager().callEvent(startEvent));
+        IRDock.getPlugin().getRunningProfilerService().clearProfilingData();
 
         if (blockDataMap == null) {
-            IndustrialRevival.runAsync(() -> Bukkit.getPluginManager().callEvent(doneEvent));
+            IRDock.getPlugin().runAsync(() -> Bukkit.getPluginManager().callEvent(doneEvent));
             return;
         }
 
@@ -64,11 +63,11 @@ public class TickerTask implements Consumer<WrappedTask> {
                     BlockTickEvent event = new BlockTickEvent(entry.getKey().getBlock(), blockData.getMachineMenu(), item, blockData);
                     Bukkit.getPluginManager().callEvent(event);
 
-                    IRDock.getPlugin().getProfilerService().startProfiling(entry.getKey());
+                    IRDock.getPlugin().getRunningProfilerService().startProfiling(entry.getKey());
                     if (!event.isCancelled()) {
                         ticker.onTick(event);
                     }
-                    IRDock.getPlugin().getProfilerService().stopProfiling(entry.getKey());
+                    IRDock.getPlugin().getRunningProfilerService().stopProfiling(entry.getKey());
                 } catch (Throwable ex) {
                     ex.printStackTrace();
                     bugsCount.put(entry.getKey(), bugsCount.getOrDefault(entry.getKey(), 0) + 1);
@@ -80,7 +79,7 @@ public class TickerTask implements Consumer<WrappedTask> {
             }
         }
 
-        IndustrialRevival.runAsync(() -> Bukkit.getPluginManager().callEvent(doneEvent));
+        IRDock.getPlugin().runAsync(() -> Bukkit.getPluginManager().callEvent(doneEvent));
 
         ticked++;
     }
@@ -118,7 +117,7 @@ public class TickerTask implements Consumer<WrappedTask> {
         chunk.load();
         // get available ticking blocks from database
         ChunkPosition chunkPosition = new ChunkPosition(chunk);
-        for (BlockRecord record : IRDock.getPlugin().getDataManager().getAllBlockRecords()) {
+        for (BlockRecord record : IRDock.getPlugin().getSQLDataManager().getAllBlockRecords()) {
             ChunkPosition recordChunkPosition = new ChunkPosition(record.getLocation().getChunk());
             if (recordChunkPosition.equals(chunkPosition)) {
                 loadBlock(record.getLocation());
@@ -132,7 +131,7 @@ public class TickerTask implements Consumer<WrappedTask> {
      * @param location The location of the block that was loaded.
      */
     public void loadBlock(Location location) {
-        IRBlockData blockData = IRDock.getPlugin().getBlockDataService().getBlockData(location);
+        IRBlockData blockData = IRDock.getPlugin().getDataManager().getBlockData(location);
         if (blockData == null) {
             return;
         }

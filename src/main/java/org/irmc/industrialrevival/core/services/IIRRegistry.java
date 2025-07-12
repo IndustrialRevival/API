@@ -4,19 +4,19 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.irmc.industrialrevival.api.elements.compounds.ChemicalCompound;
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalFormula;
 import org.irmc.industrialrevival.api.elements.melt.MeltedType;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerType;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
+import org.irmc.industrialrevival.api.items.attributes.BlockDropItem;
+import org.irmc.industrialrevival.api.items.attributes.MobDropItem;
 import org.irmc.industrialrevival.api.items.attributes.TinkerProduct;
 import org.irmc.industrialrevival.api.items.collection.ItemDictionary;
 import org.irmc.industrialrevival.api.items.groups.ItemGroup;
 import org.irmc.industrialrevival.api.menu.MachineMenuPreset;
 import org.irmc.industrialrevival.api.multiblock.MultiBlock;
-import org.irmc.industrialrevival.api.objects.annotations.AlwaysNull;
-import org.irmc.industrialrevival.api.player.PlayerProfile;
 import org.irmc.industrialrevival.api.recipes.RecipeType;
 import org.irmc.industrialrevival.api.recipes.methods.BlockDropMethod;
 import org.irmc.industrialrevival.api.recipes.methods.MobDropMethod;
@@ -28,11 +28,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 public interface IIRRegistry {
     @NotNull Map<NamespacedKey, ItemGroup> getItemGroups();
-    @NotNull Collection<ItemGroup> getAllItemGroups();
+    @NotNull List<ItemGroup> getAllItemGroups();
     @Nullable ItemGroup getItemGroup(@NotNull NamespacedKey key);
     @CanIgnoreReturnValue
     @NotNull ItemGroup registerItemGroup(@NotNull ItemGroup itemGroup);
@@ -91,25 +90,27 @@ public interface IIRRegistry {
     @CanIgnoreReturnValue
     @NotNull MultiBlock unregisterMultiBlock(@NotNull MultiBlock multiBlock);
 
-    @NotNull Map<NamespacedKey, ProduceMethod> getProduceMethods();
-    @NotNull Collection<ProduceMethod> getAllProduceMethods();
-    @NotNull Collection<ProduceMethod> getProduceMethodByInput(@NotNull List<ItemStack> inputs);
-    @NotNull Collection<ProduceMethod> getProduceMethodByInput(@NotNull ItemStack @NotNull ... inputs);
-    @NotNull Collection<ProduceMethod> getProduceMethodByInput(@AlwaysNull ItemStack inputs);
-    @NotNull Collection<ProduceMethod> getProduceMethodByOutput(@NotNull List<ItemStack> outputs);
-    @NotNull Collection<ProduceMethod> getProduceMethodByOutput(@NotNull ItemStack @NotNull ... outputs);
-    @NotNull Collection<ProduceMethod> getProduceMethodByOutput(@AlwaysNull ItemStack outputs);
-    @NotNull Collection<ProduceMethod> getProduceMethodByRecipeType(@NotNull RecipeType recipeType);
-    @NotNull <T extends ProduceMethod> Collection<T> getAllProduceMethod(@NotNull Class<T> clazz);
+    @NotNull Set<ProduceMethod> getAllProduceMethods();
+    @NotNull Set<ProduceMethod> getProduceMethodByInput(@NotNull Collection<ItemStack> inputs);
+    @NotNull Set<ProduceMethod> getProduceMethodByInput(@NotNull ItemStack @NotNull ... inputs);
+    @NotNull Set<ProduceMethod> getProduceMethodByInput(@Nullable ItemStack input);
+    @NotNull Set<ProduceMethod> getProduceMethodByOutput(@NotNull Collection<ItemStack> outputs);
+    @NotNull Set<ProduceMethod> getProduceMethodByOutput(@NotNull ItemStack @NotNull ... outputs);
+    @NotNull Set<ProduceMethod> getProduceMethodByOutput(@Nullable ItemStack output);
+    @NotNull Set<ProduceMethod> getProduceMethodByRecipeType(@NotNull RecipeType recipeType);
+    @NotNull <T extends ProduceMethod> Set<T> getAllProduceMethod(@NotNull Class<T> clazz);
     @CanIgnoreReturnValue
-    @NotNull Collection<ProduceMethod> registerProduceMethod(@NotNull ProduceMethod produceMethod);
+    @NotNull ProduceMethod registerProduceMethod(@NotNull ProduceMethod produceMethod);
     @CanIgnoreReturnValue
-    @Nullable ProduceMethod unregisterProduceMethod(@NotNull NamespacedKey key);
+    @NotNull ProduceMethod registerProduceMethod(@NotNull RecipeType recipeType, @NotNull ItemStack @NotNull [] ingredients, @Nullable ItemStack @NotNull [] outputs);
     @CanIgnoreReturnValue
-    @NotNull Collection<ProduceMethod> unregisterProduceMethod(@NotNull ProduceMethod produceMethod);
+    @NotNull ProduceMethod unregisterProduceMethod(@NotNull ProduceMethod produceMethod);
+    @CanIgnoreReturnValue
+    @Nullable ProduceMethod unregisterProduceMethod(@NotNull RecipeType recipeType, @NotNull ItemStack @NotNull [] ingredients, @Nullable ItemStack @NotNull [] outputs);
 
     @NotNull Map<MeltedType, Map<TinkerType, TinkerProduct>> getTinkerMap();
-    @NotNull Set<MeltedType> getAllMeltedTypes();
+    @NotNull Map<NamespacedKey, MeltedType> getMeltedTypes();
+    @NotNull Collection<MeltedType> getAllMeltedTypes();
     @Nullable MeltedType getMeltedType(@NotNull NamespacedKey key);
     @CanIgnoreReturnValue
     @NotNull MeltedType registerMeltedType(@NotNull MeltedType type);
@@ -149,4 +150,18 @@ public interface IIRRegistry {
     @NotNull BlockDropMethod registerBlockDrop(@NotNull BlockDropMethod dropMethod);
     @CanIgnoreReturnValue
     @NotNull BlockDropMethod unregisterBlockDrop(@NotNull BlockDropMethod dropMethod);
+
+    @NotNull Map<String, ChemicalCompound> getChemicalCompounds();
+    @Nullable ChemicalCompound getChemicalCompound(@NotNull String name);
+    @CanIgnoreReturnValue
+    @NotNull ChemicalCompound registerChemicalCompound(@NotNull ChemicalCompound compound);
+    @CanIgnoreReturnValue
+    @Nullable ChemicalCompound unregisterChemicalCompound(@NotNull ChemicalCompound compound);
+    @CanIgnoreReturnValue
+    @Nullable ChemicalCompound unregisterChemicalCompound(@NotNull String name);
+
+    @CanIgnoreReturnValue
+    @NotNull <T extends IndustrialRevivalItem & MobDropItem> T registerMobDrop(@NotNull T item);
+    @CanIgnoreReturnValue
+    @NotNull <T extends IndustrialRevivalItem & BlockDropItem> T registerBlockDrop(@NotNull T item);
 }

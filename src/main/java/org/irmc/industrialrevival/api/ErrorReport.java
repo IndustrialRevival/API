@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.handlers.BlockTicker;
 import org.irmc.industrialrevival.api.objects.IRBlockData;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Constants;
 import org.irmc.industrialrevival.utils.DataUtil;
 
@@ -63,7 +64,7 @@ public class ErrorReport<T extends Throwable> {
         this.throwable = throwable;
         this.addon = addon;
 
-        IndustrialRevival.runSync(() -> print(printer));
+        IRDock.runSync(() -> print(printer));
     }
 
     @ParametersAreNonnullByDefault

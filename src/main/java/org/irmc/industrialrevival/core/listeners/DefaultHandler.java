@@ -101,7 +101,7 @@ public class DefaultHandler implements Listener {
 
         Debug.log("onIRBlockPlace - 2");
         //IRDock.getPlugin().getItemTextureService().blockPlacing(event);
-        IRDock.getPlugin().getBlockDataService().handleBlockPlacing(location, id);
+        IRDock.getPlugin().getDataManager().placeBlock(location, id);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

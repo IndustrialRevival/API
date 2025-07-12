@@ -2,6 +2,7 @@ package org.irmc.industrialrevival.dock;
 
 import com.comphenix.protocol.ProtocolManager;
 import org.irmc.industrialrevival.api.IndustrialRevivalAddon;
+import org.irmc.industrialrevival.api.objects.ItemSettings;
 import org.irmc.industrialrevival.core.services.IGitHubService;
 import org.irmc.industrialrevival.core.services.IIRDataManager;
 import org.irmc.industrialrevival.core.services.IIRRegistry;
@@ -11,6 +12,8 @@ import org.irmc.industrialrevival.core.services.IMinecraftRecipeService;
 import org.irmc.industrialrevival.core.services.ISQLDataManager;
 import org.irmc.pigeonlib.language.LanguageManager;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * This interface is for the IndustrialRevival plugin.
@@ -35,4 +38,12 @@ public interface IIndustrialRevivalPlugin extends IndustrialRevivalAddon {
     @NotNull IRunningProfilerService getRunningProfilerService();
 
     @NotNull IGitHubService getGitHubService();
+
+    @NotNull ItemSettings getItemSettings();
+
+    void runAsync(@NotNull Runnable runnable);
+
+    void runSync(@NotNull Runnable runnable);
+
+    List<IndustrialRevivalAddon> getAddons();
 }

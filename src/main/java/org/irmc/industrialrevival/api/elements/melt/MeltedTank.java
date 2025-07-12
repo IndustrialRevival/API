@@ -10,6 +10,7 @@ import org.irmc.industrialrevival.api.objects.display.Colorful;
 import org.irmc.industrialrevival.api.objects.display.DisplayGroup;
 import org.irmc.industrialrevival.api.objects.display.ModelHandler;
 import org.irmc.industrialrevival.api.recipes.methods.MeltMethod;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

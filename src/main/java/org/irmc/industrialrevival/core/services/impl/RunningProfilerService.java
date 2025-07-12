@@ -14,6 +14,7 @@ import org.irmc.industrialrevival.api.objects.PerformanceSummary;
 import org.irmc.industrialrevival.api.objects.TimingViewRequest;
 import org.irmc.industrialrevival.core.services.IRunningProfilerService;
 import org.irmc.industrialrevival.core.task.TickerTask;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.NumberUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +41,7 @@ public class RunningProfilerService implements IRunningProfilerService {
     @Getter
     public PerformanceSummary summary = new PerformanceSummary(getProfilingData(), new HashMap<>(), new HashMap<>(), new HashMap<>(), 0);
 
-    public void requestTimingView(TimingViewRequest request) {
+    public void requestTimingView(@NotNull TimingViewRequest request) {
         if (!requests.add(request)) {
             throw new RuntimeException("Failed to add request to queue");
         }
@@ -168,8 +169,13 @@ public class RunningProfilerService implements IRunningProfilerService {
         startTimes.clear();
     }
 
-    public Map<ProfiledBlock, Long> getProfilingData() {
+    public @NotNull Map<ProfiledBlock, Long> getProfilingData() {
         return new ConcurrentHashMap<>(profilingData);
+    }
+
+    @Override
+    public @Nullable Map.Entry<ProfiledBlock, Long> getProfilingData(@NotNull Location location) {
+        return getProfilingData().entrySet().stream().filter(entry -> entry.getKey().getLocation().equals(location)).findFirst().orElse(null);
     }
 
     @NotNull
@@ -206,7 +212,7 @@ public class RunningProfilerService implements IRunningProfilerService {
     }
 
     @NotNull
-    public Map<ProfiledBlock, Long> getProfilingDataByID(NamespacedKey id) {
+    public Map<ProfiledBlock, Long> getProfilingDataByID(@NotNull NamespacedKey id) {
         Map<ProfiledBlock, Long> profilingData = getProfilingData();
         Map<ProfiledBlock, Long> profilingDataByID = new ConcurrentHashMap<>();
         for (ProfiledBlock profiledBlock : profilingData.keySet()) {
@@ -218,7 +224,7 @@ public class RunningProfilerService implements IRunningProfilerService {
     }
 
     @NotNull
-    public Map<ProfiledBlock, Long> getProfilingDataByChunk(ChunkPosition chunkPosition) {
+    public Map<ProfiledBlock, Long> getProfilingDataByChunk(@NotNull ChunkPosition chunkPosition) {
         Map<ProfiledBlock, Long> profilingData = getProfilingData();
         Map<ProfiledBlock, Long> profilingDataByChunk = new ConcurrentHashMap<>();
         for (ProfiledBlock profiledBlock : profilingData.keySet()) {
@@ -230,7 +236,7 @@ public class RunningProfilerService implements IRunningProfilerService {
     }
 
     @NotNull
-    public Map<ProfiledBlock, Long> getProfilingDataByPlugin(String pluginName) {
+    public Map<ProfiledBlock, Long> getProfilingDataByPlugin(@NotNull String pluginName) {
         Map<ProfiledBlock, Long> profilingData = getProfilingData();
         Map<ProfiledBlock, Long> profilingDataByPlugin = new ConcurrentHashMap<>();
         for (ProfiledBlock profiledBlock : profilingData.keySet()) {
@@ -241,9 +247,9 @@ public class RunningProfilerService implements IRunningProfilerService {
         return profilingDataByPlugin;
     }
 
-    public long getTotalMachine(NamespacedKey id) {
+    public int getTotalMachine(@NotNull NamespacedKey id) {
         Map<ProfiledBlock, Long> profiledLocations = getProfilingData();
-        long totalAmount = 0;
+        int totalAmount = 0;
         for (ProfiledBlock profiledBlock : profiledLocations.keySet()) {
             if (profiledBlock.getItem().getId().equals(id)) {
                 totalAmount += profiledLocations.get(profiledBlock);

@@ -11,8 +11,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.metadata.MetadataValue;
-import org.irmc.industrialrevival.api.IndustrialRevival;
 import org.irmc.industrialrevival.api.objects.display.builder.TextModelBuilder;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -192,7 +192,7 @@ public enum ColorBlock {
                 .text(this.getBaseString())
                 .textOpacity((byte) 5)
                 .brightness(new Display.Brightness(15, 15))
-                .fixedMetaData(IndustrialRevival.getInstance(), "center", center.getX() + ";" + center.getY() + ";" + center.getZ());
+                .fixedMetaData(IRDock.getPlugin(), "center", center.getX() + ";" + center.getY() + ";" + center.getZ());
 
         if (textureHandler != null) {
             textureHandler.accept(corners, builder);

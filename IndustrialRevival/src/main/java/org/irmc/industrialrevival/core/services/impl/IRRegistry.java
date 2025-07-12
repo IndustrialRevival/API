@@ -4,13 +4,10 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import org.irmc.industrialrevival.api.elements.compounds.ChemicalCompound;
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalFormula;
 import org.irmc.industrialrevival.api.elements.melt.MeltedType;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerType;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
-import org.irmc.industrialrevival.api.items.attributes.BlockDropItem;
-import org.irmc.industrialrevival.api.items.attributes.MobDropItem;
 import org.irmc.industrialrevival.api.items.attributes.TinkerProduct;
 import org.irmc.industrialrevival.api.items.collection.ItemDictionary;
 import org.irmc.industrialrevival.api.items.groups.ItemGroup;
@@ -26,8 +23,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 
 public final class IRRegistry implements IIRRegistry {
     private final Map<NamespacedKey, ItemGroup> itemGroups = new ConcurrentHashMap<>();
@@ -50,8 +45,8 @@ public final class IRRegistry implements IIRRegistry {
     }
 
     @Override
-    public @NotNull List<ItemGroup> getAllItemGroups() {
-        return itemGroups.values().stream().sorted(Comparator.comparingInt(ItemGroup::getTier)).toList();
+    public @NotNull Collection<ItemGroup> getAllItemGroups() {
+        return Collections.unmodifiableCollection(itemGroups.values());
     }
 
     @Override
@@ -154,7 +149,7 @@ public final class IRRegistry implements IIRRegistry {
 
     @Override
     public @NotNull MachineMenuPreset registerMenuPreset(@NotNull MachineMenuPreset menuPreset) {
-        machineMenuPresets.put(menuPreset.getId(), menuPreset);
+        machineMenuPresets.put(menuPreset.getKey(), menuPreset);
         return menuPreset;
     }
 
@@ -165,7 +160,7 @@ public final class IRRegistry implements IIRRegistry {
 
     @Override
     public @NotNull MachineMenuPreset unregisterMenuPreset(@NotNull MachineMenuPreset menuPreset) {
-        return machineMenuPresets.remove(menuPreset.getId());
+        return machineMenuPresets.remove(menuPreset.getKey());
     }
 
     @Override
@@ -231,85 +226,86 @@ public final class IRRegistry implements IIRRegistry {
     }
 
     @Override
-    public @NotNull Set<ProduceMethod> getAllProduceMethods() {
-        return produceMethods;
+    public @NotNull Map<NamespacedKey, ProduceMethod> getProduceMethods() {
+        return Collections.unmodifiableMap(produceMethods.stream().collect(Collectors.toMap(ProduceMethod::getKey, m -> m)));
     }
 
     @Override
-    public @NotNull Set<ProduceMethod> getProduceMethodByInput(@NotNull Collection<ItemStack> inputs) {
-        return produceMethods.stream().filter(method -> {
-            List<ItemStack> methodInput = Arrays.asList(method.getIngredients());
-            return new HashSet<>(methodInput).containsAll(inputs);
-        }).collect(Collectors.toSet());
+    public @NotNull Collection<ProduceMethod> getAllProduceMethods() {
+        return Collections.unmodifiableCollection(produceMethods);
     }
 
     @Override
-    public @NotNull Set<ProduceMethod> getProduceMethodByInput(@NotNull ItemStack @NotNull ... inputs) {
-        return getProduceMethodByInput(List.of(inputs));
-    }
-
-    @Override
-    public @NotNull Set<ProduceMethod> getProduceMethodByInput(@Nullable ItemStack input) {
-        return getProduceMethodByInput(input == null ? List.of() : List.of(input));
-    }
-
-    @Override
-    public @NotNull Set<ProduceMethod> getProduceMethodByOutput(@NotNull Collection<ItemStack> outputs) {
+    public @NotNull Collection<ProduceMethod> getProduceMethodByInput(@NotNull List<ItemStack> inputs) {
         return produceMethods.stream()
-                .filter(method -> {
-                    List<ItemStack> methodOutputs = List.of(method.getOutput());
-                    return new HashSet<>(methodOutputs).containsAll(outputs);
-                })
-                .collect(Collectors.toSet());
+                .filter(method -> method.getInput().containsAll(inputs))
+                .toList();
     }
 
     @Override
-    public @NotNull Set<ProduceMethod> getProduceMethodByOutput(@NotNull ItemStack @NotNull ... outputs) {
-        return getProduceMethodByOutput(List.of(outputs));
+    public @NotNull Collection<ProduceMethod> getProduceMethodByInput(@NotNull ItemStack @NotNull ... inputs) {
+        return getProduceMethodByInput(Arrays.asList(inputs));
     }
 
     @Override
-    public @NotNull Set<ProduceMethod> getProduceMethodByOutput(@Nullable ItemStack output) {
-        return getProduceMethodByOutput(output == null ? List.of() : List.of(output));
+    public @NotNull Collection<ProduceMethod> getProduceMethodByInput(ItemStack inputs) {
+        return getProduceMethodByInput(Collections.singletonList(inputs));
     }
 
     @Override
-    public @NotNull Set<ProduceMethod> getProduceMethodByRecipeType(@NotNull RecipeType recipeType) {
-        return produceMethods.stream().filter(method -> method.getRecipeType().equals(recipeType)).collect(Collectors.toSet());
+    public @NotNull Collection<ProduceMethod> getProduceMethodByOutput(@NotNull List<ItemStack> outputs) {
+        return produceMethods.stream()
+                .filter(method -> outputs.stream().allMatch(method.getOutput()::contains))
+                .toList();
     }
 
     @Override
-    public @NotNull <T extends ProduceMethod> Set<T> getAllProduceMethod(@NotNull Class<T> clazz) {
-        return produceMethods.stream().filter(clazz::isInstance).map(clazz::cast).collect(Collectors.toSet());
+    public @NotNull Collection<ProduceMethod> getProduceMethodByOutput(@NotNull ItemStack @NotNull ... outputs) {
+        return getProduceMethodByOutput(Arrays.asList(outputs));
     }
 
     @Override
-    public @NotNull ProduceMethod registerProduceMethod(@NotNull ProduceMethod produceMethod) {
+    public @NotNull Collection<ProduceMethod> getProduceMethodByOutput(ItemStack outputs) {
+        return getProduceMethodByOutput(Collections.singletonList(outputs));
+    }
+
+    @Override
+    public @NotNull Collection<ProduceMethod> getProduceMethodByRecipeType(@NotNull RecipeType recipeType) {
+        return produceMethods.stream()
+                .filter(method -> method.getRecipeType().equals(recipeType))
+                .toList();
+    }
+
+    @Override
+    public @NotNull <T extends ProduceMethod> Collection<T> getAllProduceMethod(@NotNull Class<T> clazz) {
+        return produceMethods.stream()
+                .filter(clazz::isInstance)
+                .map(clazz::cast)
+                .toList();
+    }
+
+    @Override
+    public @NotNull Collection<ProduceMethod> registerProduceMethod(@NotNull ProduceMethod produceMethod) {
         produceMethods.add(produceMethod);
-        return produceMethod;
+        return Collections.singletonList(produceMethod);
     }
 
     @Override
-    public @NotNull ProduceMethod registerProduceMethod(@NotNull RecipeType recipeType, @NotNull ItemStack @Nullable [] ingredients, @Nullable ItemStack @NotNull [] outputs) {
-        return recipeType.warp(ingredients, outputs);
+    public @Nullable ProduceMethod unregisterProduceMethod(@NotNull NamespacedKey key) {
+        return produceMethods.stream()
+                .filter(method -> method.getKey().equals(key))
+                .findFirst()
+                .map(method -> {
+                    produceMethods.remove(method);
+                    return method;
+                })
+                .orElse(null);
     }
 
     @Override
-    public @NotNull ProduceMethod unregisterProduceMethod(@NotNull ProduceMethod produceMethod) {
+    public @NotNull Collection<ProduceMethod> unregisterProduceMethod(@NotNull ProduceMethod produceMethod) {
         produceMethods.remove(produceMethod);
-        return produceMethod;
-    }
-
-    @Override
-    public @Nullable ProduceMethod unregisterProduceMethod(@NotNull RecipeType recipeType, @NotNull ItemStack @NotNull [] ingredients, @Nullable ItemStack @NotNull [] outputs) {
-        ProduceMethod produceMethod = produceMethods.stream().filter(method -> {
-            return method.getRecipeType().equals(recipeType) && Arrays.equals(method.getIngredients(), ingredients) && Arrays.equals(method.getOutput(), outputs);
-        }).findFirst().orElse(null);
-
-        if (produceMethod != null) {
-            unregisterProduceMethod(produceMethod);
-        }
-        return produceMethod;
+        return Collections.singletonList(produceMethod);
     }
 
     @Override
@@ -323,8 +319,8 @@ public final class IRRegistry implements IIRRegistry {
     }
 
     @Override
-    public @NotNull Collection<MeltedType> getAllMeltedTypes() {
-        return meltTypes.values();
+    public @NotNull Set<MeltedType> getAllMeltedTypes() {
+        return Collections.unmodifiableSet(meltTypes.values().stream().collect(Collectors.toSet()));
     }
 
     @Override
@@ -334,7 +330,7 @@ public final class IRRegistry implements IIRRegistry {
 
     @Override
     public @NotNull MeltedType registerMeltedType(@NotNull MeltedType type) {
-        meltTypes.put(type.getIdentifier(), type);
+        meltTypes.put(type.getKey(), type);
         return type;
     }
 
@@ -345,7 +341,7 @@ public final class IRRegistry implements IIRRegistry {
 
     @Override
     public @NotNull MeltedType unregisterMeltedType(@NotNull MeltedType type) {
-        return meltTypes.remove(type.getIdentifier());
+        return meltTypes.remove(type.getKey());
     }
 
     @Override
@@ -355,7 +351,7 @@ public final class IRRegistry implements IIRRegistry {
 
     @Override
     public @NotNull TinkerProduct registerTinkerRecipe(@NotNull MeltedType type, @NotNull TinkerProduct product) {
-        tinkerProducts.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).put(product.getTinkerType(), product);
+        tinkerProducts.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).put(product.getType(), product);
         return product;
     }
 
@@ -367,7 +363,7 @@ public final class IRRegistry implements IIRRegistry {
 
     @Override
     public @NotNull TinkerProduct unregisterTinkerRecipe(@NotNull TinkerProduct product) {
-        tinkerProducts.forEach((type, map) -> map.remove(product.getTinkerType()));
+        tinkerProducts.forEach((type, map) -> map.remove(product.getType()));
         return product;
     }
 
@@ -414,13 +410,13 @@ public final class IRRegistry implements IIRRegistry {
 
     @Override
     public @NotNull MobDropMethod registerMobDrop(@NotNull MobDropMethod dropMethod) {
-        mobDrops.computeIfAbsent(dropMethod.getMobType(), k -> new CopyOnWriteArrayList<>()).add(dropMethod);
+        mobDrops.computeIfAbsent(dropMethod.getEntityType(), k -> new CopyOnWriteArrayList<>()).add(dropMethod);
         return dropMethod;
     }
 
     @Override
     public @NotNull MobDropMethod unregisterMobDrop(@NotNull MobDropMethod dropMethod) {
-        List<MobDropMethod> list = mobDrops.get(dropMethod.getMobType());
+        List<MobDropMethod> list = mobDrops.get(dropMethod.getEntityType());
         if (list != null) {
             list.remove(dropMethod);
         }
@@ -439,13 +435,13 @@ public final class IRRegistry implements IIRRegistry {
 
     @Override
     public @NotNull BlockDropMethod registerBlockDrop(@NotNull BlockDropMethod dropMethod) {
-        blockDrops.computeIfAbsent(dropMethod.getBlockType(), k -> new CopyOnWriteArrayList<>()).add(dropMethod);
+        blockDrops.computeIfAbsent(dropMethod.getMaterial(), k -> new CopyOnWriteArrayList<>()).add(dropMethod);
         return dropMethod;
     }
 
     @Override
     public @NotNull BlockDropMethod unregisterBlockDrop(@NotNull BlockDropMethod dropMethod) {
-        List<BlockDropMethod> list = blockDrops.get(dropMethod.getBlockType());
+        List<BlockDropMethod> list = blockDrops.get(dropMethod.getMaterial());
         if (list != null) {
             list.remove(dropMethod);
         }
@@ -476,23 +472,5 @@ public final class IRRegistry implements IIRRegistry {
     @Override
     public @Nullable ChemicalCompound unregisterChemicalCompound(@NotNull String name) {
         return chemicals.remove(name);
-    }
-
-    @Override
-    public @NotNull <T extends IndustrialRevivalItem & MobDropItem> T registerMobDrop(@NotNull T item) {
-        registerItem(item);
-        for (MobDropMethod method : item.getDropMethods()) {
-            registerProduceMethod(method);
-        }
-        return item;
-    }
-
-    @Override
-    public @NotNull <T extends IndustrialRevivalItem & BlockDropItem> T registerBlockDrop(@NotNull T item) {
-        registerItem(item);
-        for (BlockDropMethod method : item.getDropMethods()) {
-            registerProduceMethod(method);
-        }
-        return item;
     }
 }

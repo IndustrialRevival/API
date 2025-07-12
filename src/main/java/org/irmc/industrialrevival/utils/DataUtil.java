@@ -49,7 +49,7 @@ public class DataUtil {
      */
     @Nullable
     public static IRBlockData getBlockData(Location location) {
-        return IRDock.getPlugin().getBlockDataService().getBlockData(location);
+        return IRDock.getPlugin().getDataManager().getBlockData(location);
     }
 
     /**
@@ -115,8 +115,8 @@ public class DataUtil {
     @CanIgnoreReturnValue
     @Nullable
     public static IRBlockData removeBlockData(Location location) {
-        IRDock.getPlugin().getDataManager().handleBlockBreaking(location);
-        return IRDock.getPlugin().getBlockDataService().handleBlockBreaking(location);
+        IRDock.getPlugin().getSQLDataManager().deleteBlockRecord(location);
+        return IRDock.getPlugin().getDataManager().breakBlock(location);
     }
 
     /**

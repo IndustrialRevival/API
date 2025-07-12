@@ -10,6 +10,7 @@ import org.irmc.industrialrevival.api.elements.reaction.ReactCondition;
 import org.irmc.industrialrevival.api.machines.process.Environment;
 import org.irmc.industrialrevival.api.objects.CiFunction;
 import org.irmc.industrialrevival.api.objects.exceptions.UnknownChemicalCompoundException;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Debug;
 import org.irmc.industrialrevival.utils.NumberUtil;
 import org.jetbrains.annotations.NotNull;

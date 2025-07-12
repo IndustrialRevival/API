@@ -20,6 +20,7 @@ import org.irmc.industrialrevival.api.menu.gui.NormalGroupMenu;
 import org.irmc.industrialrevival.api.menu.gui.SearchMenu;
 import org.irmc.industrialrevival.api.menu.gui.SettingsMenu;
 import org.irmc.industrialrevival.api.menu.gui.SimpleRecipeDisplayMenu;
+import org.irmc.industrialrevival.api.menu.gui.VanillaRecipeDisplayMenu;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
 import org.irmc.industrialrevival.core.guide.GuideHistory;
@@ -231,10 +232,13 @@ public class GuideUtil {
     }
 
     public static void openComplexRecipeDisplayMenu(Player player, ItemStack itemStack, IndustrialRevivalItem ir, RecipeDisplayItem rdi, int page) {
-        var menu = new ComplexRecipeDisplayMenu(player, itemStack, ir, rdi, page);
-        if (!menu.getItems().isEmpty()) {
-            menu.open(player);
-        }
+        // idk how to design ComplexRecipeDisplayMenu
+//        var menu = new ComplexRecipeDisplayMenu(player, itemStack, ir, rdi, page);
+//        if (!menu.getItems().isEmpty()) {
+//            menu.open(player);
+//        }
+        // temp solution
+        openSimpleRecipeDisplayMenu(player, itemStack, ir, page);
     }
 
     public static void openSimpleRecipeDisplayMenu(Player player, ItemStack itemStack, IndustrialRevivalItem ir, int page) {

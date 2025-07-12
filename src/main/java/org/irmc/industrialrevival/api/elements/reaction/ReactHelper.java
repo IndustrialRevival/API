@@ -7,6 +7,7 @@ import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.attributes.ChemReactable;
 import org.irmc.industrialrevival.api.machines.process.Environment;
 import org.irmc.industrialrevival.core.services.impl.IRRegistry;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.JavaUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -72,7 +73,7 @@ public class ReactHelper {
      */
     @NotNull
     public static ReactResult react0(@NotNull Environment environment, @NotNull Set<ReactCondition> conditions, @NotNull Map<ChemicalCompound, Double> reactants) {
-        List<ChemicalFormula> formulas = new ArrayList<>(IRRegistry.getInstance().getChemicalFormulas().values());
+        List<ChemicalFormula> formulas = new ArrayList<>(IRDock.getRegistry().getChemicalFormulas().values());
 
         // shuffle the formulas, ensure that every reaction occurs uniformly
         formulas = JavaUtil.shuffle(formulas);
@@ -100,7 +101,7 @@ public class ReactHelper {
      */
     @NotNull
     public static List<ReactResult> reactBalanced(@NotNull Environment environment, @NotNull Set<ReactCondition> conditions, @NotNull Map<ChemicalCompound, Double> reactants) {
-        List<ChemicalFormula> formulas = new ArrayList<>(IRRegistry.getInstance().getChemicalFormulas().values());
+        List<ChemicalFormula> formulas = new ArrayList<>(IRDock.getRegistry().getChemicalFormulas().values());
 
         // shuffle the formulas, ensure that every reaction occurs uniformly
         formulas = JavaUtil.shuffle(formulas);

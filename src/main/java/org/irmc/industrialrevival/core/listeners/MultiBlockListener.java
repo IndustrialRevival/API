@@ -10,6 +10,7 @@ import org.irmc.industrialrevival.api.multiblock.MultiBlock;
 import org.irmc.industrialrevival.api.multiblock.Structure;
 import org.irmc.industrialrevival.api.multiblock.piece.MaterialStructurePiece;
 import org.irmc.industrialrevival.api.multiblock.piece.StructurePiece;
+import org.irmc.industrialrevival.dock.IRDock;
 
 import java.text.MessageFormat;
 import java.util.HashSet;

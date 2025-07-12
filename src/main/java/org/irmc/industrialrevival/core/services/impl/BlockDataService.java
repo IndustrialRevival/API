@@ -8,7 +8,6 @@ import org.irmc.industrialrevival.api.menu.MachineMenu;
 import org.irmc.industrialrevival.api.menu.MachineMenuPreset;
 import org.irmc.industrialrevival.api.objects.IRBlockData;
 import org.irmc.industrialrevival.core.data.BlockRecord;
-import org.irmc.industrialrevival.core.services.IBlockDataService;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Debug;
 
@@ -27,7 +26,7 @@ public class BlockDataService {
 
     private void loadData() {
         List<BlockRecord> records =
-                IRDock.getPlugin().getDataManager().getAllBlockRecords();
+                IRDock.getPlugin().getSQLDataManager().getAllBlockRecords();
         Debug.log("List<BlockRecord> records: " + records.size());
         for (BlockRecord record : records) {
             Location loc = record.getLocation();
