@@ -9,5 +9,6 @@ import java.util.List;
 public interface IMinecraftRecipeService {
     @NotNull
     List<VanillaRecipeContent> getRecipes(@NotNull ItemStack itemStack);
+
     void registerRecipe(@NotNull VanillaRecipeContent vanillaRecipeContent);
 }

@@ -2,7 +2,6 @@ package org.irmc.industrialrevival.api.elements.registry;
 
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalFormula;
 import org.irmc.industrialrevival.api.elements.reaction.ReactCondition;
-import org.irmc.industrialrevival.core.services.impl.IRRegistry;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.Nullable;
 

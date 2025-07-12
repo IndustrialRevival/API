@@ -12,13 +12,22 @@ import java.util.OptionalInt;
 
 public interface IItemDataService {
     @Nullable Optional<NamespacedKey> getId(@Nullable ItemStack stack);
+
     void setId(@NotNull ItemStack stack, @NotNull NamespacedKey id);
+
     @NotNull Optional<RadiationLevel> getRadiationLevel(@Nullable ItemStack stack);
+
     void setRadiationLevel(@NotNull ItemStack stack, @NotNull RadiationLevel radiationLevel);
+
     OptionalInt getCustomModelData(@Nullable ItemStack stack);
+
     void setCustomModelData(@NotNull ItemStack stack, Integer customModelData);
+
     OptionalDouble getEnergy(@Nullable ItemStack stack);
+
     void setEnergy(@NotNull ItemStack stack, Double energy);
+
     OptionalDouble getMaxEnergy(@Nullable ItemStack stack);
+
     void setMaxEnergy(@NotNull ItemStack stack, Double maxEnergy);
 }

@@ -3,7 +3,6 @@ package org.irmc.industrialrevival.api.recipes.methods;
 import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.elements.melt.MeltedObject;
-import org.irmc.industrialrevival.api.recipes.RecipeType;
 
 import java.util.List;
 

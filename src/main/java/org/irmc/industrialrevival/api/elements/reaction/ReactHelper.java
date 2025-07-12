@@ -6,7 +6,6 @@ import org.irmc.industrialrevival.api.elements.compounds.ChemicalFormula;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.attributes.ChemReactable;
 import org.irmc.industrialrevival.api.machines.process.Environment;
-import org.irmc.industrialrevival.core.services.impl.IRRegistry;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.JavaUtil;
 import org.jetbrains.annotations.NotNull;

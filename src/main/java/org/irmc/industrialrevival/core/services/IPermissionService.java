@@ -10,8 +10,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public interface IPermissionService {
     @ParametersAreNonnullByDefault
     boolean hasPermission(Permissible p, Permission permission);
+
     @ParametersAreNonnullByDefault
     boolean hasPermission(Permissible p, Location location, Permission permission);
+
     @ParametersAreNonnullByDefault
     boolean hasPermission(Permissible p, IndustrialRevivalItem item, Permission permission);
 }

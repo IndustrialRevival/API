@@ -3,7 +3,6 @@ package org.irmc.industrialrevival.api.items;
 import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
@@ -888,10 +887,6 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
         }
     }
 
-    public Patcher patcher() {
-        return new Patcher(this);
-    }
-
     @Override
     public ItemStack getDisplayItem(IndustrialRevivalItem item) {
         return PageableMenu.getDisplayItem0(item);
@@ -906,22 +901,5 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
     @FunctionalInterface
     public interface ProduceMethodGetter {
         @NotNull ProduceMethod getProduceMethod(@NotNull IndustrialRevivalItem item);
-    }
-
-    @RequiredArgsConstructor
-    public static class Patcher {
-        private final IndustrialRevivalItem item;
-
-        public Patcher patchId(NamespacedKey id) {
-            item.setId(id);
-            return this;
-        }
-
-        public Patcher patchIcon(ItemStack icon) {
-            item.setIcon(icon);
-            return this;
-        }
-
-        // todo
     }
 }

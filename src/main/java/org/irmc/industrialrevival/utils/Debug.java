@@ -2,7 +2,6 @@ package org.irmc.industrialrevival.utils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.irmc.industrialrevival.dock.IIndustrialRevivalPlugin;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.NotNull;
