@@ -10,6 +10,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.Debug;
 import org.irmc.industrialrevival.utils.KeyUtil;

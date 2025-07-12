@@ -11,12 +11,12 @@ import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.attributes.RecipeDisplayItem;
 import org.irmc.industrialrevival.api.menu.SimpleMenu;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
-import org.irmc.industrialrevival.api.objects.CustomItemStack;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.CleanedItemGetter;
 import org.irmc.industrialrevival.utils.Constants;
 import org.irmc.industrialrevival.utils.GuideUtil;
+import org.irmc.pigeonlib.items.CustomItemStack;
 import org.irmc.pigeonlib.items.ItemUtils;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
                             Material.BARRIER,
                             IRDock.getPlugin()
                                     .getLanguageManager()
-                                    .getMsgComponent(p, "misc.recipe_not_found")));
+                                    .getMsgComponent(p, "misc.recipe_not_found")).getBukkit());
 
             sm.setItem(Constants.ItemStacks.BACKGROUND_ITEM, ClickHandler.DEFAULT, 1, 2, 3, 4, 5, 6, 7, 8);
             sm.setItem(7, Constants.ItemStacks.BACKGROUND_ITEM, ClickHandler.DEFAULT);
@@ -213,7 +213,7 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
                             Material.BARRIER,
                             IRDock.getPlugin()
                                     .getLanguageManager()
-                                    .getMsgComponent(p, "misc.recipe_no_usage")));
+                                    .getMsgComponent(p, "misc.recipe_no_usage")).getBukkit());
 
             return;
         }

@@ -3,6 +3,7 @@ package org.irmc.industrialrevival.utils;
 import lombok.experimental.UtilityClass;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.Contract;
 
 import javax.annotation.Nonnull;

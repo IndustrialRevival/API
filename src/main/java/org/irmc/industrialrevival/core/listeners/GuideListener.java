@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.irmc.industrialrevival.api.objects.enums.GuideMode;
+import org.irmc.industrialrevival.core.guide.GuideMode;
 import org.irmc.industrialrevival.core.guide.impl.CheatGuide;
 import org.irmc.industrialrevival.core.guide.impl.SurvivalGuide;
 import org.irmc.industrialrevival.dock.IRDock;

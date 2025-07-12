@@ -9,11 +9,9 @@ import org.irmc.industrialrevival.api.elements.reaction.ReactCondition;
 import org.irmc.industrialrevival.api.elements.reaction.ReactHelper;
 import org.irmc.industrialrevival.api.elements.reaction.ReactResult;
 import org.irmc.industrialrevival.api.machines.process.Environment;
-import org.irmc.industrialrevival.core.services.IRRegistry;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.irmc.pigeonlib.pdc.PersistentDataAPI;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -21,22 +19,6 @@ import java.util.Set;
 public interface ChemReactable extends ItemAttribute, Keyed, ComplexDataContainer.DataContainer2<Double, ChemicalCompound> {
     NamespacedKey CHEMICAL_COMPOUND_KEY = KeyUtil.customKey("chemical_compound");
     NamespacedKey MASS_KEY = KeyUtil.customKey("mass");
-
-    /**
-     * Returns the reactable instance for the given chemical compound.
-     *
-     * @param compound the chemical compound to get the item for.
-     * @return the reactable instance for the given chemical compound.
-     */
-    static @Nullable ChemReactable getByCompound(@NotNull ChemicalCompound compound) {
-        for (var entry : IRRegistry.getInstance().getBindingCompounds().entrySet()) {
-            if (entry.getValue().equals(compound)) {
-                return entry.getKey();
-            }
-        }
-
-        return null;
-    }
 
     @Override
     default ChemicalCompound getData2(ItemStack itemStack) {
@@ -95,13 +77,6 @@ public interface ChemReactable extends ItemAttribute, Keyed, ComplexDataContaine
     }
 
     /**
-     * Registers the item as a reactable.
-     */
-    default void registerReactable() {
-        IRDock.getPlugin().getRegistry().registerChemicalReactable(this);
-    }
-
-    /**
      * Returns true if the item is a catalyst for the given condition.
      *
      * @param condition the condition to check.
@@ -109,14 +84,5 @@ public interface ChemReactable extends ItemAttribute, Keyed, ComplexDataContaine
      */
     default boolean isCatalyst(@NotNull ReactCondition condition) {
         return false;
-    }
-
-    /**
-     * Binds the item to the given chemical compound.
-     *
-     * @param compound the chemical compound to bind to.
-     */
-    default void bind(@NotNull ChemicalCompound compound) {
-        IRDock.getPlugin().getRegistry().bindChemicalCompound(this, compound);
     }
 }

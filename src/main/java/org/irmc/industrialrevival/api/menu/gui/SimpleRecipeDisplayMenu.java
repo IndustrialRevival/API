@@ -163,8 +163,8 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
                 .addExplain("N", "Next Page", getNextPageButton(), getNextPageClickHandler())
                 .addExplain("w", "Wiki", GuideUtil::openWiki)
                 .addExplain("t", "Recipe Type", this::pageJumper)
-                .addExplain("i", "Ingredients", GuideUtil::lookup)
-                .addExplain("o", "Output", GuideUtil::lookup);
+                .addExplain("i", "Ingredients", GuideUtil::lookupItem)
+                .addExplain("o", "Output", GuideUtil::lookupItem);
     }
 
     public ItemStack getWikiButton() {

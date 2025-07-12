@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public abstract class ItemDictionary implements Keyed {
      * @param key the key of the dictionary
      */
     public ItemDictionary(@NotNull NamespacedKey key) {
-        IRDock.getPlugin().getRegistry().registerDictionary(this);
+        IRDock.getPlugin().getRegistry().registerItemDictionary(this);
 
         this.key = key;
     }

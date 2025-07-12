@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.LimitedItem;
-import org.irmc.industrialrevival.api.objects.events.vanilla.PlayerRightClickEvent;
+import org.irmc.industrialrevival.api.events.vanilla.PlayerRightClickEvent;
 
 public class LimitedItemListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)

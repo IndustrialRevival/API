@@ -1,7 +1,7 @@
 package org.irmc.industrialrevival.api.items.attributes;
 
 import org.irmc.industrialrevival.api.recipes.methods.MobDropMethod;
-import org.irmc.industrialrevival.core.services.IRRegistry;
+import org.irmc.industrialrevival.core.services.impl.IRRegistry;
 
 /**
  * This interface defines an item that can be dropped by an entity.<br>

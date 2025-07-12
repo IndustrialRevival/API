@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.irmc.industrialrevival.core.guide.GuideHistory;
 import org.irmc.industrialrevival.core.guide.GuideSettings;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,15 +58,15 @@ public class PlayerProfile {
 
     @Nullable
     public static PlayerProfile getProfile(String playerName) {
-        return IRDock.getPlugin().getRegistry().getPlayerProfiles().get(playerName);
+        return IRDock.getPlugin().getDataManager().getPlayerProfiles().get(playerName);
     }
 
     @NotNull
     @CanIgnoreReturnValue
     public static PlayerProfile getOrRequestProfile(String name) {
-        if (IRDock.getPlugin().getRegistry().getPlayerProfiles().containsKey(name)) {
+        if (IRDock.getPlugin().getDataManager().getPlayerProfiles().containsKey(name)) {
             return IRDock.getPlugin()
-                    .getRegistry()
+                    .getDataManager()
                     .getPlayerProfiles()
                     .get(name);
         }
@@ -88,7 +89,7 @@ public class PlayerProfile {
         });
 
         PlayerProfile profile = new PlayerProfile(name, playerUUID, guideSettings, researchStatus);
-        IRDock.getPlugin().getRegistry().getPlayerProfiles().put(name, profile);
+        IRDock.getPlugin().getDataManager().getPlayerProfiles().put(name, profile);
 
         return profile;
     }

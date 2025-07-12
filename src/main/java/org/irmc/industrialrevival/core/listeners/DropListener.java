@@ -15,6 +15,7 @@ import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.attributes.ItemDroppable;
 import org.irmc.industrialrevival.api.recipes.methods.BlockDropMethod;
 import org.irmc.industrialrevival.api.recipes.methods.MobDropMethod;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.DataUtil;
 
 import java.security.SecureRandom;

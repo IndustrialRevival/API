@@ -10,18 +10,19 @@ import org.bukkit.event.block.BlockExplodeEvent;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.attributes.InventoryBlock;
 import org.irmc.industrialrevival.api.menu.MachineMenu;
-import org.irmc.industrialrevival.api.objects.IRBlockData;
-import org.irmc.industrialrevival.api.objects.events.vanilla.EndermanMoveIRBlockEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.EntityChangeIRBlockEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.EntityExplodeIRBlockEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.IRBlockBreakEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.IRBlockFromToEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.IRBlockPlaceEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.MenuOpenEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.PistonExtendIRBlockEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.PistonRetractIRBlockEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.PlayerBucketEmptyToIRBlockEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.PlayerRightClickEvent;
+import org.irmc.industrialrevival.api.data.runtime.IRBlockData;
+import org.irmc.industrialrevival.api.events.vanilla.EndermanMoveIRBlockEvent;
+import org.irmc.industrialrevival.api.events.vanilla.EntityChangeIRBlockEvent;
+import org.irmc.industrialrevival.api.events.vanilla.EntityExplodeIRBlockEvent;
+import org.irmc.industrialrevival.api.events.vanilla.IRBlockBreakEvent;
+import org.irmc.industrialrevival.api.events.vanilla.IRBlockFromToEvent;
+import org.irmc.industrialrevival.api.events.vanilla.IRBlockPlaceEvent;
+import org.irmc.industrialrevival.api.events.vanilla.MenuOpenEvent;
+import org.irmc.industrialrevival.api.events.vanilla.PistonExtendIRBlockEvent;
+import org.irmc.industrialrevival.api.events.vanilla.PistonRetractIRBlockEvent;
+import org.irmc.industrialrevival.api.events.vanilla.PlayerBucketEmptyToIRBlockEvent;
+import org.irmc.industrialrevival.api.events.vanilla.PlayerRightClickEvent;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.Debug;
 
@@ -76,8 +77,7 @@ public class DefaultHandler implements Listener {
         }
 
         //IRDock.getPlugin().getItemTextureService().blockBreaking(event);
-        IRDock.getPlugin().getBlockDataService().handleBlockBreaking(event.getOriginalEvent().getBlock().getLocation());
-        IRDock.getPlugin().getDataManager().handleBlockBreaking(event.getOriginalEvent().getBlock().getLocation());
+        IRDock.getPlugin().getDataManager().breakBlock(event.getOriginalEvent().getBlock().getLocation());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -101,7 +101,7 @@ public class DefaultHandler implements Listener {
 
         Debug.log("onIRBlockPlace - 2");
         //IRDock.getPlugin().getItemTextureService().blockPlacing(event);
-        IRDock.getPlugin().getBlockDataService().handleBlockPlacing(location, id);
+        IRDock.getPlugin().getDataManager().placeBlock(location, id);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

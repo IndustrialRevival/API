@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.irmc.industrialrevival.api.menu.SimpleMenu;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
-import org.irmc.industrialrevival.api.objects.enums.GuideMode;
+import org.irmc.industrialrevival.core.guide.GuideMode;
 import org.irmc.pigeonlib.items.CustomItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

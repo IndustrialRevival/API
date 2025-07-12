@@ -20,6 +20,7 @@ import org.irmc.industrialrevival.api.menu.gui.NormalGroupMenu;
 import org.irmc.industrialrevival.api.menu.gui.SearchMenu;
 import org.irmc.industrialrevival.api.menu.gui.SettingsMenu;
 import org.irmc.industrialrevival.api.menu.gui.SimpleRecipeDisplayMenu;
+import org.irmc.industrialrevival.api.menu.gui.VanillaRecipeDisplayMenu;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
 import org.irmc.industrialrevival.core.guide.GuideHistory;
@@ -29,6 +30,7 @@ import org.irmc.pigeonlib.items.CustomItemStack;
 /**
  * @author balugaq
  */
+@SuppressWarnings({"UnusedReturnValue", "unused", "SameReturnValue"})
 public class GuideUtil {
     public static final NamespacedKey WIKI_KEY = KeyUtil.customKey("wiki");
 
@@ -196,22 +198,22 @@ public class GuideUtil {
     /**
      * Compatible with {@link ClickHandler}
      */
-    public static boolean lookup(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
-        return lookup(player, itemStack);
+    public static boolean lookupItem(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
+        return lookupItem(player, itemStack);
     }
 
-    public static boolean lookup(Player player, ItemStack itemStack) {
-        return lookup(player, itemStack, 1);
+    public static boolean lookupItem(Player player, ItemStack itemStack) {
+        return lookupItem(player, itemStack, 1);
     }
 
-    public static boolean lookup(Player player, ItemStack itemStack, int page) {
+    public static boolean lookupItem(Player player, ItemStack itemStack, int page) {
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return false;
         }
 
         var ir = IndustrialRevivalItem.getByItem(itemStack);
         if (ir != null) {
-            lookup(player, ir, itemStack, page);
+            lookupItem(player, ir, itemStack, page);
         } else {
             openVanillaRecipeDisplayMenu(player, itemStack, page);
         }
@@ -219,7 +221,7 @@ public class GuideUtil {
         return false;
     }
 
-    public static boolean lookup(Player player, IndustrialRevivalItem ir, ItemStack itemStack, int page) {
+    public static boolean lookupItem(Player player, IndustrialRevivalItem ir, ItemStack itemStack, int page) {
         if (ir instanceof RecipeDisplayItem rdi) {
             openComplexRecipeDisplayMenu(player, itemStack, ir, rdi, page);
         } else if (ir != null) {
@@ -230,10 +232,13 @@ public class GuideUtil {
     }
 
     public static void openComplexRecipeDisplayMenu(Player player, ItemStack itemStack, IndustrialRevivalItem ir, RecipeDisplayItem rdi, int page) {
-        var menu = new ComplexRecipeDisplayMenu(player, itemStack, ir, rdi, page);
-        if (!menu.getItems().isEmpty()) {
-            menu.open(player);
-        }
+        // idk how to design ComplexRecipeDisplayMenu
+//        var menu = new ComplexRecipeDisplayMenu(player, itemStack, ir, rdi, page);
+//        if (!menu.getItems().isEmpty()) {
+//            menu.open(player);
+//        }
+        // temp solution
+        openSimpleRecipeDisplayMenu(player, itemStack, ir, page);
     }
 
     public static void openSimpleRecipeDisplayMenu(Player player, ItemStack itemStack, IndustrialRevivalItem ir, int page) {

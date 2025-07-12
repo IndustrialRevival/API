@@ -12,7 +12,7 @@ import org.irmc.industrialrevival.api.machines.process.IOperation;
 import org.irmc.industrialrevival.api.menu.MachineMenu;
 import org.irmc.industrialrevival.api.menu.MatrixMenuDrawer;
 import org.irmc.industrialrevival.api.menu.SimpleMenu;
-import org.irmc.industrialrevival.api.objects.enums.ItemFlow;
+import org.irmc.industrialrevival.api.machines.ItemFlow;
 import org.irmc.pigeonlib.items.CustomItemStack;
 import org.irmc.pigeonlib.items.ItemUtils;
 import org.jetbrains.annotations.NotNull;

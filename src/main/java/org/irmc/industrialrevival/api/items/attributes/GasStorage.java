@@ -8,7 +8,7 @@ import org.irmc.pigeonlib.objects.percentage.PositiveHundredPercentage;
 import org.irmc.pigeonlib.pdc.PersistentDataAPI;
 
 public interface GasStorage extends ChemReactable, SimpleDataContainer<PositiveHundredPercentage> {
-    public static final NamespacedKey GAS_STORAGE_CAPACITY_KEY = KeyUtil.customKey("gas_storage_capacity");
+    NamespacedKey GAS_STORAGE_CAPACITY_KEY = KeyUtil.customKey("gas_storage_capacity");
 
     CatheterInsertionMethod getCatheterInsertionMethod(ItemStack item);
 

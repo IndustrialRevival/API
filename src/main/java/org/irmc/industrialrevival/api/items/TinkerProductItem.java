@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.elements.melt.MeltedType;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerType;
 import org.irmc.industrialrevival.api.items.attributes.TinkerProduct;
+import org.irmc.industrialrevival.dock.IRDock;
 
 @Getter
 public class TinkerProductItem extends IndustrialRevivalItem implements TinkerProduct {
@@ -35,7 +36,7 @@ public class TinkerProductItem extends IndustrialRevivalItem implements TinkerPr
         if (this.meltedType == null) {
             throw new IllegalArgumentException("MeltedType must be set for TinkerProductItem");
         }
-        IRDock.getPlugin().getRegistry().registerTinkerItem(getMeltedType(), this);
+        IRDock.getPlugin().getRegistry().registerTinkerRecipe(getMeltedType(), this);
     }
 
     @Override

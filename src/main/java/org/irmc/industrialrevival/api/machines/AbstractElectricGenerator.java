@@ -3,8 +3,7 @@ package org.irmc.industrialrevival.api.machines;
 import lombok.Getter;
 import org.irmc.industrialrevival.api.items.attributes.EnergyNetProvider;
 import org.irmc.industrialrevival.api.items.handlers.BlockTicker;
-import org.irmc.industrialrevival.api.objects.enums.EnergyNetComponentType;
-import org.irmc.industrialrevival.api.objects.events.ir.BlockTickEvent;
+import org.irmc.industrialrevival.api.events.ir.BlockTickEvent;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 

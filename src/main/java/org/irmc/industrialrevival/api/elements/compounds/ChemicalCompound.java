@@ -7,6 +7,7 @@ import org.irmc.industrialrevival.api.elements.ElementType;
 import org.irmc.industrialrevival.api.elements.compounds.types.IonCompound;
 import org.irmc.industrialrevival.api.elements.compounds.types.OxideCompound;
 import org.irmc.industrialrevival.api.elements.registry.ChemicalCompounds;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +26,6 @@ import java.util.Map;
  */
 @Data
 public class ChemicalCompound {
-    public static final Map<String, ChemicalCompound> ALL_CHEMICALS = new HashMap<>();
     @NotNull
     public final String name;
     @NotNull
@@ -56,7 +56,7 @@ public class ChemicalCompound {
         this.name = name;
         this.compounds = compounds;
         if (register) {
-            ALL_CHEMICALS.put(name, this);
+            IRDock.getRegistry().getChemicalCompounds().put(name, this);
         }
     }
 
@@ -73,7 +73,7 @@ public class ChemicalCompound {
             return null;
         }
 
-        return ALL_CHEMICALS.get(name);
+        return IRDock.getRegistry().getChemicalCompounds().get(name);
     }
 
     public String asKey() {

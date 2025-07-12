@@ -3,7 +3,6 @@ package org.irmc.industrialrevival.api.items;
 import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
@@ -29,15 +28,14 @@ import org.irmc.industrialrevival.api.items.handlers.ItemHandler;
 import org.irmc.industrialrevival.api.menu.Displayable;
 import org.irmc.industrialrevival.api.menu.gui.PageableMenu;
 import org.irmc.industrialrevival.api.multiblock.MultiBlock;
-import org.irmc.industrialrevival.api.objects.CustomItemStack;
-import org.irmc.industrialrevival.api.objects.exceptions.IncompatibleItemHandlerException;
+import org.irmc.industrialrevival.api.exceptions.IncompatibleItemHandlerException;
 import org.irmc.industrialrevival.api.recipes.RecipeContent;
 import org.irmc.industrialrevival.api.recipes.RecipeContents;
 import org.irmc.industrialrevival.api.recipes.RecipeType;
 import org.irmc.industrialrevival.api.recipes.methods.CraftMethod;
 import org.irmc.industrialrevival.api.recipes.methods.ProduceMethod;
 import org.irmc.industrialrevival.core.translation.ItemTranslator;
-import org.irmc.industrialrevival.implementation.items.IndustrialRevivalItemSetup;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Constants;
 import org.irmc.pigeonlib.items.ItemUtils;
 import org.irmc.pigeonlib.language.LanguageManager;
@@ -248,17 +246,6 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
     @NotNull
     public IndustrialRevivalItem icon(@NotNull ItemStack icon) {
         return setIcon(icon);
-    }
-
-    /**
-     * Sets the icon of the item.
-     *
-     * @param icon the icon of the item
-     * @return this instance
-     */
-    @NotNull
-    public IndustrialRevivalItem icon(@NotNull CustomItemStack icon) {
-        return icon(new org.irmc.pigeonlib.items.CustomItemStack(icon));
     }
 
     /**
@@ -704,11 +691,11 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
             IRDock.getPlugin().getRegistry().registerMultiBlock(mb);
         }
         if (this instanceof MobDropItem mdi) {
-            IRDock.getPlugin().getRegistry().registerMobDrop(mdi);
+            IRDock.getPlugin().getRegistry().registerMobDrop((IndustrialRevivalItem & MobDropItem) mdi);
         }
 
         if (this instanceof BlockDropItem bdi) {
-            IRDock.getPlugin().getRegistry().registerBlockDrop(bdi);
+            IRDock.getPlugin().getRegistry().registerBlockDrop((IndustrialRevivalItem & BlockDropItem) bdi);
         }
 
         if (this instanceof VanillaSmeltingItem vsi) {
@@ -888,10 +875,6 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
         }
     }
 
-    public Patcher patcher() {
-        return new Patcher(this);
-    }
-
     @Override
     public ItemStack getDisplayItem(IndustrialRevivalItem item) {
         return PageableMenu.getDisplayItem0(item);
@@ -906,22 +889,5 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
     @FunctionalInterface
     public interface ProduceMethodGetter {
         @NotNull ProduceMethod getProduceMethod(@NotNull IndustrialRevivalItem item);
-    }
-
-    @RequiredArgsConstructor
-    public static class Patcher {
-        private final IndustrialRevivalItem item;
-
-        public Patcher patchId(NamespacedKey id) {
-            item.setId(id);
-            return this;
-        }
-
-        public Patcher patchIcon(ItemStack icon) {
-            item.setIcon(icon);
-            return this;
-        }
-
-        // todo
     }
 }

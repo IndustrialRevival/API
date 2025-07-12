@@ -148,8 +148,6 @@ public abstract class ItemGroup implements Displayable<ItemGroup> {
         locked = true;
 
         IRDock.getPlugin().getRegistry().registerItemGroup(this);
-
-        resort();
     }
 
     /**
@@ -180,13 +178,6 @@ public abstract class ItemGroup implements Displayable<ItemGroup> {
     public void setOnlyVisibleByAdmins(boolean onlyVisibleByAdmins) {
         checkLocked();
         this.onlyVisibleByAdmins = onlyVisibleByAdmins;
-    }
-
-    /**
-     * Resorts the item groups. An internal method
-     */
-    void resort() {
-        IRDock.getPlugin().getRegistry().resortItemGroups();
     }
 
     /**

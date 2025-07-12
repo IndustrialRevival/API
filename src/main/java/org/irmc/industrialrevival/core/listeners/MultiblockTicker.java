@@ -4,8 +4,8 @@ import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.irmc.industrialrevival.api.items.attributes.ExtraTickable;
-import org.irmc.industrialrevival.api.objects.events.ir.TickDoneEvent;
-import org.irmc.industrialrevival.api.objects.events.ir.TickStartEvent;
+import org.irmc.industrialrevival.api.events.ir.TickDoneEvent;
+import org.irmc.industrialrevival.api.events.ir.TickStartEvent;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
