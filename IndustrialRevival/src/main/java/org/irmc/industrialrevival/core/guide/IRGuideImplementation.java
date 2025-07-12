@@ -9,16 +9,14 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * Interface defining the guide implementation for IndustrialRevival items and features.
- * This interface provides various methods to open and display guide content to players.
- *
- * @author balugaq
+ * Interface for guide implementation.
+ * Defines methods for displaying guide content to players.
  */
 public interface IRGuideImplementation {
     /**
-     * Gets the current guide mode being used by this implementation.
+     * Gets the current guide mode.
      *
-     * @return GuideMode enum representing the current guide mode
+     * @return the current guide mode
      */
     @NotNull
     GuideMode getGuideMode();
@@ -26,18 +24,18 @@ public interface IRGuideImplementation {
     /**
      * Opens the main page of the guide for a player.
      *
-     * @param player Player who will see the guide
-     * @param page   Page number to display (used for pagination)
+     * @param player the player to open the guide for
+     * @param page the page number to display
      */
     @ParametersAreNonnullByDefault
     void openMainPage(Player player, int page);
 
     /**
-     * Opens a specific item group in the guide for a player.
+     * Opens an item group in the guide for a player.
      *
-     * @param player    Player who will see the guide
-     * @param itemGroup Item group to display
-     * @param page      Page number within the item group to display
+     * @param player the player to open the guide for
+     * @param itemGroup the item group to display
+     * @param page the page number to display
      */
     @ParametersAreNonnullByDefault
     void openItemGroup(Player player, ItemGroup itemGroup, int page);
@@ -45,9 +43,9 @@ public interface IRGuideImplementation {
     /**
      * Displays a specific item in the guide for a player.
      *
-     * @param player    Player who will see the guide
-     * @param itemStack Item to display in the guide
-     * @param page      Page number for the item display
+     * @param player the player to open the guide for
+     * @param itemStack the item to display
+     * @param page the page number to display
      */
     @ParametersAreNonnullByDefault
     void displayItem(Player player, ItemStack itemStack, int page);

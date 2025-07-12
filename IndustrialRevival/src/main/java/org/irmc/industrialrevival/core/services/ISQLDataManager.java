@@ -10,8 +10,6 @@ import java.util.List;
 /**
  * Interface for SQL data management operations.
  * Provides methods for managing block records in the database.
- *
- * @author balugaq
  */
 public interface ISQLDataManager {
     /**
@@ -29,17 +27,17 @@ public interface ISQLDataManager {
     void saveBlockRecord(@NotNull BlockRecord record);
 
     /**
-     * Retrieves a block record by its location.
+     * Retrieves a block record for the specified location.
      *
-     * @param loc the location to search for
-     * @return the block record at the given location, or null if not found
+     * @param loc the location to get the block record for
+     * @return the block record for the specified location, or null if not found
      */
     @Nullable BlockRecord getBlockRecord(@NotNull Location loc);
 
     /**
-     * Deletes a block record by its location.
+     * Deletes a block record for the specified location.
      *
-     * @param loc the location of the block record to delete
+     * @param loc the location to delete the block record for
      */
     void deleteBlockRecord(@NotNull Location loc);
 }

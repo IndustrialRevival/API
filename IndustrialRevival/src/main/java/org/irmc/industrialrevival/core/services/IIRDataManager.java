@@ -14,17 +14,15 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Service interface for managing IndustrialRevival data in the plugin.
- * Provides methods to handle block data and player profiles.
- *
- * @author balugaq
+ * Interface for IndustrialRevival data management.
+ * Provides methods for managing block data and player profiles.
  */
 public interface IIRDataManager {
     /**
-     * Gets the block data at the specified location if it exists.
+     * Gets the block data at the specified location.
      *
      * @param location the location to check
-     * @return the block data at the location, or null if not found
+     * @return the block data at the specified location, or null if none exists
      */
     @Nullable
     IRBlockData getBlockData(@NotNull Location location);
@@ -32,83 +30,84 @@ public interface IIRDataManager {
     /**
      * Places a block with the specified ID at the given location.
      *
-     * @param loc     the location to place the block
-     * @param blockID the NamespacedKey ID of the block to place
+     * @param loc the location to place the block
+     * @param blockID the ID of the block to place
      */
     void placeBlock(@NotNull Location loc, @NotNull NamespacedKey blockID);
 
     /**
-     * Breaks (removes) a block at the specified location.
+     * Breaks a block at the specified location.
      *
-     * @param loc the location to break the block
-     * @return the removed block data, or null if no block was at that location
+     * @param loc the location of the block to break
+     * @return the block data of the broken block, or null if none existed
      */
     @CanIgnoreReturnValue
     @Nullable
     IRBlockData breakBlock(@NotNull Location loc);
 
     /**
-     * Saves all current data to storage.
+     * Saves all data to persistent storage.
      */
     void saveAllData();
 
     /**
-     * Gets a map of all block data locations to their respective data.
+     * Gets the map of all block data.
      *
-     * @return a map of block locations to block data
+     * @return a map of locations to block data
      */
     @NotNull
     Map<Location, IRBlockData> getBlockDataMap();
 
     /**
-     * Gets a map of player names to their player profiles.
+     * Gets all player profiles by their string identifier.
      *
-     * @return a map of player names to player profiles
+     * @return a map of player profile string identifiers to profiles
      */
-    @NotNull Map<String, PlayerProfile> getPlayerProfiles();
+    @NotNull
+    Map<String, PlayerProfile> getPlayerProfiles();
 
     /**
-     * Gets a collection of all player profiles.
+     * Gets all player profiles as a collection.
      *
      * @return a collection of all player profiles
      */
     @NotNull Collection<PlayerProfile> getAllPlayerProfiles();
 
     /**
-     * Gets a player profile by player name if it exists.
+     * Gets a player profile by player name.
      *
-     * @param playerName the name of the player to get the profile for
-     * @return the player profile if found, null otherwise
+     * @param playerName the name of the player
+     * @return the player profile, or null if not found
      */
     @Nullable PlayerProfile getPlayerProfile(@NotNull String playerName);
 
     /**
-     * Gets a player profile by player object.
+     * Gets a player profile for the specified player.
      *
      * @param player the player to get the profile for
-     * @return the player profile associated with this player
+     * @return the player profile
      */
     @NotNull PlayerProfile getPlayerProfile(@NotNull Player player);
 
     /**
      * Gets a player profile by player UUID.
      *
-     * @param playerUUID the UUID of the player to get the profile for
-     * @return the player profile associated with this UUID
+     * @param playerUUID the UUID of the player
+     * @return the player profile
      */
     @NotNull PlayerProfile getPlayerProfile(@NotNull UUID playerUUID);
 
     /**
-     * Saves a player profile to storage.
+     * Saves a player profile to persistent storage.
      *
      * @param profile the player profile to save
      */
     void savePlayerProfile(@NotNull PlayerProfile profile);
 
     /**
-     * Requests and loads a player profile for the specified player.
+     * Requests a player profile for the specified player.
      *
-     * @param player the player to request a profile for
+     * @param player the player to request the profile for
      */
     void requestPlayerProfile(@NotNull Player player);
 }

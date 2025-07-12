@@ -12,5 +12,10 @@ import org.irmc.industrialrevival.api.IndustrialRevivalAddon;
  * </p>
  */
 public interface DataStorePoint {
+    /**
+     * Gets the IndustrialRevivalAddon instance associated with this data store point.
+     *
+     * @return the IndustrialRevivalAddon instance
+     */
     IndustrialRevivalAddon getAddon();
 }
