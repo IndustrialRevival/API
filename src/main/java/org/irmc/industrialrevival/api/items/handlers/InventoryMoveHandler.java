@@ -1,6 +1,6 @@
 package org.irmc.industrialrevival.api.items.handlers;
 
-import org.irmc.industrialrevival.api.objects.events.vanilla.InventoryMoveIRItemEvent;
+import org.irmc.industrialrevival.api.events.vanilla.InventoryMoveIRItemEvent;
 import org.jetbrains.annotations.NotNull;
 
 @FunctionalInterface

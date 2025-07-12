@@ -5,8 +5,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.irmc.industrialrevival.api.items.handlers.BlockTicker;
 import org.irmc.industrialrevival.api.objects.ChunkPosition;
-import org.irmc.industrialrevival.api.objects.events.vanilla.IRBlockBreakEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.IRBlockPlaceEvent;
+import org.irmc.industrialrevival.api.events.vanilla.IRBlockBreakEvent;
+import org.irmc.industrialrevival.api.events.vanilla.IRBlockPlaceEvent;
 
 import java.util.HashMap;
 import java.util.Map;

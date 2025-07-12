@@ -1,7 +1,7 @@
 package org.irmc.industrialrevival.core.services;
 
 import org.bukkit.Location;
-import org.irmc.industrialrevival.core.data.BlockRecord;
+import org.irmc.industrialrevival.api.data.sql.BlockRecord;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -2,7 +2,7 @@ package org.irmc.industrialrevival.core.services;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
-import org.irmc.industrialrevival.api.objects.enums.RadiationLevel;
+import org.irmc.industrialrevival.api.items.radiation.RadiationLevel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

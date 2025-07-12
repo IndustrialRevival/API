@@ -2,7 +2,7 @@ package org.irmc.industrialrevival.dock;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.Player;
-import org.irmc.industrialrevival.api.objects.ItemSettings;
+import org.irmc.industrialrevival.core.services.ItemSettings;
 import org.irmc.industrialrevival.core.guide.IRGuideImplementation;
 import org.irmc.industrialrevival.core.services.IGitHubService;
 import org.irmc.industrialrevival.core.services.IIRDataManager;

@@ -1,6 +1,6 @@
 package org.irmc.industrialrevival.api.items.handlers;
 
-import org.irmc.industrialrevival.api.objects.events.vanilla.PrepareGrindstoneIRItemEvent;
+import org.irmc.industrialrevival.api.events.vanilla.PrepareGrindstoneIRItemEvent;
 import org.jetbrains.annotations.NotNull;
 
 @FunctionalInterface

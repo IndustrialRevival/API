@@ -6,8 +6,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.irmc.industrialrevival.api.menu.MachineMenu;
 import org.irmc.industrialrevival.api.menu.MachineMenuPreset;
-import org.irmc.industrialrevival.api.objects.IRBlockData;
-import org.irmc.industrialrevival.core.data.BlockRecord;
+import org.irmc.industrialrevival.api.data.runtime.IRBlockData;
+import org.irmc.industrialrevival.api.data.sql.BlockRecord;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Debug;
 

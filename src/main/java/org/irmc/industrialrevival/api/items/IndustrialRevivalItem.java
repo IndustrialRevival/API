@@ -28,8 +28,7 @@ import org.irmc.industrialrevival.api.items.handlers.ItemHandler;
 import org.irmc.industrialrevival.api.menu.Displayable;
 import org.irmc.industrialrevival.api.menu.gui.PageableMenu;
 import org.irmc.industrialrevival.api.multiblock.MultiBlock;
-import org.irmc.industrialrevival.api.objects.CustomItemStack;
-import org.irmc.industrialrevival.api.objects.exceptions.IncompatibleItemHandlerException;
+import org.irmc.industrialrevival.api.exceptions.IncompatibleItemHandlerException;
 import org.irmc.industrialrevival.api.recipes.RecipeContent;
 import org.irmc.industrialrevival.api.recipes.RecipeContents;
 import org.irmc.industrialrevival.api.recipes.RecipeType;
@@ -247,17 +246,6 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
     @NotNull
     public IndustrialRevivalItem icon(@NotNull ItemStack icon) {
         return setIcon(icon);
-    }
-
-    /**
-     * Sets the icon of the item.
-     *
-     * @param icon the icon of the item
-     * @return this instance
-     */
-    @NotNull
-    public IndustrialRevivalItem icon(@NotNull CustomItemStack icon) {
-        return icon(new org.irmc.pigeonlib.items.CustomItemStack(icon));
     }
 
     /**

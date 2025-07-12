@@ -9,7 +9,7 @@ import net.kyori.adventure.text.TextComponent;
 import org.irmc.industrialrevival.api.elements.reaction.ReactCondition;
 import org.irmc.industrialrevival.api.machines.process.Environment;
 import org.irmc.industrialrevival.api.objects.CiFunction;
-import org.irmc.industrialrevival.api.objects.exceptions.UnknownChemicalCompoundException;
+import org.irmc.industrialrevival.api.exceptions.UnknownChemicalCompoundException;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Debug;
 import org.irmc.industrialrevival.utils.NumberUtil;

@@ -5,10 +5,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-import org.irmc.industrialrevival.api.items.ArmorPiece;
-import org.irmc.industrialrevival.api.items.ArmorSet;
+import org.irmc.industrialrevival.api.items.armor.ArmorPiece;
+import org.irmc.industrialrevival.api.items.armor.ArmorSet;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
-import org.irmc.industrialrevival.api.objects.enums.ArmorProtectionType;
+import org.irmc.industrialrevival.api.items.armor.ArmorProtectionType;
 
 import java.util.HashMap;
 import java.util.List;

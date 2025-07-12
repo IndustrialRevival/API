@@ -8,11 +8,11 @@ import org.bukkit.Location;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.handlers.BlockTicker;
 import org.irmc.industrialrevival.api.objects.ChunkPosition;
-import org.irmc.industrialrevival.api.objects.IRBlockData;
-import org.irmc.industrialrevival.api.objects.events.ir.BlockTickEvent;
-import org.irmc.industrialrevival.api.objects.events.ir.TickDoneEvent;
-import org.irmc.industrialrevival.api.objects.events.ir.TickStartEvent;
-import org.irmc.industrialrevival.core.data.BlockRecord;
+import org.irmc.industrialrevival.api.data.runtime.IRBlockData;
+import org.irmc.industrialrevival.api.events.ir.BlockTickEvent;
+import org.irmc.industrialrevival.api.events.ir.TickDoneEvent;
+import org.irmc.industrialrevival.api.events.ir.TickStartEvent;
+import org.irmc.industrialrevival.api.data.sql.BlockRecord;
 import org.irmc.industrialrevival.dock.IRDock;
 
 import java.util.HashMap;

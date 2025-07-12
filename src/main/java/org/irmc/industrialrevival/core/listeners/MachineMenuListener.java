@@ -12,8 +12,8 @@ import org.irmc.industrialrevival.api.menu.SimpleMenu;
 import org.irmc.industrialrevival.api.menu.handlers.AdvancedClickHandler;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.menu.handlers.OutsideClickHandler;
-import org.irmc.industrialrevival.api.objects.events.vanilla.MenuCloseEvent;
-import org.irmc.industrialrevival.api.objects.events.vanilla.MenuOpenEvent;
+import org.irmc.industrialrevival.api.events.vanilla.MenuCloseEvent;
+import org.irmc.industrialrevival.api.events.vanilla.MenuOpenEvent;
 
 import java.util.HashSet;
 import java.util.Set;

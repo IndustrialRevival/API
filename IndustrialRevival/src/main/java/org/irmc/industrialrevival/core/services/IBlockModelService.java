@@ -1,7 +1,7 @@
 package org.irmc.industrialrevival.core.services;
 
 import org.bukkit.Location;
-import org.irmc.industrialrevival.api.objects.display.DisplayGroup;
+import org.irmc.industrialrevival.api.display.DisplayGroup;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

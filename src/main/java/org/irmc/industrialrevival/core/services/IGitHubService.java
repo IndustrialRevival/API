@@ -1,7 +1,7 @@
 package org.irmc.industrialrevival.core.services;
 
-import org.irmc.industrialrevival.api.objects.Contributor;
-import org.irmc.industrialrevival.api.objects.GitHubRepository;
+import org.irmc.industrialrevival.api.data.github.Contributor;
+import org.irmc.industrialrevival.api.data.github.GitHubRepository;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 

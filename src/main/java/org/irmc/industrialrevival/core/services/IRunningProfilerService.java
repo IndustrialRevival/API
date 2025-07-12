@@ -2,9 +2,9 @@ package org.irmc.industrialrevival.core.services;
 
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
-import org.irmc.industrialrevival.api.ProfiledBlock;
+import org.irmc.industrialrevival.api.timings.ProfiledBlock;
 import org.irmc.industrialrevival.api.objects.ChunkPosition;
-import org.irmc.industrialrevival.api.objects.TimingViewRequest;
+import org.irmc.industrialrevival.api.timings.TimingViewRequest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
