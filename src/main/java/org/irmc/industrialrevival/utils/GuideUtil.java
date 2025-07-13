@@ -28,6 +28,7 @@ import org.irmc.industrialrevival.core.guide.GuideMode;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.pigeonlib.items.CustomItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author balugaq
@@ -36,19 +37,19 @@ import org.jetbrains.annotations.NotNull;
 public class GuideUtil {
     public static final NamespacedKey WIKI_KEY = KeyUtil.customKey("wiki");
 
-    public static void openMainMenu(Player player) {
+    public static void openMainMenu(@NotNull Player player) {
         openMainMenu(player, 1);
     }
 
-    public static void openMainMenu(Player player, int page) {
+    public static void openMainMenu(@NotNull Player player, int page) {
         new MainMenu(player, page).open(player);
     }
 
-    public static void openItemGroup(Player player, ItemGroup itemGroup) {
+    public static void openItemGroup(@NotNull Player player, @NotNull ItemGroup itemGroup) {
         openGroupMenu(player, itemGroup, 1);
     }
 
-    public static void openGroupMenu(Player player, ItemGroup itemGroup, int page) {
+    public static void openGroupMenu(@NotNull Player player, @NotNull ItemGroup itemGroup, int page) {
         if (itemGroup instanceof NestedItemGroup n) {
             new NestedGroupMenu(player, n, page);
         } else if (itemGroup instanceof NormalItemGroup) {
@@ -59,15 +60,15 @@ public class GuideUtil {
         }
     }
 
-    public static void removeLastHistory(PlayerProfile profile) {
+    public static void removeLastHistory(@NotNull PlayerProfile profile) {
         profile.getGuideHistory().removeLast();
     }
 
-    public static void addToHistory(GuideHistory guideHistory, SimpleMenu simpleMenu) {
+    public static void addToHistory(@NotNull GuideHistory guideHistory, @NotNull SimpleMenu simpleMenu) {
         guideHistory.addMenu(simpleMenu);
     }
 
-    public static ItemStack getSettingsButton(Player player) {
+    public static ItemStack getSettingsButton(@NotNull Player player) {
         return new CustomItemStack(
                 Material.COMPASS,
                 "&b设置",
@@ -75,7 +76,7 @@ public class GuideUtil {
         ).getBukkit();
     }
 
-    public static ItemStack getWikiButton(String s) {
+    public static ItemStack getWikiButton(@NotNull String s) {
         return new CustomItemStack(
                 Material.KNOWLEDGE_BOOK,
                 "&bWiki",
@@ -88,7 +89,7 @@ public class GuideUtil {
     /**
      * Compatible with {@link ClickHandler}
      */
-    public static boolean openWiki(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
+    public static boolean openWiki(@NotNull Player player, @NotNull ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
         return openWiki(player, itemStack);
     }
 
@@ -99,7 +100,7 @@ public class GuideUtil {
      * @param itemStack The item
      * @return false
      */
-    public static boolean openWiki(Player player, ItemStack itemStack) {
+    public static boolean openWiki(@NotNull Player player, @NotNull ItemStack itemStack) {
         String url = Constants.Misc.WIKI_URL + DataUtil.getPDC(itemStack.getItemMeta(), WIKI_KEY, PersistentDataType.STRING);
         ClickEvent clickEvent = ClickEvent.openUrl(url);
         Component text = IRDock.getPlugin().getLanguageManager().getMsgComponent(player, "misc.wiki_page");
@@ -113,7 +114,7 @@ public class GuideUtil {
     /**
      * Compatible with {@link ClickHandler}
      */
-    public static boolean openSettings(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
+    public static boolean openSettings(@NotNull Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
         return openSettings(player);
     }
 
@@ -123,7 +124,7 @@ public class GuideUtil {
      * @param player The player
      * @return false
      */
-    public static boolean openSettings(Player player) {
+    public static boolean openSettings(@NotNull Player player) {
         new SettingsMenu(player).open(player);
         return false;
     }
@@ -135,12 +136,12 @@ public class GuideUtil {
      * @param page   The page
      * @return false
      */
-    public static boolean openSettings(Player player, int page) {
+    public static boolean openSettings(@NotNull Player player, int page) {
         new SettingsMenu(player, page).open(player);
         return false;
     }
 
-    public static ItemStack getSearchButton(Player player) {
+    public static ItemStack getSearchButton(@NotNull Player player) {
         return new CustomItemStack(
                 Material.HOPPER,
                 "&b搜索...",
@@ -151,11 +152,11 @@ public class GuideUtil {
     /**
      * Compatible with {@link ClickHandler}
      */
-    public static boolean openSearch(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
+    public static boolean openSearch(@NotNull Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
         return openSearch(player);
     }
 
-    public static ItemStack getBackButton(Player player) {
+    public static ItemStack getBackButton(@NotNull Player player) {
         return new CustomItemStack(
                 Material.ENCHANTED_BOOK,
                 "&7返回",
@@ -167,7 +168,7 @@ public class GuideUtil {
     /**
      * Compatible with {@link ClickHandler}
      */
-    public static boolean backHistory(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
+    public static boolean backHistory(@NotNull Player player, ItemStack itemStack, int slot, SimpleMenu menu, @NotNull ClickType clickType) {
         return backHistory(player, PlayerProfile.getProfile(player), clickType);
     }
 
@@ -177,7 +178,7 @@ public class GuideUtil {
      * @param player The player
      * @return false
      */
-    public static boolean backHistory(Player player, PlayerProfile profile, ClickType clickType) {
+    public static boolean backHistory(Player player, @NotNull PlayerProfile profile, @NotNull ClickType clickType) {
         if (clickType.isShiftClick()) {
             profile.getGuideHistory().goBackMainMenu();
         } else {
@@ -192,7 +193,7 @@ public class GuideUtil {
      * @param player The player
      * @return false
      */
-    public static boolean openSearch(Player player) {
+    public static boolean openSearch(@NotNull Player player) {
         SearchMenu.openSearch(player, menu -> menu.open(player));
         return false;
     }
@@ -200,15 +201,15 @@ public class GuideUtil {
     /**
      * Compatible with {@link ClickHandler}
      */
-    public static boolean lookupItem(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
+    public static boolean lookupItem(@NotNull Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
         return lookupItem(player, itemStack);
     }
 
-    public static boolean lookupItem(Player player, ItemStack itemStack) {
+    public static boolean lookupItem(@NotNull Player player, ItemStack itemStack) {
         return lookupItem(player, itemStack, 1);
     }
 
-    public static boolean lookupItem(Player player, ItemStack itemStack, int page) {
+    public static boolean lookupItem(@NotNull Player player, @Nullable ItemStack itemStack, int page) {
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return false;
         }
@@ -223,18 +224,20 @@ public class GuideUtil {
         return false;
     }
 
-    public static boolean lookupItem(Player player, IndustrialRevivalItem ir, ItemStack itemStack, int page) {
+    public static boolean lookupItem(@NotNull Player player, @Nullable IndustrialRevivalItem ir, @NotNull ItemStack itemStack, int page) {
         if (ir instanceof RecipeDisplayItem rdi) {
             openComplexRecipeDisplayMenu(player, itemStack, ir, rdi, page);
         } else if (ir != null) {
             openSimpleRecipeDisplayMenu(player, itemStack, ir, page);
+        } else {
+            openVanillaRecipeDisplayMenu(player, itemStack, page);
         }
 
         return false;
     }
 
-    public static void openComplexRecipeDisplayMenu(Player player, ItemStack itemStack, IndustrialRevivalItem ir, RecipeDisplayItem rdi, int page) {
-        // idk how to design ComplexRecipeDisplayMenu
+    public static void openComplexRecipeDisplayMenu(@NotNull Player player, @NotNull ItemStack itemStack, @NotNull IndustrialRevivalItem ir, RecipeDisplayItem rdi, int page) {
+        // I don't know how to design ComplexRecipeDisplayMenu
 //        var menu = new ComplexRecipeDisplayMenu(player, itemStack, ir, rdi, page);
 //        if (!menu.getItems().isEmpty()) {
 //            menu.open(player);
@@ -243,21 +246,21 @@ public class GuideUtil {
         openSimpleRecipeDisplayMenu(player, itemStack, ir, page);
     }
 
-    public static void openSimpleRecipeDisplayMenu(Player player, ItemStack itemStack, IndustrialRevivalItem ir, int page) {
+    public static void openSimpleRecipeDisplayMenu(@NotNull Player player, @NotNull ItemStack itemStack, @NotNull IndustrialRevivalItem ir, int page) {
         var menu = new SimpleRecipeDisplayMenu(player, ir, page);
         if (!menu.getItems().isEmpty()) {
             menu.open(player);
         }
     }
 
-    public static void openVanillaRecipeDisplayMenu(Player player, ItemStack itemStack, int page) {
+    public static void openVanillaRecipeDisplayMenu(@NotNull Player player, @NotNull ItemStack itemStack, int page) {
         var menu = new VanillaRecipeDisplayMenu(player, itemStack, page);
         if (!menu.getItems().isEmpty()) {
             menu.open(player);
         }
     }
 
-    public static void addBookmark(Player player, IndustrialRevivalItem ir) {
+    public static void addBookmark(@NotNull Player player, @NotNull IndustrialRevivalItem ir) {
         // todo
     }
 

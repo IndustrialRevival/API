@@ -21,9 +21,9 @@ import java.util.Map;
  */
 @SuppressWarnings("deprecation")
 public class ColorUtil {
-    public static Map<ChemicalFormula, Integer> formulaColors = new HashMap<>();
-    public static Map<ChemicalCompound, Integer> moleColors = new HashMap<>();
-    public static Map<ElementType, Integer> atomicColors = new EnumMap<>(ElementType.class);
+    public static @NotNull Map<ChemicalFormula, Integer> formulaColors = new HashMap<>();
+    public static @NotNull Map<ChemicalCompound, Integer> moleColors = new HashMap<>();
+    public static @NotNull Map<ElementType, Integer> atomicColors = new EnumMap<>(ElementType.class);
 
     /**
      * Converts alternate color codes in a string to Minecraft's internal color codes.
@@ -36,7 +36,7 @@ public class ColorUtil {
      * @return The formatted string with valid Minecraft color codes
      * @see ChatColor#translateAlternateColorCodes(char, String)
      */
-    public static String color(String input) {
+    public static @NotNull String color(@NotNull String input) {
         return ChatColor.translateAlternateColorCodes('&', input);
     }
 

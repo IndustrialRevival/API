@@ -13,6 +13,7 @@ import org.irmc.industrialrevival.api.menu.MachineMenu;
 import org.irmc.industrialrevival.api.menu.MachineMenuPreset;
 import org.irmc.industrialrevival.api.data.runtime.IRBlockData;
 import org.irmc.industrialrevival.dock.IRDock;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -34,7 +35,7 @@ public class DataUtil {
      * @return The IndustrialRevivalItem associated with the block, or null if no item is found.
      */
     @Nullable
-    public static IndustrialRevivalItem getItem(Location location) {
+    public static IndustrialRevivalItem getItem(@NotNull Location location) {
         IRBlockData blockData = getBlockData(location);
         if (blockData == null) {
             return null;
@@ -49,7 +50,7 @@ public class DataUtil {
      * @return The IRBlockData associated with the block, or null if no data is found.
      */
     @Nullable
-    public static IRBlockData getBlockData(Location location) {
+    public static IRBlockData getBlockData(@NotNull Location location) {
         return IRDock.getPlugin().getDataManager().getBlockData(location);
     }
 
@@ -60,7 +61,7 @@ public class DataUtil {
      * @param key      The key to set.
      * @param value    The value to associate with the key.
      */
-    public static void setData(Location location, String key, String value) {
+    public static void setData(@NotNull Location location, @NotNull String key, String value) {
         getBlockData(location).getConfig().set(key, value);
     }
 
@@ -72,7 +73,7 @@ public class DataUtil {
      * @return The value associated with the key, or null if the key does not exist.
      */
     @Nullable
-    public static String getData(Location location, String key) {
+    public static String getData(@NotNull Location location, @NotNull String key) {
         return getBlockData(location).getConfig().getString(key);
     }
 
@@ -83,7 +84,7 @@ public class DataUtil {
      * @param key      The key to check.
      * @return True if the key exists, false otherwise.
      */
-    public static boolean hasData(Location location, String key) {
+    public static boolean hasData(@NotNull Location location, @NotNull String key) {
         return getData(location, key) != null;
     }
 
@@ -103,7 +104,7 @@ public class DataUtil {
      * @param location The location of the block.
      * @return True if IRBlockData exists, false otherwise.
      */
-    public static boolean hasBlockData(Location location) {
+    public static boolean hasBlockData(@NotNull Location location) {
         return getBlockData(location) != null;
     }
 
@@ -115,7 +116,7 @@ public class DataUtil {
      */
     @CanIgnoreReturnValue
     @Nullable
-    public static IRBlockData removeBlockData(Location location) {
+    public static IRBlockData removeBlockData(@NotNull Location location) {
         IRDock.getPlugin().getSQLDataManager().deleteBlockRecord(location);
         return IRDock.getPlugin().getDataManager().breakBlock(location);
     }
@@ -126,7 +127,7 @@ public class DataUtil {
      * @param location The location of the block.
      * @param key      The key to remove.
      */
-    public static void removeData(Location location, String key) {
+    public static void removeData(@NotNull Location location, @NotNull String key) {
         setData(location, key, null);
     }
 
@@ -137,7 +138,7 @@ public class DataUtil {
      * @return The MachineMenu associated with the block, or null if no menu is found.
      */
     @Nullable
-    public static MachineMenu getMachineMenu(Location location) {
+    public static MachineMenu getMachineMenu(@NotNull Location location) {
         return getBlockData(location).getMachineMenu();
     }
 
@@ -148,7 +149,7 @@ public class DataUtil {
      * @return The MachineMenu associated with the block, or null if no menu is found.
      */
     @Nullable
-    public static MachineMenu getMachineMenu(Block block) {
+    public static MachineMenu getMachineMenu(@NotNull Block block) {
         return getBlockData(block.getLocation()).getMachineMenu();
     }
 
@@ -158,7 +159,7 @@ public class DataUtil {
      * @param location The location of the block.
      * @return True if a MachineMenu exists, false otherwise.
      */
-    public static boolean hasMachineMenu(Location location) {
+    public static boolean hasMachineMenu(@NotNull Location location) {
         return getMachineMenu(location) != null;
     }
 
@@ -168,7 +169,7 @@ public class DataUtil {
      * @param block The block to check.
      * @return True if a MachineMenu exists, false otherwise.
      */
-    public static boolean hasMachineMenu(Block block) {
+    public static boolean hasMachineMenu(@NotNull Block block) {
         return hasMachineMenu(block.getLocation());
     }
 
@@ -190,7 +191,7 @@ public class DataUtil {
      * @param id       The ID to compare against.
      * @return True if the block's ID matches the specified ID, false otherwise.
      */
-    public static boolean isBlock(Location location, NamespacedKey id) {
+    public static boolean isBlock(@NotNull Location location, NamespacedKey id) {
         return getBlockData(location).getId().equals(id);
     }
 
@@ -201,7 +202,7 @@ public class DataUtil {
      * @param key    The key to set.
      * @param value  The value to associate with the key.
      */
-    public static void setPDC(PersistentDataHolder holder, NamespacedKey key, String value) {
+    public static void setPDC(@NotNull PersistentDataHolder holder, @NotNull NamespacedKey key, @NotNull String value) {
         holder.getPersistentDataContainer().set(key, PersistentDataType.STRING, value);
     }
 
@@ -213,7 +214,7 @@ public class DataUtil {
      * @return The value associated with the key, or null if the key does not exist.
      */
     @Nullable
-    public static <T> T getPDC(PersistentDataHolder holder, NamespacedKey key, PersistentDataType<?, T> type) {
+    public static <T> T getPDC(@NotNull PersistentDataHolder holder, @NotNull NamespacedKey key, @NotNull PersistentDataType<?, T> type) {
         return holder.getPersistentDataContainer().get(key, type);
     }
 
@@ -225,7 +226,7 @@ public class DataUtil {
      * @return The value associated with the key, or null if the key does not exist.
      */
     @Nullable
-    public static <T> T getPDC(ItemStack itemStack, NamespacedKey key, PersistentDataType<?, T> type) {
+    public static <T> T getPDC(@NotNull ItemStack itemStack, @NotNull NamespacedKey key, @NotNull PersistentDataType<?, T> type) {
         return getPDC(itemStack.getItemMeta(), key, type);
     }
 
@@ -235,7 +236,7 @@ public class DataUtil {
      * @param holder The PersistentDataHolder to remove the key from.
      * @param key    The key to remove.
      */
-    public static void removePDC(PersistentDataHolder holder, NamespacedKey key) {
+    public static void removePDC(@NotNull PersistentDataHolder holder, @NotNull NamespacedKey key) {
         holder.getPersistentDataContainer().remove(key);
     }
 
@@ -246,7 +247,7 @@ public class DataUtil {
      * @param key    The key to check for.
      * @return True if the key exists, false otherwise.
      */
-    public static boolean hasPDC(PersistentDataHolder holder, NamespacedKey key) {
+    public static boolean hasPDC(@NotNull PersistentDataHolder holder, @NotNull NamespacedKey key) {
         return holder.getPersistentDataContainer().has(key);
     }
 
@@ -258,7 +259,7 @@ public class DataUtil {
      * @param value  The value to check for.
      * @return True if the key exists and has the specified value, false otherwise.
      */
-    public static boolean hasPDC(PersistentDataHolder holder, NamespacedKey key, String value) {
+    public static boolean hasPDC(@NotNull PersistentDataHolder holder, @NotNull NamespacedKey key, String value) {
         return holder.getPersistentDataContainer().has(key, PersistentDataType.STRING);
     }
 }

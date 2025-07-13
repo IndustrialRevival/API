@@ -1,5 +1,7 @@
 package org.irmc.industrialrevival.utils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Map;
 
 /**
@@ -9,7 +11,7 @@ import java.util.Map;
  * @author Unknown
  */
 public class NumberUtil {
-    public static Map<Integer, String> subscripts = Map.of(
+    public static @NotNull Map<Integer, String> subscripts = Map.of(
             0, "\u2080",
             1, "\u2081",
             2, "\u2082",
@@ -22,7 +24,7 @@ public class NumberUtil {
             9, "\u2089"
     );
 
-    public static Map<Integer, String> superscripts = Map.of(
+    public static @NotNull Map<Integer, String> superscripts = Map.of(
             0, "\u2070",
             1, "\u00B9",
             2, "\u00B2",
@@ -41,7 +43,7 @@ public class NumberUtil {
      * @param s The string of digits to convert.
      * @return The subscript representation of the string.
      */
-    public static String toSubscript(String s) {
+    public static @NotNull String toSubscript(@NotNull String s) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -60,7 +62,7 @@ public class NumberUtil {
      * @param s The string of digits to convert.
      * @return The superscript representation of the string.
      */
-    public static String toSuperscript(String s) {
+    public static @NotNull String toSuperscript(@NotNull String s) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);

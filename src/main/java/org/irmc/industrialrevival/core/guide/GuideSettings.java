@@ -9,6 +9,7 @@ import org.irmc.industrialrevival.api.player.GuideSetting;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.irmc.industrialrevival.utils.TextUtil;
 import org.irmc.pigeonlib.items.CustomItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -75,11 +76,11 @@ public class GuideSettings {
         this.settings = settings;
     }
 
-    public static GuideSettings of(Map<NamespacedKey, GuideSetting<?>> settings) {
+    public static @NotNull GuideSettings of(Map<NamespacedKey, GuideSetting<?>> settings) {
         return new GuideSettings(settings);
     }
 
-    public static GuideSettings of(GuideSetting<?>... settings) {
+    public static @NotNull GuideSettings of(GuideSetting<?> @NotNull ... settings) {
         Map<NamespacedKey, GuideSetting<?>> map = new HashMap<>();
         for (GuideSetting<?> setting : settings) {
             map.put(setting.getKey(), setting);
@@ -88,7 +89,7 @@ public class GuideSettings {
         return of(map);
     }
 
-    public <T> GuideSetting<T> getPlayerSettings(GuideSetting<T> clazz) {
+    public <T> GuideSetting<T> getPlayerSettings(@NotNull GuideSetting<T> clazz) {
         return (GuideSetting<T>) settings.get(clazz.getKey());
     }
 
@@ -96,7 +97,7 @@ public class GuideSettings {
         return (GuideSetting<T>) settings.get(key);
     }
 
-    public <T> void setGuideSettings(GuideSetting<T> clazz, T value) {
+    public <T> void setGuideSettings(@NotNull GuideSetting<T> clazz, T value) {
         getPlayerSettings(clazz).setValue(value);
     }
 }

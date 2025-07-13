@@ -30,15 +30,15 @@ import java.util.List;
 public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
     public static final NamespacedKey PAGE_KEY = KeyUtil.customKey("current_page");
 
-    public SimpleRecipeDisplayMenu(Player player, IndustrialRevivalItem item) {
+    public SimpleRecipeDisplayMenu(@NotNull Player player, @NotNull IndustrialRevivalItem item) {
         this(player, item, 1);
     }
 
-    public SimpleRecipeDisplayMenu(Player player, IndustrialRevivalItem item, int page) {
+    public SimpleRecipeDisplayMenu(@NotNull Player player, @NotNull IndustrialRevivalItem item, int page) {
         this(item.getItemName(), player, PlayerProfile.getProfile(player), page, RecipeContents.getRecipeContents(item.getId()));
     }
 
-    public SimpleRecipeDisplayMenu(Component title, Player p, PlayerProfile playerProfile, int currentPage, List<RecipeContent> contents) {
+    public SimpleRecipeDisplayMenu(@NotNull Component title, Player p, @NotNull PlayerProfile playerProfile, int currentPage, @NotNull List<RecipeContent> contents) {
         super(title, p, playerProfile, currentPage, contents, new HashMap<>());
 
         if (contents.isEmpty()) {
@@ -137,7 +137,7 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
      * Shut up, compiler
      */
     @Override
-    public ItemStack getDisplayItem(RecipeContent item) {
+    public @Nullable ItemStack getDisplayItem(RecipeContent item) {
         return null;
     }
 
@@ -167,7 +167,7 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
                 .addExplain("o", "Output", GuideUtil::lookupItem);
     }
 
-    public ItemStack getWikiButton() {
+    public @Nullable ItemStack getWikiButton() {
         var s = getOutput().getWikiText();
         if (s != null) {
             return GuideUtil.getWikiButton(s);
@@ -176,11 +176,11 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
         }
     }
 
-    public boolean pageJumper(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
+    public boolean pageJumper(Player player, @NotNull ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
         return pageJumper(player, itemStack);
     }
 
-    public boolean pageJumper(Player player, ItemStack itemStack) {
+    public boolean pageJumper(Player player, @NotNull ItemStack itemStack) {
         int page = DataUtil.getPDC(itemStack, PAGE_KEY, PersistentDataType.INTEGER);
         var menu = getByPage(page);
         if (menu != null) {
@@ -191,7 +191,7 @@ public class SimpleRecipeDisplayMenu extends PageableMenu<RecipeContent> {
     }
 
     @Override
-    public PageableMenu<RecipeContent> newMenu(PageableMenu<RecipeContent> menu, int newPage) {
+    public PageableMenu<RecipeContent> newMenu(@NotNull PageableMenu<RecipeContent> menu, int newPage) {
         return new SimpleRecipeDisplayMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems());
     }
 }

@@ -11,6 +11,8 @@ import org.irmc.industrialrevival.api.player.PlayerProfile;
 import org.irmc.industrialrevival.api.player.GuideSetting;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -19,15 +21,15 @@ import java.util.List;
 import java.util.Map;
 
 public class SettingsMenu extends PageableMenu<GuideSetting<?>> {
-    public SettingsMenu(Player player) {
+    public SettingsMenu(@NotNull Player player) {
         this(player, 1);
     }
 
-    public SettingsMenu(Player p, int page) {
+    public SettingsMenu(@NotNull Player p, int page) {
         this(Component.text("设置", TextColor.color(0x4abfa0)), p, PlayerProfile.getProfile(p), page, new ArrayList<>(PlayerProfile.getProfile(p).getGuideSettings().getSettings().values()), new HashMap<>());
     }
 
-    public SettingsMenu(Component title, Player p, PlayerProfile playerProfile, int currentPage, List<GuideSetting<?>> settings, Map<Integer, PageableMenu<GuideSetting<?>>> pages) {
+    public SettingsMenu(@NotNull Component title, Player p, @NotNull PlayerProfile playerProfile, int currentPage, List<GuideSetting<?>> settings, Map<Integer, PageableMenu<GuideSetting<?>>> pages) {
         super(title, p, playerProfile, currentPage, settings, pages);
         drawer.addExplain(objSymbol, "Settings");
 
@@ -61,7 +63,7 @@ public class SettingsMenu extends PageableMenu<GuideSetting<?>> {
 
     @Warning(reason = "Not implemented, use getDisplayItem0(Player, PlayerSettings) instead.")
     @Override
-    public ItemStack getDisplayItem(GuideSetting<?> item) {
+    public @Nullable ItemStack getDisplayItem(GuideSetting<?> item) {
         return null;
     }
 
@@ -79,7 +81,7 @@ public class SettingsMenu extends PageableMenu<GuideSetting<?>> {
     }
 
     @Nonnull
-    public MatrixMenuDrawer explainDrawer(MatrixMenuDrawer matrixMenuDrawer) {
+    public MatrixMenuDrawer explainDrawer(@NotNull MatrixMenuDrawer matrixMenuDrawer) {
         return matrixMenuDrawer
                 .addExplain("B", "Background", MenuUtil.BACKGROUND, ClickHandler.DEFAULT)
                 .addExplain("T", "Settings", GuideUtil.getSettingsButton(getPlayer()), GuideUtil::openSettings)
@@ -94,7 +96,7 @@ public class SettingsMenu extends PageableMenu<GuideSetting<?>> {
     }
 
     @Override
-    public PageableMenu<GuideSetting<?>> newMenu(PageableMenu<GuideSetting<?>> menu, int newPage) {
+    public PageableMenu<GuideSetting<?>> newMenu(@NotNull PageableMenu<GuideSetting<?>> menu, int newPage) {
         return new SettingsMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems(), menu.getPages());
     }
 }

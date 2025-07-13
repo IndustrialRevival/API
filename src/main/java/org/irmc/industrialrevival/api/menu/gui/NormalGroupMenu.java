@@ -17,6 +17,8 @@ import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -27,16 +29,16 @@ import java.util.Map;
 public class NormalGroupMenu extends PageableMenu<IndustrialRevivalItem> {
     private ItemGroup itemGroup;
 
-    public NormalGroupMenu(Player player, ItemGroup itemGroup) {
+    public NormalGroupMenu(@NotNull Player player, @NotNull ItemGroup itemGroup) {
         this(player, itemGroup, 1);
     }
 
-    public NormalGroupMenu(Player player, ItemGroup itemGroup, int page) {
+    public NormalGroupMenu(@NotNull Player player, @NotNull ItemGroup itemGroup, int page) {
         this(itemGroup.getIcon().displayName(), player, PlayerProfile.getProfile(player), page, itemGroup.getItems(), new HashMap<>());
         this.itemGroup = itemGroup;
     }
 
-    public NormalGroupMenu(Component title, Player player, PlayerProfile playerProfile, int currentPage, List<IndustrialRevivalItem> items, Map<Integer, PageableMenu<IndustrialRevivalItem>> pages) {
+    public NormalGroupMenu(@NotNull Component title, Player player, @NotNull PlayerProfile playerProfile, int currentPage, List<IndustrialRevivalItem> items, Map<Integer, PageableMenu<IndustrialRevivalItem>> pages) {
         super(title, player, playerProfile, currentPage, items, pages);
         drawer.addExplain(objSymbol, "Item");
 
@@ -72,17 +74,17 @@ public class NormalGroupMenu extends PageableMenu<IndustrialRevivalItem> {
         GuideUtil.addToHistory(playerProfile.getGuideHistory(), this);
     }
 
-    public static void tryGiveItem(Player player, IndustrialRevivalItem ir, ItemStack itemStack, int amount) {
+    public static void tryGiveItem(@NotNull Player player, @NotNull IndustrialRevivalItem ir, ItemStack itemStack, int amount) {
         player.getInventory().addItem(ir.getIcon().asQuantity(amount));
         player.sendMessage(Component.text("已获取 " + amount + "x ").append(ir.getIcon().displayName()));
     }
 
     @Override
-    public PageableMenu<IndustrialRevivalItem> newMenu(PageableMenu<IndustrialRevivalItem> menu, int newPage) {
+    public PageableMenu<IndustrialRevivalItem> newMenu(@NotNull PageableMenu<IndustrialRevivalItem> menu, int newPage) {
         return new NormalGroupMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems(), menu.getPages());
     }
 
-    public ItemStack getDisplayItem(IndustrialRevivalItem item) {
+    public @Nullable ItemStack getDisplayItem(@NotNull IndustrialRevivalItem item) {
         return PageableMenu.getDisplayItem0(item);
     }
 
@@ -100,7 +102,7 @@ public class NormalGroupMenu extends PageableMenu<IndustrialRevivalItem> {
     }
 
     @Nonnull
-    public MatrixMenuDrawer explainDrawer(MatrixMenuDrawer matrixMenuDrawer) {
+    public MatrixMenuDrawer explainDrawer(@NotNull MatrixMenuDrawer matrixMenuDrawer) {
         return matrixMenuDrawer
                 .addExplain("B", "Background", MenuUtil.BACKGROUND, ClickHandler.DEFAULT)
                 .addExplain("T", "Settings", GuideUtil.getSettingsButton(getPlayer()), GuideUtil::openSettings)

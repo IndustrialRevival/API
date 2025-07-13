@@ -3,6 +3,7 @@ package org.irmc.industrialrevival.utils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.irmc.industrialrevival.dock.IRDock;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This utility class provides methods for creating custom {@link NamespacedKey} instances.
@@ -20,11 +21,11 @@ public class KeyUtil {
      * @param key The key to use for the {@link NamespacedKey}.
      * @return A {@link NamespacedKey} with the plugin's namespace and the provided key.
      */
-    public static NamespacedKey customKey(String key) {
+    public static @NotNull NamespacedKey customKey(@NotNull String key) {
         return new NamespacedKey(IRDock.getPlugin(), key.toLowerCase());
     }
 
-    public static NamespacedKey appendOnKey(NamespacedKey key, String append) {
+    public static @NotNull NamespacedKey appendOnKey(@NotNull NamespacedKey key, @NotNull String append) {
         return new NamespacedKey(key.getNamespace(), key.getKey() + "_" + append.toLowerCase());
     }
 }

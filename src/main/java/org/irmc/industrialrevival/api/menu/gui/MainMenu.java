@@ -14,6 +14,7 @@ import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ import java.util.List;
 import java.util.Map;
 
 public class MainMenu extends PageableMenu<ItemGroup> {
-    public MainMenu(Player player) {
+    public MainMenu(@NotNull Player player) {
         this(player, 1);
     }
 
-    public MainMenu(Player player, int page) {
+    public MainMenu(@NotNull Player player, int page) {
         this(Component.text("工业复兴指南书", TextColor.color(0xFF5700)), player, PlayerProfile.getProfile(player), page, getDisplayableItemGroups(player), new HashMap<>());
     }
 
@@ -54,7 +55,7 @@ public class MainMenu extends PageableMenu<ItemGroup> {
 
     }
 
-    public static List<ItemGroup> getDisplayableItemGroups(Player player) {
+    public static @NotNull List<ItemGroup> getDisplayableItemGroups(@NotNull Player player) {
         List<ItemGroup> itemGroups = new ArrayList<>();
         for (var i : IRDock.getRegistry().getItemGroups().values()) {
             if (!i.isOnlyVisibleByAdmins() || player.isOp()) {
@@ -66,23 +67,23 @@ public class MainMenu extends PageableMenu<ItemGroup> {
     }
 
     @Override
-    public void open(Player... players) {
+    public void open(Player @NotNull ... players) {
         for (Player p : players) {
             open(p);
         }
     }
 
-    public void open(Player player) {
+    public void open(@NotNull Player player) {
         GuideUtil.addToHistory(PlayerProfile.getProfile(player).getGuideHistory(), this);
         super.open(player);
     }
 
     @Override
-    public PageableMenu<ItemGroup> newMenu(PageableMenu<ItemGroup> menu, int newPage) {
+    public PageableMenu<ItemGroup> newMenu(@NotNull PageableMenu<ItemGroup> menu, int newPage) {
         return new MainMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems(), menu.getPages());
     }
 
-    public ItemStack getDisplayItem(ItemGroup group) {
+    public ItemStack getDisplayItem(@NotNull ItemGroup group) {
         return PageableMenu.getDisplayItem0(group);
     }
 
@@ -100,7 +101,7 @@ public class MainMenu extends PageableMenu<ItemGroup> {
     }
 
     @Nonnull
-    public MatrixMenuDrawer explainDrawer(MatrixMenuDrawer matrixMenuDrawer) {
+    public MatrixMenuDrawer explainDrawer(@NotNull MatrixMenuDrawer matrixMenuDrawer) {
         return matrixMenuDrawer
                 .addExplain("B", "Background", MenuUtil.BACKGROUND, ClickHandler.DEFAULT)
                 .addExplain("T", "Settings", GuideUtil.getSettingsButton(getPlayer()), GuideUtil::openSettings)

@@ -5,6 +5,8 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -356,7 +358,7 @@ public class TextUtil {
         return result;
     }
 
-    public static String onlyUpperFirstLetter(String str) {
+    public static String onlyUpperFirstLetter(@Nullable String str) {
         if (str == null || str.isEmpty()) {
             return str;
         }
@@ -369,7 +371,7 @@ public class TextUtil {
     }
 
     @SuppressWarnings("deprecation")
-    public static <T> List<T> crop(List<T> list, int maxLines, Function<String, T> adapter) {
+    public static <T> @NotNull List<T> crop(@NotNull List<T> list, int maxLines, @NotNull Function<String, T> adapter) {
         var result = new ArrayList<T>();
         for (T obj : list) {
             if (result.size() >= maxLines) {
@@ -383,12 +385,12 @@ public class TextUtil {
         return result;
     }
 
-    public static String getBooleanText(boolean bool) {
+    public static @NotNull String getBooleanText(boolean bool) {
         return bool ? COLOR_POSITIVE + "Yes" : COLOR_NEGATIVE + "No";
     }
 
     @Contract("null -> null; !null -> !null")
-    public static String upperFirstLetterOnly(String name) {
+    public static String upperFirstLetterOnly(@Nullable String name) {
         if (name == null) {
             return null;
         }

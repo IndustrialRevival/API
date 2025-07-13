@@ -10,6 +10,7 @@ import org.irmc.industrialrevival.core.guide.GuideMode;
 import org.irmc.industrialrevival.core.guide.IRGuideImplementation;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.pigeonlib.items.CustomItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -359,7 +360,7 @@ public class Constants {
             languages.put("en-US", getLanguageButton(Locale.US));
         }
 
-        private static ItemStack getLanguageButton(Locale locale) {
+        private static ItemStack getLanguageButton(@NotNull Locale locale) {
             CustomItemStack cis = new CustomItemStack(Material.PLAYER_HEAD);
             cis.setPDCData(ItemStackKeys.LANGUAGE_KEY, PersistentDataType.STRING, locale.getLanguage());
             // todo: add texture
@@ -371,7 +372,7 @@ public class Constants {
          *
          * @return A map of locale to language button ItemStacks.
          */
-        public static Map<String, ItemStack> getLanguageButtons() {
+        public static @NotNull Map<String, ItemStack> getLanguageButtons() {
             return new HashMap<>(languages);
         }
 
@@ -380,7 +381,7 @@ public class Constants {
          *
          * @return A map of locale to texture hashcodes.
          */
-        public static Map<String, String> getTextures() {
+        public static @NotNull Map<String, String> getTextures() {
             return new HashMap<>(textures);
         }
     }
