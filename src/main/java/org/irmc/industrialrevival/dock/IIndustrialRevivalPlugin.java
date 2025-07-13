@@ -2,6 +2,7 @@ package org.irmc.industrialrevival.dock;
 
 import com.comphenix.protocol.ProtocolManager;
 import org.irmc.industrialrevival.api.IndustrialRevivalAddon;
+import org.irmc.industrialrevival.core.services.IItemSettings;
 import org.irmc.industrialrevival.core.services.ItemSettings;
 import org.irmc.industrialrevival.core.services.IGitHubService;
 import org.irmc.industrialrevival.core.services.IIRDataManager;
@@ -94,7 +95,7 @@ public interface IIndustrialRevivalPlugin extends IndustrialRevivalAddon {
      *
      * @return an instance of ItemSettings
      */
-    @NotNull ItemSettings getItemSettings();
+    @NotNull IItemSettings getItemSettings();
 
     /**
      * Runs the specified task asynchronously on the server thread pool.

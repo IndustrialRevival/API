@@ -13,6 +13,7 @@ import org.irmc.industrialrevival.api.events.ir.BlockTickEvent;
 import org.irmc.industrialrevival.api.events.ir.TickDoneEvent;
 import org.irmc.industrialrevival.api.events.ir.TickStartEvent;
 import org.irmc.industrialrevival.api.data.sql.BlockRecord;
+import org.irmc.industrialrevival.api.timings.ErrorReport;
 import org.irmc.industrialrevival.dock.IRDock;
 
 import java.util.HashMap;
@@ -142,5 +143,6 @@ public class TickerTask implements Consumer<WrappedTask> {
     private void reportBug(Location location, IRBlockData blockData, Throwable e) {
         // todo
         String message = "An error caught while ticking a block at " + location + ":\n" + e.getMessage();
+        new ErrorReport<>(e, blockData.getLocation(), blockData.getMachineMenu().getIRItem());
     }
 }

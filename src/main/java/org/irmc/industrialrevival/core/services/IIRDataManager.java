@@ -53,6 +53,11 @@ public interface IIRDataManager {
     void saveAllData();
 
     /**
+     * Save block data to storage.
+     */
+    void saveBlock(@NotNull Location location);
+
+    /**
      * Gets a map of all block data locations to their respective data.
      *
      * @return a map of block locations to block data
@@ -104,6 +109,13 @@ public interface IIRDataManager {
      * @param profile the player profile to save
      */
     void savePlayerProfile(@NotNull PlayerProfile profile);
+
+    /**
+     * Saves a player profile to storage.
+     *
+     * @param player the player to save
+     */
+    void savePlayerProfile(@NotNull Player player);
 
     /**
      * Requests and loads a player profile for the specified player.
