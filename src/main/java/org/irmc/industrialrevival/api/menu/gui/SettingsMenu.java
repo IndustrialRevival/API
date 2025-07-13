@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.menu.MatrixMenuDrawer;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
-import org.irmc.industrialrevival.api.player.PlayerSettings;
+import org.irmc.industrialrevival.api.player.GuideSetting;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
 
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SettingsMenu extends PageableMenu<PlayerSettings<?>> {
+public class SettingsMenu extends PageableMenu<GuideSetting<?>> {
     public SettingsMenu(Player player) {
         this(player, 1);
     }
@@ -27,7 +27,7 @@ public class SettingsMenu extends PageableMenu<PlayerSettings<?>> {
         this(Component.text("设置", TextColor.color(0x4abfa0)), p, PlayerProfile.getProfile(p), page, new ArrayList<>(PlayerProfile.getProfile(p).getGuideSettings().getSettings().values()), new HashMap<>());
     }
 
-    public SettingsMenu(Component title, Player p, PlayerProfile playerProfile, int currentPage, List<PlayerSettings<?>> settings, Map<Integer, PageableMenu<PlayerSettings<?>>> pages) {
+    public SettingsMenu(Component title, Player p, PlayerProfile playerProfile, int currentPage, List<GuideSetting<?>> settings, Map<Integer, PageableMenu<GuideSetting<?>>> pages) {
         super(title, p, playerProfile, currentPage, settings, pages);
         drawer.addExplain(objSymbol, "Settings");
 
@@ -42,14 +42,14 @@ public class SettingsMenu extends PageableMenu<PlayerSettings<?>> {
                 }
             }
 
-            PlayerSettings<?> settings2 = getItems().get(index * getCurrentPage());
+            GuideSetting<?> settings2 = getItems().get(index * getCurrentPage());
             settings2.onClick(p2, i, s, m, t);
             GuideUtil.removeLastHistory(playerProfile);
             GuideUtil.openSettings(p2, currentPage);
             return false;
         };
 
-        List<PlayerSettings<?>> cropped = crop(currentPage);
+        List<GuideSetting<?>> cropped = crop(currentPage);
         for (var item : cropped) {
             if (!insertFirstEmpty(getDisplayItem0(p, playerProfile, item), clickHandler, getDrawer().getCharPositions('i'))) {
                 break;
@@ -61,7 +61,7 @@ public class SettingsMenu extends PageableMenu<PlayerSettings<?>> {
 
     @Warning(reason = "Not implemented, use getDisplayItem0(Player, PlayerSettings) instead.")
     @Override
-    public ItemStack getDisplayItem(PlayerSettings<?> item) {
+    public ItemStack getDisplayItem(GuideSetting<?> item) {
         return null;
     }
 
@@ -94,7 +94,7 @@ public class SettingsMenu extends PageableMenu<PlayerSettings<?>> {
     }
 
     @Override
-    public PageableMenu<PlayerSettings<?>> newMenu(PageableMenu<PlayerSettings<?>> menu, int newPage) {
+    public PageableMenu<GuideSetting<?>> newMenu(PageableMenu<GuideSetting<?>> menu, int newPage) {
         return new SettingsMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems(), menu.getPages());
     }
 }

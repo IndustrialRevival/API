@@ -5,6 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.irmc.industrialrevival.api.menu.SimpleMenu;
 
+/**
+ * @author balugaq
+ * @author lijinhong11
+ */
 @Data
 @RequiredArgsConstructor
 public class GuideEntry {

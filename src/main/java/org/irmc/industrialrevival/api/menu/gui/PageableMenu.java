@@ -13,7 +13,7 @@ import org.irmc.industrialrevival.api.menu.MatrixMenuDrawer;
 import org.irmc.industrialrevival.api.menu.SimpleMenu;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
-import org.irmc.industrialrevival.api.player.PlayerSettings;
+import org.irmc.industrialrevival.api.player.GuideSetting;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
@@ -116,7 +116,7 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
                 .getBukkit();
     }
 
-    public static <K> ItemStack getDisplayItem0(Player player, PlayerProfile profile, PlayerSettings<K> clazz) {
+    public static <K> ItemStack getDisplayItem0(Player player, PlayerProfile profile, GuideSetting<K> clazz) {
         return clazz.getIcon().apply(profile.getGuideSettings(clazz));
     }
 

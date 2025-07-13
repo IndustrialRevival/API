@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
- * Represents different colored blocks that can be displayed in the game, each with specific orientation and positioning.
+ * Represents different colored blocks **(rectangles only)** that can be displayed in the game, each with specific orientation and positioning.
  * These blocks are used to visualize various surfaces and connections in the industrial system.
  *
  * @author balugaq
@@ -169,14 +169,14 @@ public enum ColorBlock {
     @ParametersAreNonnullByDefault
     public static void connect(TextDisplay display1, TextDisplay display2, Color color) {
         connect(display1, display2, (corners) -> {
-            makeSurface(corners, color);
+            //todo
         });
     }
 
     @ParametersAreNonnullByDefault
     public static void connect(TextDisplay display1, TextDisplay display2, Color color, TextureHandler handler) {
         connect(display1, display2, (corners) -> {
-            makeSurface(corners, color, handler);
+            //todo
         });
     }
 
@@ -254,7 +254,7 @@ public enum ColorBlock {
      * @return the created TextDisplay object
      */
     private TextDisplay generate(@NotNull Corners corners, @NotNull TextModelBuilder builder) {
-        Location location = null;
+        Location location;
         switch (this) {
             case UP_VISIBLE ->
                     location = new Location(corners.getWorld(), corners.getMinX(), corners.getMaxY(), corners.getMaxZ());

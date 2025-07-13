@@ -24,8 +24,10 @@ import org.irmc.industrialrevival.api.menu.gui.VanillaRecipeDisplayMenu;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
 import org.irmc.industrialrevival.core.guide.GuideHistory;
+import org.irmc.industrialrevival.core.guide.GuideMode;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.pigeonlib.items.CustomItemStack;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author balugaq
@@ -256,6 +258,10 @@ public class GuideUtil {
     }
 
     public static void addBookmark(Player player, IndustrialRevivalItem ir) {
+        // todo
+    }
+
+    public static @NotNull ItemStack getGuideIcon(@NotNull GuideMode mode) {
         // todo
     }
 }

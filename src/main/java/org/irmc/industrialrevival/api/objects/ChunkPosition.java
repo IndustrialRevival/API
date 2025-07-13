@@ -6,6 +6,9 @@ import org.bukkit.Location;
 
 import java.text.MessageFormat;
 
+/**
+ * @author balugaq
+ */
 @SuppressWarnings("unused")
 @Getter
 public class ChunkPosition {

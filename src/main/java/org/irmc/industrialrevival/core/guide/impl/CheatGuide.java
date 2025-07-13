@@ -4,6 +4,9 @@ import org.irmc.industrialrevival.core.guide.GuideMode;
 import org.irmc.industrialrevival.core.guide.IRGuide;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author balugaq
+ */
 public class CheatGuide extends IRGuide {
     public static final CheatGuide instance = new CheatGuide();
 

@@ -10,6 +10,10 @@ import org.irmc.industrialrevival.utils.GuideUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author balugaq
+ * @author lijinhong11
+ */
 @Getter
 public class GuideHistory {
     private final String playerName;
