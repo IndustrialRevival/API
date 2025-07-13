@@ -1,9 +1,10 @@
-package org.irmc.industrialrevival.core.services;
+package org.irmc.industrialrevival.core.services.impl;
 
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.irmc.industrialrevival.core.services.IItemSettings;
 import org.irmc.industrialrevival.dock.IRDock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Getter
 @ParametersAreNonnullByDefault
-public class ItemSettings {
+public class ItemSettings implements IItemSettings {
     private final YamlConfiguration itemCfg;
 
     public ItemSettings(YamlConfiguration itemCfg) {

@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author balugaq
  */
-public class LongSetting extends ItemSetting<Long> {
+public class LongSetting extends ComparableItemSetting<Long> {
     public LongSetting(@NotNull IndustrialRevivalItem item, @NotNull String key, @NotNull Long defaultValue, @NotNull Long minValue, @NotNull Long maxValue) {
         super(item, key, defaultValue, minValue, maxValue);
     }

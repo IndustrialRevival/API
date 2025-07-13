@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author balugaq
  */
-public class IntegerSetting extends ItemSetting<Integer> {
+public class IntegerSetting extends ComparableItemSetting<Integer> {
     public IntegerSetting(@NotNull IndustrialRevivalItem item, @NotNull String key, @NotNull Integer defaultValue, @NotNull Integer minValue, @NotNull Integer maxValue) {
         super(item, key, defaultValue, minValue, maxValue);
     }
