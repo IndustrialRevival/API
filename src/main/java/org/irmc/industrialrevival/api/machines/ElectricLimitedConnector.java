@@ -1,7 +1,5 @@
 package org.irmc.industrialrevival.api.machines;
 
-import org.irmc.industrialrevival.api.objects.enums.EnergyNetComponentType;
-
 /**
  * ElectricLimitedConnector is a limited connector.
  *

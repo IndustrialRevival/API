@@ -6,7 +6,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-import org.irmc.industrialrevival.api.objects.enums.GuideMode;
+import org.irmc.industrialrevival.core.guide.GuideMode;
 import org.irmc.industrialrevival.core.guide.IRGuideImplementation;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.pigeonlib.items.CustomItemStack;
@@ -39,6 +39,10 @@ public class Constants {
          * Key for storing the item ID in PDC.
          */
         public static final NamespacedKey ITEM_ID_KEY = KeyUtil.customKey("ir_item_id");
+
+        public static final NamespacedKey ENERGY_KEY = KeyUtil.customKey("ir_energy");
+
+        public static final NamespacedKey MAX_ENERGY_KEY = KeyUtil.customKey("ir_max_energy");
 
         /**
          * Key for storing the radiation level in PDC.
@@ -264,24 +268,24 @@ public class Constants {
         /**
          * The folder for storing IndustrialRevival-related data.
          */
-        public static final File STORAGE_FOLDER = new File(IRDock.getPlugin().getPlugin().getDataFolder().getParentFile().getParentFile(), "irstorage");
+        public static final File STORAGE_FOLDER = new File(IRDock.getPlugin().getDataFolder().getParentFile().getParentFile(), "irstorage");
 
         /**
          * The folder for storing error reports.
          */
-        public static final File ERROR_REPORTS_FOLDER = new File(IRDock.getPlugin().getPlugin().getDataFolder(), "error-reports");
+        public static final File ERROR_REPORTS_FOLDER = new File(IRDock.getPlugin().getDataFolder(), "error-reports");
 
         /**
          * The folder for storing language files.
          */
-        public static final File LANGUAGES_FOLDER = new File(IRDock.getPlugin().getPlugin().getDataFolder(), "languages");
+        public static final File LANGUAGES_FOLDER = new File(IRDock.getPlugin().getDataFolder(), "languages");
         //</editor-fold>
 
         //<editor-fold desc="Files">
         /**
          * The file for storing item settings.
          */
-        public static final File ITEM_SETTINGS_FILE = new File(IRDock.getPlugin().getPlugin().getDataFolder(), "items-settings.yml");
+        public static final File ITEM_SETTINGS_FILE = new File(IRDock.getPlugin().getDataFolder(), "items-settings.yml");
 
         /**
          * The file for storing all the block / player data for SQLite

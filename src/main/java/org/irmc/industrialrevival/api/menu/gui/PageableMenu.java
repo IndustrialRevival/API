@@ -75,6 +75,10 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
                 .getBukkit();
     }
 
+    public static ItemStack getDisplayItem0(ItemStack icon) {
+        return icon;
+    }
+
     public static ItemStack getDisplayItemInSearch0(IndustrialRevivalItem item) {
         var icon = item.getIcon();
         var meta = icon.getItemMeta();

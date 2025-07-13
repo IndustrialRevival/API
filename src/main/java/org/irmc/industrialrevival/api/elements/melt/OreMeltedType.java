@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.NamespacedKey;
 import org.irmc.industrialrevival.api.elements.ElementType;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.ColorUtil;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.jetbrains.annotations.NotNull;

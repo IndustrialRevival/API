@@ -1,6 +1,6 @@
 package org.irmc.industrialrevival.core.guide.impl;
 
-import org.irmc.industrialrevival.api.objects.enums.GuideMode;
+import org.irmc.industrialrevival.core.guide.GuideMode;
 import org.irmc.industrialrevival.core.guide.IRGuide;
 import org.jetbrains.annotations.NotNull;
 

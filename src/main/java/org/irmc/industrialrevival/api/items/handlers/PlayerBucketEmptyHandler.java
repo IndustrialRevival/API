@@ -1,6 +1,6 @@
 package org.irmc.industrialrevival.api.items.handlers;
 
-import org.irmc.industrialrevival.api.objects.events.vanilla.PlayerBucketEmptyToIRBlockEvent;
+import org.irmc.industrialrevival.api.events.vanilla.PlayerBucketEmptyToIRBlockEvent;
 import org.jetbrains.annotations.NotNull;
 
 public interface PlayerBucketEmptyHandler extends ItemHandler {

@@ -1,6 +1,6 @@
 package org.irmc.industrialrevival.api.items.attributes;
 
-import org.irmc.industrialrevival.api.objects.enums.EnergyNetComponentType;
+import org.irmc.industrialrevival.api.machines.EnergyNetComponentType;
 
 /**
  * This interface defines a machine can be connected to an energy network.<br>

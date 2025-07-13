@@ -1,8 +1,8 @@
 package org.irmc.industrialrevival.api.items.handlers;
 
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
-import org.irmc.industrialrevival.api.objects.events.vanilla.IRItemKillEntityEvent;
-import org.irmc.industrialrevival.api.objects.exceptions.IncompatibleItemHandlerException;
+import org.irmc.industrialrevival.api.events.vanilla.IRItemKillEntityEvent;
+import org.irmc.industrialrevival.api.exceptions.IncompatibleItemHandlerException;
 import org.jetbrains.annotations.NotNull;
 
 @FunctionalInterface

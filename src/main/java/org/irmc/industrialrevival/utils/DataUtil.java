@@ -11,7 +11,8 @@ import org.bukkit.persistence.PersistentDataType;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.menu.MachineMenu;
 import org.irmc.industrialrevival.api.menu.MachineMenuPreset;
-import org.irmc.industrialrevival.api.objects.IRBlockData;
+import org.irmc.industrialrevival.api.data.runtime.IRBlockData;
+import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -48,7 +49,7 @@ public class DataUtil {
      */
     @Nullable
     public static IRBlockData getBlockData(Location location) {
-        return IRDock.getPlugin().getBlockDataService().getBlockData(location);
+        return IRDock.getPlugin().getDataManager().getBlockData(location);
     }
 
     /**
@@ -92,7 +93,7 @@ public class DataUtil {
      * @param blockData The IRBlockData to associate with the block.
      */
     public static void setBlockData(Location location, IRBlockData blockData) {
-        IRDock.getPlugin().getBlockDataService().getBlockDataMap().put(location, blockData);
+        IRDock.getPlugin().getDataManager().getBlockDataMap().put(location, blockData);
     }
 
     /**
@@ -114,8 +115,8 @@ public class DataUtil {
     @CanIgnoreReturnValue
     @Nullable
     public static IRBlockData removeBlockData(Location location) {
-        IRDock.getPlugin().getDataManager().handleBlockBreaking(location);
-        return IRDock.getPlugin().getBlockDataService().handleBlockBreaking(location);
+        IRDock.getPlugin().getSQLDataManager().deleteBlockRecord(location);
+        return IRDock.getPlugin().getDataManager().breakBlock(location);
     }
 
     /**

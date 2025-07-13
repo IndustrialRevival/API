@@ -4,7 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
-import org.irmc.industrialrevival.api.objects.IRBlockData;
+import org.irmc.industrialrevival.api.data.runtime.IRBlockData;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.jetbrains.annotations.NotNull;
 

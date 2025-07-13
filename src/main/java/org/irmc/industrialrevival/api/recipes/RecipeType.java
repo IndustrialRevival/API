@@ -8,12 +8,14 @@ import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.IndustrialRevivalAddon;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.menu.SimpleMenu;
-import org.irmc.industrialrevival.api.objects.CustomItemStack;
 import org.irmc.industrialrevival.api.recipes.methods.CraftMethod;
+import org.irmc.industrialrevival.api.recipes.methods.ProduceMethod;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Constants;
 import org.irmc.industrialrevival.utils.KeyUtil;
+import org.irmc.pigeonlib.items.CustomItemStack;
 import org.irmc.pigeonlib.pdc.PersistentDataAPI;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
@@ -59,7 +61,7 @@ public class RecipeType {
                         IRDock.getPlugin().getLanguageManager().getRecipeTypeName(RECIPE_TYPE_GRINDSTONE),
                         IRDock.getPlugin()
                                 .getLanguageManager()
-                                .getRecipeTypeLore(RECIPE_TYPE_GRINDSTONE)));
+                                .getRecipeTypeLore(RECIPE_TYPE_GRINDSTONE)).getBukkit());
 
         VANILLA_SMELTING = new RecipeType(
                 IRDock.getPlugin(),
@@ -71,7 +73,7 @@ public class RecipeType {
                                 .getRecipeTypeName(RECIPE_TYPE_VANILLA_SMELTING),
                         IRDock.getPlugin()
                                 .getLanguageManager()
-                                .getRecipeTypeLore(RECIPE_TYPE_VANILLA_SMELTING)));
+                                .getRecipeTypeLore(RECIPE_TYPE_VANILLA_SMELTING)).getBukkit());
 
         MINE = new RecipeType(
                 IRDock.getPlugin(),
@@ -79,7 +81,7 @@ public class RecipeType {
                 new CustomItemStack(
                         Material.IRON_PICKAXE,
                         IRDock.getPlugin().getLanguageManager().getRecipeTypeName(RECIPE_TYPE_MINE),
-                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_MINE)));
+                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_MINE)).getBukkit());
 
         KILL_MOB = new RecipeType(
                 IRDock.getPlugin(),
@@ -87,7 +89,7 @@ public class RecipeType {
                 new CustomItemStack(
                         Material.DIAMOND_SWORD,
                         IRDock.getPlugin().getLanguageManager().getRecipeTypeName(RECIPE_TYPE_KILL_MOB),
-                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_KILL_MOB)));
+                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_KILL_MOB)).getBukkit());
 
         INTERACT = new RecipeType(
                 IRDock.getPlugin(),
@@ -95,7 +97,7 @@ public class RecipeType {
                 new CustomItemStack(
                         Material.STICK,
                         IRDock.getPlugin().getLanguageManager().getRecipeTypeName(RECIPE_TYPE_INTERACT),
-                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_INTERACT)));
+                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_INTERACT)).getBukkit());
 
         WAIT = new RecipeType(
                 IRDock.getPlugin(),
@@ -103,9 +105,9 @@ public class RecipeType {
                 new CustomItemStack(
                         Material.CLOCK,
                         IRDock.getPlugin().getLanguageManager().getRecipeTypeName(RECIPE_TYPE_WAIT),
-                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_WAIT)));
+                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_WAIT)).getBukkit());
 
-        NULL = new RecipeType(IRDock.getPlugin(), RECIPE_TYPE_NULL, new CustomItemStack(Material.AIR));
+        NULL = new RecipeType(IRDock.getPlugin(), RECIPE_TYPE_NULL, new CustomItemStack(Material.AIR).getBukkit());
 
         VANILLA_CRAFTING = new RecipeType(
                 IRDock.getPlugin(),
@@ -117,7 +119,7 @@ public class RecipeType {
                                 .getRecipeTypeName(RECIPE_TYPE_VANILLA_CRAFTING),
                         IRDock.getPlugin()
                                 .getLanguageManager()
-                                .getRecipeTypeLore(RECIPE_TYPE_VANILLA_CRAFTING)));
+                                .getRecipeTypeLore(RECIPE_TYPE_VANILLA_CRAFTING)).getBukkit());
 
         SMELTING = new RecipeType(
                 IRDock.getPlugin(),
@@ -125,7 +127,7 @@ public class RecipeType {
                 new CustomItemStack(
                         Material.FURNACE,
                         IRDock.getPlugin().getLanguageManager().getRecipeTypeName(RECIPE_TYPE_SMELTING),
-                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_SMELTING)));
+                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_SMELTING)).getBukkit());
 
         CRAFTING = new RecipeType(
                 IRDock.getPlugin(),
@@ -133,7 +135,7 @@ public class RecipeType {
                 new CustomItemStack(
                         Material.CRAFTING_TABLE,
                         IRDock.getPlugin().getLanguageManager().getRecipeTypeName(RECIPE_TYPE_CRAFTING),
-                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_CRAFTING)));
+                        IRDock.getPlugin().getLanguageManager().getRecipeTypeLore(RECIPE_TYPE_CRAFTING)).getBukkit());
         ELECTROLYSIS = new RecipeType(
                 IRDock.getPlugin(),
                 RECIPE_TYPE_ELECTROLYSIS,
@@ -144,7 +146,7 @@ public class RecipeType {
                                 .getRecipeTypeName(RECIPE_TYPE_ELECTROLYSIS),
                         IRDock.getPlugin()
                                 .getLanguageManager()
-                                .getRecipeTypeLore(RECIPE_TYPE_ELECTROLYSIS)));
+                                .getRecipeTypeLore(RECIPE_TYPE_ELECTROLYSIS)).getBukkit());
         MULTIBLOCK = new RecipeType(
                 IRDock.getPlugin(),
                 RECIPE_TYPE_MULTIBLOCK,
@@ -155,7 +157,7 @@ public class RecipeType {
                                 .getRecipeTypeName(RECIPE_TYPE_MULTIBLOCK),
                         IRDock.getPlugin()
                                 .getLanguageManager()
-                                .getRecipeTypeLore(RECIPE_TYPE_MULTIBLOCK)));
+                                .getRecipeTypeLore(RECIPE_TYPE_MULTIBLOCK)).getBukkit());
 
         BLOCK_DROP = new RecipeType(
                 IRDock.getPlugin(),
@@ -167,7 +169,7 @@ public class RecipeType {
                                 .getRecipeTypeName(RECIPE_TYPE_BLOCK_DROP),
                         IRDock.getPlugin()
                                 .getLanguageManager()
-                                .getRecipeTypeLore(RECIPE_TYPE_BLOCK_DROP)));
+                                .getRecipeTypeLore(RECIPE_TYPE_BLOCK_DROP)).getBukkit());
     }
 
     private final IndustrialRevivalAddon addon;
@@ -282,14 +284,14 @@ public class RecipeType {
     }
 
     public void registerRecipe(ItemStack[] input, ItemStack output) {
-        IRDock.getPlugin().getRegistry().registerCraftable(this, output);
+        IRDock.getPlugin().getRegistry().registerProduceMethod(this, input, new ItemStack[]{output});
         if (registerRecipeConsumer != null) {
             registerRecipeConsumer.accept(input, output);
         }
     }
 
     public void unregisterRecipe(ItemStack[] input, ItemStack output) {
-        IRDock.getPlugin().getRegistry().unregisterProduceable(this, output);
+        IRDock.getPlugin().getRegistry().unregisterProduceMethod(this, input, new ItemStack[]{output});
         if (unregisterRecipeConsumer != null) {
             unregisterRecipeConsumer.accept(input, output);
         }
@@ -301,6 +303,25 @@ public class RecipeType {
 
     public ItemStack getRecipeTypeIcon() {
         return getIcon();
+    }
+
+    public ProduceMethod warp(@NotNull ItemStack @Nullable [] ingredients, @Nullable ItemStack @NotNull [] outputs) {
+        return new ProduceMethod() {
+            @Override
+            public RecipeType getRecipeType() {
+                return RecipeType.this;
+            }
+
+            @Override
+            public ItemStack[] getIngredients() {
+                return ingredients;
+            }
+
+            @Override
+            public ItemStack[] getOutput() {
+                return outputs;
+            }
+        };
     }
 
     @FunctionalInterface

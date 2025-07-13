@@ -39,23 +39,6 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class ChemicalCompounds {
     public static final List<Runnable> onLoad = new ArrayList<>();
-    public static boolean loaded = false;
-
-    public static void onLoad(@NotNull Runnable runnable) {
-        Preconditions.checkNotNull(runnable);
-        onLoad.add(runnable);
-    }
-
-    //<editor-fold desc="Compounds elements">
-    static {
-        for (ElementType elementType : ElementType.values()) {
-            new ChemicalCompound(
-                    elementType.getSymbol(),
-                    Map.of(asCompound(elementType), 1D));
-        }
-    }
-    //</editor-fold>
-
     //<editor-fold desc="Compounds ions">
     public static final @NotNull IonCompound SO4 = new IonCompound("SO4", Map.of(
             asCompound(ElementType.S), 1D,
@@ -69,6 +52,7 @@ public class ChemicalCompounds {
             asCompound(ElementType.S), 1D,
             asCompound(ElementType.O), 3D
     ));
+    //</editor-fold>
     public static final @NotNull IonCompound OH = new IonCompound("OH", Map.of(
             asCompound(ElementType.O), 1D,
             asCompound(ElementType.H), 1D
@@ -203,8 +187,6 @@ public class ChemicalCompounds {
             asCompound(ElementType.Si), 1D,
             asCompound(ElementType.O), 4D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="Acids">
     public static final @NotNull ChemicalCompound H2SO4 = new AcidCompound("H2SO4", Map.of(
             asCompound(ElementType.H), 2D,
@@ -218,6 +200,7 @@ public class ChemicalCompounds {
             asCompound(ElementType.H), 2D,
             asCompound(CO3), 1D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound HCl = new AcidCompound("HCl", Map.of(
             asCompound(ElementType.H), 1D,
             asCompound(ElementType.Cl), 1D
@@ -238,8 +221,6 @@ public class ChemicalCompounds {
             asCompound(ElementType.H), 4D,
             asCompound(SiO4), 1D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="Oxides">
     public static final @NotNull ChemicalCompound P2O5 = new OxideCompound("P2O5", Map.of(
             asCompound(ElementType.P), 2D,
@@ -253,6 +234,7 @@ public class ChemicalCompounds {
             asCompound(ElementType.C), 1D,
             asCompound(ElementType.O), 2D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound CO = new OxideCompound("CO", Map.of(
             asCompound(ElementType.C), 1D,
             asCompound(ElementType.O), 1D
@@ -309,8 +291,6 @@ public class ChemicalCompounds {
             asCompound(ElementType.Si), 1D,
             asCompound(ElementType.O), 2D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="SO4s">
     public static final @NotNull ChemicalCompound MgSO4 = new ChemicalCompound("MgSO4", Map.of(
             asCompound(ElementType.Mg), 1D,
@@ -324,6 +304,7 @@ public class ChemicalCompounds {
             asCompound(ElementType.Na), 2D,
             asCompound(SO4), 1D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound CaSO4 = new ChemicalCompound("CaSO4", Map.of(
             asCompound(ElementType.Ca), 1D,
             asCompound(SO4), 1D
@@ -356,8 +337,6 @@ public class ChemicalCompounds {
             asCompound(ElementType.Ba), 1D,
             asCompound(SO4), 1D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="NO3s">
     public static final @NotNull ChemicalCompound KNO3 = new ChemicalCompound("KNO3", Map.of(
             asCompound(ElementType.K), 1D,
@@ -371,6 +350,7 @@ public class ChemicalCompounds {
             asCompound(ElementType.Fe), 1D,
             asCompound(NO3), 2D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound CaNO3_2 = new ChemicalCompound("Ca(NO3)_2", Map.of(
             asCompound(ElementType.Ca), 1D,
             asCompound(NO3), 2D
@@ -415,8 +395,6 @@ public class ChemicalCompounds {
             asCompound(ElementType.Ba), 1D,
             asCompound(NO3), 2D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="HCO3s">
     public static final @NotNull ChemicalCompound NaHCO3 = new ChemicalCompound("NaHCO3", Map.of(
             asCompound(ElementType.Na), 1D,
@@ -430,12 +408,11 @@ public class ChemicalCompounds {
             asCompound(ElementType.Mg), 1D,
             asCompound(HCO3), 2D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound NH4HCO3 = new ChemicalCompound("NH4HCO3", Map.of(
             asCompound(NH4), 1D,
             asCompound(HCO3), 1D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="Cls">
     public static final @NotNull ChemicalCompound KCL = new ChemicalCompound("KCl", Map.of(
             asCompound(ElementType.K), 1D,
@@ -449,6 +426,7 @@ public class ChemicalCompounds {
             asCompound(ElementType.Mg), 1D,
             asCompound(ElementType.Cl), 2D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound FeCl2 = new ChemicalCompound("FeCl2", Map.of(
             asCompound(ElementType.Fe), 1D,
             asCompound(ElementType.Cl), 2D
@@ -485,8 +463,6 @@ public class ChemicalCompounds {
             asCompound(NH4), 1D,
             asCompound(ElementType.Cl), 1D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="OHs">
     public static final @NotNull ChemicalCompound CaOH_2 = new ChemicalCompound("Ca(OH)_2", Map.of(
             asCompound(ElementType.Ca), 1D,
@@ -500,6 +476,7 @@ public class ChemicalCompounds {
             asCompound(ElementType.Fe), 1D,
             asCompound(OH), 2D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound NaOH = new ChemicalCompound("NaOH", Map.of(
             asCompound(ElementType.Na), 1D,
             asCompound(OH), 1D
@@ -524,8 +501,6 @@ public class ChemicalCompounds {
             asCompound(ElementType.Mn), 1D,
             asCompound(OH), 2D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="CO3s">
     public static final @NotNull ChemicalCompound CaCO3 = new ChemicalCompound("CaCO3", Map.of(
             asCompound(ElementType.Ca), 1D,
@@ -535,15 +510,12 @@ public class ChemicalCompounds {
             asCompound(ElementType.Ba), 1D,
             asCompound(CO3), 1D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="ClO3s"
     public static final @NotNull ChemicalCompound KClO3 = new ChemicalCompound("KClO3", Map.of(
             asCompound(ElementType.K), 1D,
             asCompound(ClO3), 1D
     ));
     //</editor-fold>
-
     //<editor-fold desc="SO3s"
     public static final @NotNull ChemicalCompound Na2SO3 = new ChemicalCompound("Na2SO3", Map.of(
             asCompound(ElementType.Na), 2D,
@@ -554,17 +526,18 @@ public class ChemicalCompounds {
             asCompound(SO3), 1D
     ));
     //</editor-fold>
-
     //<editor-fold desc="Gases">
     public static final @NotNull ChemicalCompound O2 = new ChemicalCompound("O2", Map.of(
             asCompound(ElementType.O), 2D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound H2 = new ChemicalCompound("H2", Map.of(
             asCompound(ElementType.H), 2D
     ));
     public static final @NotNull ChemicalCompound N2 = new ChemicalCompound("N2", Map.of(
             asCompound(ElementType.N), 2D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound Cl2 = new ChemicalCompound("Cl2", Map.of(
             asCompound(ElementType.Cl), 2D
     ));
@@ -580,8 +553,6 @@ public class ChemicalCompounds {
             asCompound(ElementType.S), 1D,
             asCompound(ElementType.O), 2D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="Organic compounds"
     public static final @NotNull ChemicalCompound CH4 = new ChemicalCompound("CH4", Map.of(
             asCompound(ElementType.C), 1D,
@@ -592,28 +563,42 @@ public class ChemicalCompounds {
             asCompound(ElementType.H), 6D,
             asCompound(ElementType.O), 1D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="Other compounds">
     public static final @NotNull ChemicalCompound KMnO4 = new ChemicalCompound("KMnO4", Map.of(
             asCompound(ElementType.K), 1D,
             asCompound(MnO4), 1D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound K2MnO4 = new ChemicalCompound("K2MnO4", Map.of(
             asCompound(ElementType.K), 2D,
             asCompound(MnO4), 1D
     ));
-    //</editor-fold>
-
     //<editor-fold desc="Imagines">
     public static final @NotNull ChemicalCompound Au2Fe = new ChemicalCompound("Au2Fe", Map.of(
             asCompound(ElementType.Au), 2D,
             asCompound(ElementType.Fe), 1D
     ));
+    //</editor-fold>
     public static final @NotNull ChemicalCompound Ag2Cu = new ChemicalCompound("Ag2Cu", Map.of(
             asCompound(ElementType.Ag), 2D,
             asCompound(ElementType.Cu), 1D
     ));
+    public static boolean loaded = false;
+    //</editor-fold>
+
+    //<editor-fold desc="Compounds elements">
+    static {
+        for (ElementType elementType : ElementType.values()) {
+            new ChemicalCompound(
+                    elementType.getSymbol(),
+                    Map.of(asCompound(elementType), 1D));
+        }
+    }
+
+    public static void onLoad(@NotNull Runnable runnable) {
+        Preconditions.checkNotNull(runnable);
+        onLoad.add(runnable);
+    }
     //</editor-fold>
 
     //<editor-fold desc="Unsorted"

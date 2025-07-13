@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.menu.MachineMenu;
-import org.irmc.industrialrevival.api.objects.enums.ItemFlow;
+import org.irmc.industrialrevival.api.machines.ItemFlow;
 import org.irmc.industrialrevival.api.pipe.servers.Puller;
 import org.irmc.industrialrevival.api.pipe.servers.Pusher;
 import org.irmc.industrialrevival.utils.DataUtil;
