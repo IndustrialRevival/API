@@ -6,6 +6,9 @@ import org.irmc.industrialrevival.api.elements.tinker.TinkerType;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerTypes;
 import org.jetbrains.annotations.Range;
 
+/**
+ * @author balugaq
+ */
 public class ElementOre extends ElementItem {
     @Override
     public @Range(from = 0, to = Smeltery.MAX_FUEL) int getMeltingPoint(ItemStack itemStack) {

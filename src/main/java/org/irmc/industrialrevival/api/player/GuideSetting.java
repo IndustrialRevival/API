@@ -17,38 +17,41 @@ import org.jetbrains.annotations.Range;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * @author balugaq
+ */
 @Data
-public class PlayerSettings<T> implements ClickHandler, Cloneable {
+public class GuideSetting<T> implements ClickHandler, Cloneable {
     public static final NamespacedKey KEY = NamespacedKey.minecraft("key");
     private Predicate<Player> displayable;
     private NamespacedKey key;
     private T value;
     private Function<T, ItemStack> icon;
 
-    public PlayerSettings(Predicate<Player> displayable, NamespacedKey key, T value, Function<T, ItemStack> icon) {
+    public GuideSetting(Predicate<Player> displayable, NamespacedKey key, T value, Function<T, ItemStack> icon) {
         this.displayable = displayable;
         this.key = key;
         this.value = value;
         this.icon = icon.andThen(i -> new CustomItemStack(i).setPDCData(KEY, PersistentDataType.STRING, key.toString()).getBukkit());
     }
 
-    public PlayerSettings(NamespacedKey key, T value, Function<T, ItemStack> icon) {
+    public GuideSetting(NamespacedKey key, T value, Function<T, ItemStack> icon) {
         this(_ -> true, key, value, icon);
     }
 
-    public static <T> PlayerSettings<T> of(Predicate<Player> displayable, NamespacedKey key, T value, Function<T, ItemStack> icon) {
-        return new PlayerSettings<>(displayable, key, value, icon);
+    public static <T> GuideSetting<T> of(Predicate<Player> displayable, NamespacedKey key, T value, Function<T, ItemStack> icon) {
+        return new GuideSetting<>(displayable, key, value, icon);
     }
 
-    public static <T> PlayerSettings<T> of(NamespacedKey key, T value, Function<T, ItemStack> icon) {
-        return new PlayerSettings<>(key, value, icon);
+    public static <T> GuideSetting<T> of(NamespacedKey key, T value, Function<T, ItemStack> icon) {
+        return new GuideSetting<>(key, value, icon);
     }
 
-    public static <T> PlayerSettings<T> constof(Predicate<Player> requirement, NamespacedKey key, T defaultValue, Function<T, ItemStack> icon) {
+    public static <T> GuideSetting<T> constof(Predicate<Player> requirement, NamespacedKey key, T defaultValue, Function<T, ItemStack> icon) {
         return of(requirement, key, defaultValue, icon);
     }
 
-    public static <T> PlayerSettings<T> constof(NamespacedKey key, T defaultValue, Function<T, ItemStack> icon) {
+    public static <T> GuideSetting<T> constof(NamespacedKey key, T defaultValue, Function<T, ItemStack> icon) {
         return of(key, defaultValue, icon);
     }
 
@@ -86,7 +89,7 @@ public class PlayerSettings<T> implements ClickHandler, Cloneable {
         return false;
     }
 
-    public PlayerSettings<T> clone() {
-        return new PlayerSettings<>(key, value, icon);
+    public GuideSetting<T> clone() {
+        return new GuideSetting<>(key, value, icon);
     }
 }

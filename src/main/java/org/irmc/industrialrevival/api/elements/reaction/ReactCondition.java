@@ -32,17 +32,16 @@ public final class ReactCondition {
     private final Type type;
     private final @Nullable ChemicalCompound catalyst;
 
-    private ReactCondition(Type type) {
-        this.type = type;
-        this.catalyst = null;
+    private ReactCondition(@NotNull Type type) {
+        this(type, null);
     }
 
-    private ReactCondition(Type type, @Nullable ChemicalCompound catalyst) {
+    private ReactCondition(@NotNull Type type, @Nullable ChemicalCompound catalyst) {
         this.type = type;
         this.catalyst = catalyst;
     }
 
-    public static @NotNull ReactCondition asCatalyzer(ChemicalCompound compound) {
+    public static @NotNull ReactCondition asCatalyzer(@NotNull ChemicalCompound compound) {
         return new ReactCondition(Type.CATALYZER, compound);
     }
 

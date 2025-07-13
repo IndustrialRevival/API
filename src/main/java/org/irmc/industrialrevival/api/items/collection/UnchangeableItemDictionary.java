@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author lijinhong11
+ */
 public class UnchangeableItemDictionary extends SimpleItemDictionary {
     private final List<IndustrialRevivalItem> items;
 

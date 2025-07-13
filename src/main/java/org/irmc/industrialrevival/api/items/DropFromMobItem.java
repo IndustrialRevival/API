@@ -8,12 +8,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author lijinhong11
+ */
 @Getter
 public class DropFromMobItem extends IndustrialRevivalItem implements MobDropItem {
     private final Set<MobDropMethod> dropMethods = new HashSet<>();
 
     @Override
-    public MobDropMethod[] getDropMethods() {
+    public MobDropMethod @NotNull [] getDropMethods() {
         return dropMethods.toArray(new MobDropMethod[0]);
     }
 

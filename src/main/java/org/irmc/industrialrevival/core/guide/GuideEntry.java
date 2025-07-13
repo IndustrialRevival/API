@@ -4,17 +4,22 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.irmc.industrialrevival.api.menu.SimpleMenu;
+import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author balugaq
+ * @author lijinhong11
+ */
 @Data
 @RequiredArgsConstructor
 public class GuideEntry {
-    private final IRGuideImplementation guide;
-    private final SimpleMenu content;
+    private final @NotNull IRGuideImplementation guide;
+    private final @NotNull SimpleMenu content;
 
     @Setter
     private int page;
 
-    public static GuideEntry warp(IRGuideImplementation guide, SimpleMenu value) {
+    public static @NotNull GuideEntry warp(IRGuideImplementation guide, SimpleMenu value) {
         var e = new GuideEntry(guide, value);
         e.setPage(1);
         return e;

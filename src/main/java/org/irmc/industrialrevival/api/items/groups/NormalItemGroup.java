@@ -6,6 +6,10 @@ import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author lijinhong11
+ * @author balugaq
+ */
 public class NormalItemGroup extends ItemGroup {
     public NormalItemGroup(@NotNull NamespacedKey key, @NotNull ItemStack icon) {
         super(key, icon);

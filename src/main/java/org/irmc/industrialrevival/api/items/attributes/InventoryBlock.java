@@ -10,6 +10,8 @@ import java.util.function.Consumer;
  * This interface defines a machine that has an inventory. <br>
  * <br>
  * <b>Note: </b> Right-click to open the inventory.
+ *
+ * @author lijinhong11
  */
 public interface InventoryBlock extends ItemAttribute {
     int[] getInputSlots();

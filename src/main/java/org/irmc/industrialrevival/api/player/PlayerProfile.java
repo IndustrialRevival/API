@@ -119,7 +119,7 @@ public class PlayerProfile {
     }
      */
 
-    public <T> T getGuideSettings(PlayerSettings<T> clazz) {
+    public <T> T getGuideSettings(GuideSetting<T> clazz) {
         return getGuideSettings().getPlayerSettings(clazz).get();
     }
 

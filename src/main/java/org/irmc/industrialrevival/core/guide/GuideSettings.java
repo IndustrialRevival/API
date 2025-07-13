@@ -5,15 +5,19 @@ import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
-import org.irmc.industrialrevival.api.player.PlayerSettings;
+import org.irmc.industrialrevival.api.player.GuideSetting;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.irmc.industrialrevival.utils.TextUtil;
 import org.irmc.pigeonlib.items.CustomItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * @author balugaq
+ */
 @Getter
 @Setter
 public class GuideSettings {
@@ -22,7 +26,7 @@ public class GuideSettings {
     public static final NamespacedKey KEY_LEARNING_ANIMATION_ENABLED = KeyUtil.customKey("learning_animation_enabled");
     public static final NamespacedKey KEY_LANGUAGE = KeyUtil.customKey("language");
 
-    public static final PlayerSettings<GuideMode> GUIDE_MODE = PlayerSettings.constof(
+    public static final GuideSetting<GuideMode> GUIDE_MODE = GuideSetting.constof(
             Player::isOp,
             KEY_GUIDE_MODE,
             GuideMode.SURVIVAL,
@@ -32,7 +36,7 @@ public class GuideSettings {
                     "Survival Guide"
             ).getBukkit());
 
-    public static final PlayerSettings<Boolean> FIREWORKS_ENABLED = PlayerSettings.constof(
+    public static final GuideSetting<Boolean> FIREWORKS_ENABLED = GuideSetting.constof(
             KEY_FIREWORKS_ENABLED,
             true,
             enabled -> new CustomItemStack(
@@ -41,7 +45,7 @@ public class GuideSettings {
                     "Fireworks: " + TextUtil.getBooleanText(enabled)
             ).getBukkit());
 
-    public static final PlayerSettings<Boolean> LEARNING_ANIMATION_ENABLED = PlayerSettings.constof(
+    public static final GuideSetting<Boolean> LEARNING_ANIMATION_ENABLED = GuideSetting.constof(
             KEY_LEARNING_ANIMATION_ENABLED,
             true,
             enabled -> new CustomItemStack(
@@ -50,7 +54,7 @@ public class GuideSettings {
                     "Learning Animation: " + TextUtil.getBooleanText(enabled)
             ).getBukkit());
 
-    public static final PlayerSettings<String> LANGUAGE = PlayerSettings.constof(
+    public static final GuideSetting<String> LANGUAGE = GuideSetting.constof(
             KEY_LANGUAGE,
             Locale.getDefault().toLanguageTag(),
             language -> new CustomItemStack(
@@ -66,34 +70,34 @@ public class GuideSettings {
                     LANGUAGE.clone()
             );
 
-    public final Map<NamespacedKey, PlayerSettings<?>> settings;
+    public final Map<NamespacedKey, GuideSetting<?>> settings;
 
-    public GuideSettings(Map<NamespacedKey, PlayerSettings<?>> settings) {
+    public GuideSettings(Map<NamespacedKey, GuideSetting<?>> settings) {
         this.settings = settings;
     }
 
-    public static GuideSettings of(Map<NamespacedKey, PlayerSettings<?>> settings) {
+    public static @NotNull GuideSettings of(Map<NamespacedKey, GuideSetting<?>> settings) {
         return new GuideSettings(settings);
     }
 
-    public static GuideSettings of(PlayerSettings<?>... settings) {
-        Map<NamespacedKey, PlayerSettings<?>> map = new HashMap<>();
-        for (PlayerSettings<?> setting : settings) {
+    public static @NotNull GuideSettings of(GuideSetting<?> @NotNull ... settings) {
+        Map<NamespacedKey, GuideSetting<?>> map = new HashMap<>();
+        for (GuideSetting<?> setting : settings) {
             map.put(setting.getKey(), setting);
         }
 
         return of(map);
     }
 
-    public <T> PlayerSettings<T> getPlayerSettings(PlayerSettings<T> clazz) {
-        return (PlayerSettings<T>) settings.get(clazz.getKey());
+    public <T> GuideSetting<T> getPlayerSettings(@NotNull GuideSetting<T> clazz) {
+        return (GuideSetting<T>) settings.get(clazz.getKey());
     }
 
-    public <T> PlayerSettings<T> getPlayerSettings(NamespacedKey key) {
-        return (PlayerSettings<T>) settings.get(key);
+    public <T> GuideSetting<T> getPlayerSettings(NamespacedKey key) {
+        return (GuideSetting<T>) settings.get(key);
     }
 
-    public <T> void setGuideSettings(PlayerSettings<T> clazz, T value) {
+    public <T> void setGuideSettings(@NotNull GuideSetting<T> clazz, T value) {
         getPlayerSettings(clazz).setValue(value);
     }
 }

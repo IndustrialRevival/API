@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @author balugaq
+ */
 public class ReactHelper {
     /**
      * React the items with the conditions
@@ -235,7 +238,8 @@ public class ReactHelper {
         return new ReactResult(formula, finalConsume, finalResult);
     }
 
-    public static ReactResult reactAll(Environment environment, Set<ReactCondition> conditions, Map<ChemicalCompound, Double> reactants, ChemicalFormula formula) {
+    @NotNull
+    public static ReactResult reactAll(@NotNull Environment environment, @NotNull Set<ReactCondition> conditions, @NotNull Map<ChemicalCompound, Double> reactants, @NotNull ChemicalFormula formula) {
         if (!conditionSatisfied(environment, reactants, formula.getConditions(), conditions)) {
             return ReactResult.FAILED;
         }

@@ -7,6 +7,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * AbstractModelBuilder is the base class for all model builders.
  * Used to build a display entity at a given location.
+ *
+ * @author balugaq
  */
 public abstract class AbstractModelBuilder {
     /**

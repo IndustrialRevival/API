@@ -33,6 +33,20 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Builder class for creating BlockDisplay entities with comprehensive configuration options.
+ * <p>
+ * This class provides a fluent API for building BlockDisplay entities with various
+ * properties including block data, transformation, visibility, physics, and metadata.
+ * It extends AbstractModelBuilder and implements Cloneable for easy copying.
+ * </p>
+ * <p>
+ * The builder supports all major BlockDisplay properties and provides convenient
+ * methods for setting block data from different sources (Block, Location, Material, ItemStack).
+ * </p>
+ *
+ * @author balugaq
+ */
 @Getter
 public class BlockModelBuilder extends AbstractModelBuilder implements Cloneable {
     private TransformationBuilder transformationBuilder;
@@ -75,15 +89,31 @@ public class BlockModelBuilder extends AbstractModelBuilder implements Cloneable
     private Map<String, List<MetadataValue>> metadata;
     private Component customName;
 
+    /**
+     * Constructs a new BlockModelBuilder with default settings.
+     */
     public BlockModelBuilder() {
     }
 
+    /**
+     * Executes the given runnable if the object is not null.
+     * This is a utility method used internally for conditional property setting.
+     *
+     * @param object the object to check for null
+     * @param runnable the runnable to execute if object is not null
+     */
     public void ifPresent(@Nullable Object object, @NotNull Runnable runnable) {
         if (object != null) {
             runnable.run();
         }
     }
 
+    /**
+     * Creates a deep copy of this BlockModelBuilder.
+     * All properties are copied to the new instance.
+     *
+     * @return a new BlockModelBuilder with the same properties
+     */
     public @NotNull BlockModelBuilder clone() {
         BlockModelBuilder clone = new BlockModelBuilder();
         clone.blockData = this.blockData;
@@ -128,10 +158,22 @@ public class BlockModelBuilder extends AbstractModelBuilder implements Cloneable
         return clone;
     }
 
+    /**
+     * Creates a copy of this builder.
+     *
+     * @return a copy of this BlockModelBuilder
+     */
     public @NotNull BlockModelBuilder build() {
         return clone();
     }
 
+    /**
+     * Builds a BlockDisplay entity at the specified location with all configured properties.
+     * This method runs synchronously on the main thread to ensure thread safety.
+     *
+     * @param location the location to spawn the BlockDisplay at
+     * @return the created BlockDisplay entity, or null if creation failed
+     */
     public @NotNull BlockDisplay buildAt(@NotNull Location location) {
         try {
             return Bukkit.getScheduler().callSyncMethod(IRDock.getPlugin(), () ->
@@ -182,19 +224,44 @@ public class BlockModelBuilder extends AbstractModelBuilder implements Cloneable
     }
 
     // Block Display methods
+    /**
+     * Sets the block data for this BlockDisplay.
+     *
+     * @param blockData the block data to set
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder block(BlockData blockData) {
         this.blockData = blockData;
         return this;
     }
 
+    /**
+     * Sets the block data from the specified block.
+     *
+     * @param block the block to get data from
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder block(@NotNull Block block) {
         return block(block.getBlockData());
     }
 
+    /**
+     * Sets the block data from the block at the specified location.
+     *
+     * @param location the location to get block data from
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder block(@NotNull Location location) {
         return block(location.getBlock().getBlockData());
     }
 
+    /**
+     * Sets the block data from the specified material.
+     *
+     * @param material the material to create block data from
+     * @return this builder instance
+     * @throws IllegalArgumentException if the material is not a block
+     */
     public @NotNull BlockModelBuilder block(@NotNull Material material) throws IllegalArgumentException {
         if (!material.isBlock()) {
             throw new IllegalArgumentException("Material must be a block");
@@ -202,46 +269,100 @@ public class BlockModelBuilder extends AbstractModelBuilder implements Cloneable
         return block(material.createBlockData());
     }
 
+    /**
+     * Sets the block data from the specified item stack.
+     *
+     * @param itemStack the item stack to get material from
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder block(@NotNull ItemStack itemStack) {
         return block(itemStack.getType());
     }
 
     // Display methods
+    /**
+     * Sets the interpolation duration for smooth transitions.
+     *
+     * @param duration the interpolation duration in ticks
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder interpolationDuration(int duration) {
         this.interpolationDuration = duration;
         return this;
     }
 
+    /**
+     * Sets the teleport duration for smooth teleportation.
+     *
+     * @param duration the teleport duration in ticks
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder teleportDuration(int duration) {
         this.teleportDuration = duration;
         return this;
     }
 
+    /**
+     * Sets the view range for this display.
+     *
+     * @param viewRange the view range
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder viewRange(float viewRange) {
         this.viewRange = viewRange;
         return this;
     }
 
+    /**
+     * Sets the shadow radius for this display.
+     *
+     * @param shadowRadius the shadow radius
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder shadowRadius(float shadowRadius) {
         this.shadowRadius = shadowRadius;
         return this;
     }
 
+    /**
+     * Sets the shadow strength for this display.
+     *
+     * @param shadowStrength the shadow strength
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder shadowStrength(float shadowStrength) {
         this.shadowStrength = shadowStrength;
         return this;
     }
 
+    /**
+     * Sets the display width.
+     *
+     * @param displayWidth the display width
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder displayWidth(float displayWidth) {
         this.displayWidth = displayWidth;
         return this;
     }
 
+    /**
+     * Sets the display height.
+     *
+     * @param displayHeight the display height
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder displayHeight(float displayHeight) {
         this.displayHeight = displayHeight;
         return this;
     }
 
+    /**
+     * Sets the interpolation delay.
+     *
+     * @param delay the interpolation delay in ticks
+     * @return this builder instance
+     */
     public @NotNull BlockModelBuilder interpolationDelay(int delay) {
         this.interpolationDelay = delay;
         return this;

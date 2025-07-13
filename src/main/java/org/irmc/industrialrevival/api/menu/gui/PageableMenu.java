@@ -13,11 +13,12 @@ import org.irmc.industrialrevival.api.menu.MatrixMenuDrawer;
 import org.irmc.industrialrevival.api.menu.SimpleMenu;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
-import org.irmc.industrialrevival.api.player.PlayerSettings;
+import org.irmc.industrialrevival.api.player.GuideSetting;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
 import org.irmc.pigeonlib.items.CustomItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -28,8 +29,8 @@ import java.util.Map;
 
 @Getter
 public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
-    public static NamespacedKey GROUP_KEY = KeyUtil.customKey("group");
-    public static NamespacedKey ITEM_KEY = KeyUtil.customKey("item");
+    public static @NotNull NamespacedKey GROUP_KEY = KeyUtil.customKey("group");
+    public static @NotNull NamespacedKey ITEM_KEY = KeyUtil.customKey("item");
     private final Player player;
     private final PlayerProfile playerProfile;
     private final int currentPage;
@@ -38,7 +39,7 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
     protected char objSymbol = 'i';
     protected MatrixMenuDrawer drawer;
 
-    public PageableMenu(Component title, Player player, PlayerProfile playerProfile, int currentPage, List<T> items, Map<Integer, PageableMenu<T>> pages) {
+    public PageableMenu(@NotNull Component title, Player player, PlayerProfile playerProfile, int currentPage, List<T> items, Map<Integer, PageableMenu<T>> pages) {
         super(title);
 
         this.player = player;
@@ -52,7 +53,7 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
         recordPage(currentPage);
     }
 
-    public PageableMenu(PageableMenu<T> menu) {
+    public PageableMenu(@NotNull PageableMenu<T> menu) {
         super(menu.getTitle());
 
         this.player = menu.player;
@@ -63,7 +64,7 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
         this.drawer = getDrawer();
     }
 
-    public static ItemStack getDisplayItem0(IndustrialRevivalItem item) {
+    public static @Nullable ItemStack getDisplayItem0(@NotNull IndustrialRevivalItem item) {
         var icon = item.getIcon();
         var meta = icon.getItemMeta();
         if (meta == null) {
@@ -79,7 +80,7 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
         return icon;
     }
 
-    public static ItemStack getDisplayItemInSearch0(IndustrialRevivalItem item) {
+    public static @Nullable ItemStack getDisplayItemInSearch0(@NotNull IndustrialRevivalItem item) {
         var icon = item.getIcon();
         var meta = icon.getItemMeta();
         if (meta == null) {
@@ -109,14 +110,14 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
                 .getBukkit();
     }
 
-    public static ItemStack getDisplayItem0(ItemGroup group) {
+    public static ItemStack getDisplayItem0(@NotNull ItemGroup group) {
         return new CustomItemStack(group.getIcon())
                 .lore(List.of(Component.text("点击打开", TextColor.color(0x4abfa0))))
                 .setPDCData(GROUP_KEY, PersistentDataType.STRING, group.getKey().toString())
                 .getBukkit();
     }
 
-    public static <K> ItemStack getDisplayItem0(Player player, PlayerProfile profile, PlayerSettings<K> clazz) {
+    public static <K> ItemStack getDisplayItem0(Player player, @NotNull PlayerProfile profile, @NotNull GuideSetting<K> clazz) {
         return clazz.getIcon().apply(profile.getGuideSettings(clazz));
     }
 
@@ -140,22 +141,22 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
         }
     }
 
-    public ItemStack getPreviousPageButton() {
+    public @NotNull ItemStack getPreviousPageButton() {
         return MenuUtil.getPreviousButton(player, currentPage, maxPage());
     }
 
-    public ItemStack getNextPageButton() {
+    public @NotNull ItemStack getNextPageButton() {
         return MenuUtil.getNextButton(player, currentPage, maxPage());
     }
 
-    public ClickHandler getPreviousPageClickHandler() {
+    public @NotNull ClickHandler getPreviousPageClickHandler() {
         return (player, _, _, _, _) -> {
             previousPage(player, playerProfile, currentPage);
             return false;
         };
     }
 
-    public ClickHandler getNextPageClickHandler() {
+    public @NotNull ClickHandler getNextPageClickHandler() {
         return (player, _, _, _, _) -> {
             nextPage(player, playerProfile, currentPage);
             return false;
@@ -192,15 +193,15 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
         return (int) Math.ceil((double) getItems().size() / objsLength());
     }
 
-    public List<T> crop(int page) {
+    public @NotNull List<T> crop(int page) {
         int start = Math.max(0, page - 1) * objsLength();
         int end = Math.min(start + objsLength(), getItems().size());
         return getItems().subList(start, end);
     }
 
-    public abstract ItemStack getDisplayItem(T item);
+    public abstract @Nullable ItemStack getDisplayItem(T item);
 
-    public MatrixMenuDrawer getDrawer() {
+    public @NotNull MatrixMenuDrawer getDrawer() {
         if (drawer != null) {
             return drawer;
         }
@@ -222,7 +223,7 @@ public abstract class PageableMenu<T> extends SimpleMenu implements Pageable {
     }
 
     @Nonnull
-    public MatrixMenuDrawer explainDrawer(MatrixMenuDrawer matrixMenuDrawer) {
+    public MatrixMenuDrawer explainDrawer(@NotNull MatrixMenuDrawer matrixMenuDrawer) {
         return matrixMenuDrawer
                 .addExplain("B", "Background", MenuUtil.BACKGROUND, ClickHandler.DEFAULT)
                 .addExplain("T", "Settings", GuideUtil.getSettingsButton(getPlayer()), GuideUtil::openSettings)

@@ -1,7 +1,9 @@
 package org.irmc.industrialrevival.api.items.armor;
 
+/**
+ * @author lijinhong11
+ */
 public enum ArmorProtectionType {
-    NONE,
     RADIATION,
     /**
      * Lava protection(including fire)

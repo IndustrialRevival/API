@@ -7,6 +7,9 @@ import org.irmc.industrialrevival.utils.GuideUtil;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/**
+ * @author balugaq
+ */
 public abstract class IRGuide implements IRGuideImplementation {
     @Override
     @ParametersAreNonnullByDefault

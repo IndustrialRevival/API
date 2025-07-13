@@ -12,6 +12,14 @@ import org.irmc.industrialrevival.api.data.runtime.IRBlockData;
 import org.irmc.industrialrevival.api.events.interfaces.RelatedIRItem;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Event representing a tick update for a specific block in the industrial revival system.
+ * Contains information about the block, associated machine menu, industrial item and block data.
+ *
+ * @author balugaq
+ * @see Cancellable
+ * @see RelatedIRItem
+ */
 @Getter
 public class BlockTickEvent extends Event implements Cancellable, RelatedIRItem {
     private static final HandlerList handlers = new HandlerList();

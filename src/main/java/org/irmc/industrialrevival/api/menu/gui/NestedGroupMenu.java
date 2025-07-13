@@ -16,6 +16,8 @@ import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -26,16 +28,16 @@ import java.util.Map;
 public class NestedGroupMenu extends PageableMenu<ItemGroup> {
     private NestedItemGroup itemGroup;
 
-    public NestedGroupMenu(Player player, NestedItemGroup itemGroup) {
+    public NestedGroupMenu(@NotNull Player player, @NotNull NestedItemGroup itemGroup) {
         this(player, itemGroup, 1);
     }
 
-    public NestedGroupMenu(Player player, NestedItemGroup itemGroup, int page) {
+    public NestedGroupMenu(@NotNull Player player, @NotNull NestedItemGroup itemGroup, int page) {
         this(itemGroup.getIcon().displayName(), player, PlayerProfile.getProfile(player), page, itemGroup.getSubItemGroups(), new HashMap<>());
         this.itemGroup = itemGroup;
     }
 
-    public NestedGroupMenu(Component title, Player player, PlayerProfile playerProfile, int currentPage, List<ItemGroup> items, Map<Integer, PageableMenu<ItemGroup>> pages) {
+    public NestedGroupMenu(@NotNull Component title, Player player, @NotNull PlayerProfile playerProfile, int currentPage, List<ItemGroup> items, Map<Integer, PageableMenu<ItemGroup>> pages) {
         super(title, player, playerProfile, currentPage, items, pages);
         drawer.addExplain(objSymbol, "Item");
 
@@ -60,16 +62,16 @@ public class NestedGroupMenu extends PageableMenu<ItemGroup> {
         GuideUtil.addToHistory(playerProfile.getGuideHistory(), this);
     }
 
-    public ItemStack getDisplayItem(ItemGroup sub) {
+    public ItemStack getDisplayItem(@NotNull ItemGroup sub) {
         return PageableMenu.getDisplayItem0(sub);
     }
 
     @Override
-    public PageableMenu<ItemGroup> newMenu(PageableMenu<ItemGroup> menu, int newPage) {
+    public PageableMenu<ItemGroup> newMenu(@NotNull PageableMenu<ItemGroup> menu, int newPage) {
         return new NestedGroupMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems(), menu.getPages());
     }
 
-    public ItemStack getDisplayItem(IndustrialRevivalItem item) {
+    public @Nullable ItemStack getDisplayItem(@NotNull IndustrialRevivalItem item) {
         return PageableMenu.getDisplayItem0(item);
     }
 
@@ -87,7 +89,7 @@ public class NestedGroupMenu extends PageableMenu<ItemGroup> {
     }
 
     @Nonnull
-    public MatrixMenuDrawer explainDrawer(MatrixMenuDrawer matrixMenuDrawer) {
+    public MatrixMenuDrawer explainDrawer(@NotNull MatrixMenuDrawer matrixMenuDrawer) {
         return matrixMenuDrawer
                 .addExplain("B", "Background", MenuUtil.BACKGROUND, ClickHandler.DEFAULT)
                 .addExplain("T", "Settings", GuideUtil.getSettingsButton(getPlayer()), GuideUtil::openSettings)

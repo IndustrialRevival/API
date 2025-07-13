@@ -8,6 +8,7 @@ package org.irmc.industrialrevival.api.objects;
  * @param <B> the type of the second argument
  * @param <C> the type of the third argument
  * @param <R> the type of the result
+ * @author balugaq
  */
 @FunctionalInterface
 public interface CiFunction<A, B, C, R> {

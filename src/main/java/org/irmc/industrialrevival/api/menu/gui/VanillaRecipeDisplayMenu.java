@@ -31,15 +31,15 @@ import java.util.List;
 public class VanillaRecipeDisplayMenu extends PageableMenu<VanillaRecipeContent> {
     public static final NamespacedKey PAGE_KEY = KeyUtil.customKey("current_page");
 
-    public VanillaRecipeDisplayMenu(Player player, ItemStack item) {
+    public VanillaRecipeDisplayMenu(@NotNull Player player, @NotNull ItemStack item) {
         this(player, item, 1);
     }
 
-    public VanillaRecipeDisplayMenu(Player player, ItemStack item, int page) {
+    public VanillaRecipeDisplayMenu(@NotNull Player player, @NotNull ItemStack item, int page) {
         this(ItemUtils.getDisplayName(item), player, PlayerProfile.getProfile(player), page, RecipeContents.getVanillaRecipeContents(item));
     }
 
-    public VanillaRecipeDisplayMenu(Component title, Player p, PlayerProfile playerProfile, int currentPage, List<VanillaRecipeContent> contents) {
+    public VanillaRecipeDisplayMenu(@NotNull Component title, Player p, @NotNull PlayerProfile playerProfile, int currentPage, @NotNull List<VanillaRecipeContent> contents) {
         super(title, p, playerProfile, currentPage, contents, new HashMap<>());
 
         if (contents.isEmpty()) {
@@ -122,11 +122,11 @@ public class VanillaRecipeDisplayMenu extends PageableMenu<VanillaRecipeContent>
         }
     }
 
-    public RecipeChoice[] getIngredients() {
+    public RecipeChoice @NotNull [] getIngredients() {
         return getRecipeContent().recipe();
     }
 
-    public ItemStack getOutput() {
+    public @NotNull ItemStack getOutput() {
         return getRecipeContent().result();
     }
 
@@ -134,7 +134,7 @@ public class VanillaRecipeDisplayMenu extends PageableMenu<VanillaRecipeContent>
      * Shut up, compiler
      */
     @Override
-    public ItemStack getDisplayItem(VanillaRecipeContent item) {
+    public @Nullable ItemStack getDisplayItem(VanillaRecipeContent item) {
         return null;
     }
 
@@ -163,11 +163,11 @@ public class VanillaRecipeDisplayMenu extends PageableMenu<VanillaRecipeContent>
                 .addExplain("o", "Output", GuideUtil::lookupItem);
     }
 
-    public boolean pageJumper(Player player, ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
+    public boolean pageJumper(Player player, @NotNull ItemStack itemStack, int slot, SimpleMenu menu, ClickType clickType) {
         return pageJumper(player, itemStack);
     }
 
-    public boolean pageJumper(Player player, ItemStack itemStack) {
+    public boolean pageJumper(Player player, @NotNull ItemStack itemStack) {
         int page = DataUtil.getPDC(itemStack, PAGE_KEY, PersistentDataType.INTEGER);
         var menu = getByPage(page);
         if (menu != null) {
@@ -178,7 +178,7 @@ public class VanillaRecipeDisplayMenu extends PageableMenu<VanillaRecipeContent>
     }
 
     @Override
-    public PageableMenu<VanillaRecipeContent> newMenu(PageableMenu<VanillaRecipeContent> menu, int newPage) {
+    public PageableMenu<VanillaRecipeContent> newMenu(@NotNull PageableMenu<VanillaRecipeContent> menu, int newPage) {
         return new VanillaRecipeDisplayMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems());
     }
 }

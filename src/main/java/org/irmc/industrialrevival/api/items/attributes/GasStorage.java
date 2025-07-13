@@ -6,13 +6,18 @@ import org.bukkit.persistence.PersistentDataType;
 import org.irmc.industrialrevival.utils.KeyUtil;
 import org.irmc.pigeonlib.objects.percentage.PositiveHundredPercentage;
 import org.irmc.pigeonlib.pdc.PersistentDataAPI;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+/**
+ * @author lijinhong11
+ */
 public interface GasStorage extends ChemReactable, SimpleDataContainer<PositiveHundredPercentage> {
     NamespacedKey GAS_STORAGE_CAPACITY_KEY = KeyUtil.customKey("gas_storage_capacity");
 
-    CatheterInsertionMethod getCatheterInsertionMethod(ItemStack item);
+    @Nullable CatheterInsertionMethod getCatheterInsertionMethod(@NotNull ItemStack item);
 
-    void setCatheterInsertionMethod(CatheterInsertionMethod catheterInsertionMethod, ItemStack item);
+    void setCatheterInsertionMethod(@NotNull CatheterInsertionMethod catheterInsertionMethod, @NotNull ItemStack item);
 
     @Override
     default PositiveHundredPercentage getData(ItemStack item) {

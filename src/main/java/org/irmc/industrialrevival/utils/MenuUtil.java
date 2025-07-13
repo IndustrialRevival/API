@@ -181,7 +181,7 @@ public class MenuUtil {
      * @return The remaining item stack if it couldn't be fully pushed, or null if it was fully pushed.
      */
     @Nullable
-    public static ItemStack pushItem(@Nonnull SimpleMenu simpleMenu, @Nonnull ItemStack item, int... slots) {
+    public static ItemStack pushItem(@Nonnull SimpleMenu simpleMenu, @Nonnull ItemStack item, int @NotNull ... slots) {
         if (item == null || item.getType() == Material.AIR) {
             throw new IllegalArgumentException("Cannot push null or AIR");
         }
@@ -314,7 +314,7 @@ public class MenuUtil {
      * @param slots      The slots in the menu to check.
      * @return True if the item can fit into the slots, false otherwise.
      */
-    public static boolean fits(@Nonnull SimpleMenu simpleMenu, @Nonnull ItemStack item, int... slots) {
+    public static boolean fits(@Nonnull SimpleMenu simpleMenu, @Nonnull ItemStack item, int @NotNull ... slots) {
         if (item.getType() == Material.AIR) {
             return true;
         }
@@ -368,7 +368,7 @@ public class MenuUtil {
      * @param slots      The slots in the menu to check.
      * @return True if all items can fit into the slots, false otherwise.
      */
-    public static boolean fits(@Nonnull SimpleMenu simpleMenu, @Nonnull List<ItemStack> items, int... slots) {
+    public static boolean fits(@Nonnull SimpleMenu simpleMenu, @Nonnull List<ItemStack> items, int @NotNull ... slots) {
         if (items.isEmpty()) {
             return false;
         }
@@ -453,7 +453,7 @@ public class MenuUtil {
      * @param operation The operation to generate the progress.
      * @return The progress bar item.
      */
-    public static ItemStack getProgressBar(@Nonnull Material material, @Nonnull IOperation operation) {
+    public static @NotNull ItemStack getProgressBar(@Nonnull Material material, @Nonnull IOperation operation) {
         int current = operation.getCurrentProgress();
         int max = operation.getTotalProgress();
         int currentPercentage = (int) (current * 100.0f / max);

@@ -1,5 +1,7 @@
 package org.irmc.industrialrevival.utils;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -295,7 +297,7 @@ public class JavaUtil {
         return null;
     }
 
-    public static int[] centerAlign(int[] objects) {
+    public static int[] centerAlign(int @NotNull [] objects) {
         // 输入 1 2 3 4 5
         // 输出 3 2 4 1 5
         // 输入 1 2 3 4 5 6

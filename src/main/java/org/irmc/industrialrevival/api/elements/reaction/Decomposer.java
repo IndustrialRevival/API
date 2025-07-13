@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalCompound;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerTypes;
 import org.irmc.industrialrevival.api.items.attributes.CompoundContainerHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,11 +19,11 @@ public class Decomposer {
     public static final Random random = new Random();
     private final Map<ChemicalCompound, Double> weights;
 
-    public Decomposer(ChemicalCompound output, double weight) {
+    public Decomposer(@NotNull ChemicalCompound output, double weight) {
         this(output, (Object) weight);
     }
 
-    public Decomposer(Object... args) {
+    public Decomposer(@NotNull Object @NotNull ... args) {
         double totalWeight = 0;
         Map<ChemicalCompound, Double> map = new HashMap<>();
         for (int i = 0; i < args.length; i += 2) {
@@ -39,7 +40,7 @@ public class Decomposer {
         this.weights = map;
     }
 
-    public void decompose(CompoundContainerHolder holder, Location location) {
+    public void decompose(@NotNull CompoundContainerHolder holder, @NotNull Location location) {
         for (var entry : weights.entrySet()) {
             var r = random.nextDouble();
             if (r < entry.getValue()) {

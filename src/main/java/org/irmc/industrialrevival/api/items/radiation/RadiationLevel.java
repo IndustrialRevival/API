@@ -4,6 +4,9 @@ import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import org.irmc.industrialrevival.dock.IRDock;
 
+/**
+ * @author lijinhong11
+ */
 public enum RadiationLevel {
     LOW(1, "radiation.level.low"),
     MEDIUM(3, "radiation.level.medium"),

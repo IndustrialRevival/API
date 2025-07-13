@@ -12,6 +12,8 @@ import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.GuideUtil;
 import org.irmc.industrialrevival.utils.MenuUtil;
 import org.irmc.pigeonlib.chat.ChatInput;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import java.util.function.Consumer;
 public class SearchMenu extends PageableMenu<IndustrialRevivalItem> {
     private final String searchTerm;
 
-    public SearchMenu(Component title, String searchTerm, Player player, PlayerProfile playerProfile, int currentPage) {
+    public SearchMenu(Component title, @NotNull String searchTerm, Player player, @NotNull PlayerProfile playerProfile, int currentPage) {
         super(title, player, playerProfile, currentPage, searchItems(player, searchTerm), new HashMap<>());
         this.searchTerm = searchTerm;
         drawer.addExplain(objSymbol, "Item");
@@ -36,7 +38,7 @@ public class SearchMenu extends PageableMenu<IndustrialRevivalItem> {
         GuideUtil.addToHistory(playerProfile.getGuideHistory(), this);
     }
 
-    public static void openSearch(Player player, Consumer<SearchMenu> call) {
+    public static void openSearch(@NotNull Player player, @NotNull Consumer<SearchMenu> call) {
         player.closeInventory();
         player.sendMessage(Component.text("搜索: ", TextColor.color(0xb0f05f)));
         ChatInput.waitForPlayer(IRDock.getPlugin(), player, s -> {
@@ -44,11 +46,11 @@ public class SearchMenu extends PageableMenu<IndustrialRevivalItem> {
         });
     }
 
-    public static Component getTitle(String searchTerm) {
+    public static @NotNull Component getTitle(String searchTerm) {
         return Component.text("正在搜索: " + searchTerm, TextColor.color(0xa0f05f));
     }
 
-    public static List<IndustrialRevivalItem> searchItems(Player player, String searchTerm) {
+    public static @NotNull List<IndustrialRevivalItem> searchItems(Player player, @NotNull String searchTerm) {
         var c = Component.text(searchTerm);
         List<IndustrialRevivalItem> items = new ArrayList<>();
         for (var item : IRDock.getPlugin().getRegistry().getItems().values()) {
@@ -65,11 +67,11 @@ public class SearchMenu extends PageableMenu<IndustrialRevivalItem> {
     }
 
     @Override
-    public PageableMenu<IndustrialRevivalItem> newMenu(PageableMenu<IndustrialRevivalItem> menu, int newPage) {
+    public PageableMenu<IndustrialRevivalItem> newMenu(@NotNull PageableMenu<IndustrialRevivalItem> menu, int newPage) {
         return new SearchMenu(menu.getTitle(), searchTerm, menu.getPlayer(), menu.getPlayerProfile(), newPage);
     }
 
-    public ItemStack getDisplayItem(IndustrialRevivalItem item) {
+    public @Nullable ItemStack getDisplayItem(@NotNull IndustrialRevivalItem item) {
         return PageableMenu.getDisplayItem0(item);
     }
 
@@ -87,7 +89,7 @@ public class SearchMenu extends PageableMenu<IndustrialRevivalItem> {
     }
 
     @Nonnull
-    public MatrixMenuDrawer explainDrawer(MatrixMenuDrawer matrixMenuDrawer) {
+    public MatrixMenuDrawer explainDrawer(@NotNull MatrixMenuDrawer matrixMenuDrawer) {
         return matrixMenuDrawer
                 .addExplain("B", "Background", MenuUtil.BACKGROUND, ClickHandler.DEFAULT)
                 .addExplain("T", "Settings", GuideUtil.getSettingsButton(getPlayer()), GuideUtil::openSettings)

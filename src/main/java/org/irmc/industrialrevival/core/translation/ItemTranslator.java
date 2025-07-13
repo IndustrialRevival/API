@@ -7,6 +7,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Warning;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -15,6 +16,8 @@ import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.Debug;
 import org.irmc.industrialrevival.utils.KeyUtil;
 
+@Warning(reason = "use matlib")
+@Deprecated
 public class ItemTranslator {
     public static final NamespacedKey TRANSLATE_KEY = KeyUtil.customKey("ir_translate_key");
 

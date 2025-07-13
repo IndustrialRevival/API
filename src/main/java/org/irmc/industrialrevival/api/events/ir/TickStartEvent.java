@@ -10,6 +10,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Event triggered at the start of a tick cycle in the industrial revival system.
+ * This event contains information about block data, check interval and tick count.
+ *
+ * @author balugaq
+ * @see IRBlockData
+ */
 @Getter
 public class TickStartEvent extends Event {
     private static final HandlerList handlers = new HandlerList();

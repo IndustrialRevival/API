@@ -3,6 +3,7 @@ package org.irmc.industrialrevival.api.machines;
 import org.bukkit.block.Block;
 import org.irmc.industrialrevival.api.menu.MachineMenu;
 import org.irmc.industrialrevival.api.events.ir.BlockTickEvent;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author balugaq
@@ -27,7 +28,7 @@ public abstract class ElectricSolarGenerator extends AbstractElectricGenerator {
     protected abstract long getNightEnergyProduction(Block block, MachineMenu menu, byte lightLevel);
 
     @Override
-    public GeneratorType getGeneratorType() {
+    public @NotNull GeneratorType getGeneratorType() {
         return GeneratorType.SOLAR;
     }
 }

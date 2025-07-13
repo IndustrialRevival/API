@@ -2,7 +2,7 @@ package org.irmc.industrialrevival.dock;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.Player;
-import org.irmc.industrialrevival.core.services.ItemSettings;
+import org.irmc.industrialrevival.core.services.IItemSettings;
 import org.irmc.industrialrevival.core.guide.IRGuideImplementation;
 import org.irmc.industrialrevival.core.services.IGitHubService;
 import org.irmc.industrialrevival.core.services.IIRDataManager;
@@ -78,7 +78,7 @@ public class IRDock {
         return getPlugin().getGitHubService();
     }
 
-    public static @NotNull ItemSettings getItemSettings() {
+    public static @NotNull IItemSettings getItemSettings() {
         return getPlugin().getItemSettings();
     }
 

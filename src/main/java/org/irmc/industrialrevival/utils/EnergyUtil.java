@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.pigeonlib.pdc.PersistentDataAPI;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This utility class provides methods for managing energy-related operations for items in the IndustrialRevival plugin.
@@ -21,7 +22,7 @@ public class EnergyUtil {
      * @param stack The ItemStack to retrieve the energy from.
      * @return The energy value as a double. Returns 0 if no energy is stored.
      */
-    public static double getItemEnergy(ItemStack stack) {
+    public static double getItemEnergy(@NotNull ItemStack stack) {
         return PersistentDataAPI.getDouble(stack.getItemMeta(), ENERGY_KEY, 0);
     }
 
@@ -31,7 +32,7 @@ public class EnergyUtil {
      * @param stack  The ItemStack to set the energy for.
      * @param energy The energy value to set.
      */
-    public static void setItemEnergy(ItemStack stack, double energy) {
+    public static void setItemEnergy(@NotNull ItemStack stack, double energy) {
         PersistentDataAPI.setDouble(stack.getItemMeta(), ENERGY_KEY, energy);
     }
 
@@ -41,7 +42,7 @@ public class EnergyUtil {
      * @param stack  The ItemStack to add energy to.
      * @param energy The amount of energy to add.
      */
-    public static void addItemEnergy(ItemStack stack, double energy) {
+    public static void addItemEnergy(@NotNull ItemStack stack, double energy) {
         setItemEnergy(stack, getItemEnergy(stack) + energy);
     }
 
@@ -52,7 +53,7 @@ public class EnergyUtil {
      * @param stack  The ItemStack to take energy from.
      * @param energy The amount of energy to take.
      */
-    public static void takeItemEnergy(ItemStack stack, double energy) {
+    public static void takeItemEnergy(@NotNull ItemStack stack, double energy) {
         if (getItemEnergy(stack) < energy) {
             setItemEnergy(stack, 0);
         }
@@ -66,7 +67,7 @@ public class EnergyUtil {
      * @param energy The amount of energy to check against.
      * @return True if the ItemStack has enough energy, false otherwise.
      */
-    public static boolean hasEnoughEnergy(ItemStack stack, double energy) {
+    public static boolean hasEnoughEnergy(@NotNull ItemStack stack, double energy) {
         return getItemEnergy(stack) >= energy;
     }
 }

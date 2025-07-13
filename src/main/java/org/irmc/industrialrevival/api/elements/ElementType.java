@@ -137,6 +137,7 @@ public enum ElementType {
     Ts("Ts", 294, 117, Valence.of(-1), false, ElementGroup.VIIA, 7, ElementUtil.UNKNOWN, ElementUtil.UNKNOWN, ElementUtil.UNKNOWN),
     Og("Og", 294, 118, Valence.of(0), false, ElementGroup.VIIIA, 7, ElementUtil.UNKNOWN, ElementUtil.UNKNOWN, ElementUtil.UNKNOWN);
 
+    // Alias constants for better readability
     public static final ElementType Sodium = Na;
     public static final ElementType Potassium = K;
     public static final ElementType Iron = Fe;
@@ -162,6 +163,20 @@ public enum ElementType {
     private final double boilingPoint;
     private final double density;
 
+    /**
+     * Constructs an ElementType with the specified properties.
+     *
+     * @param symbol the chemical symbol of the element
+     * @param relativeAtomicMass the relative atomic mass of the element
+     * @param neutronNumber the number of neutrons in the element
+     * @param valence the valence of the element
+     * @param isMetal whether the element is a metal
+     * @param elementGroup the group of the element in the periodic table
+     * @param period the period of the element in the periodic table
+     * @param meltingPoint the melting point in Celsius
+     * @param boilingPoint the boiling point in Celsius
+     * @param density the density in g/cm³
+     */
     ElementType(String symbol, double relativeAtomicMass, int neutronNumber, Valence valence, boolean isMetal, ElementGroup elementGroup, int period, double meltingPoint, double boilingPoint, double density) {
         this.symbol = symbol;
         this.relativeAtomicMass = relativeAtomicMass;
@@ -176,14 +191,33 @@ public enum ElementType {
         this.density = density;
     }
 
+    /**
+     * Gets the next element in the periodic table.
+     * Wraps around to the first element if this is the last element.
+     *
+     * @return the next element in the periodic table
+     */
     public ElementType getNext() {
         return ElementType.values()[(this.ordinal() + 1) % ElementType.values().length];
     }
 
+    /**
+     * Gets the previous element in the periodic table.
+     * Wraps around to the last element if this is the first element.
+     *
+     * @return the previous element in the periodic table
+     */
     public ElementType getPrevious() {
         return ElementType.values()[(this.ordinal() - 1 + ElementType.values().length) % ElementType.values().length];
     }
 
+    /**
+     * Checks if this element is radioactive.
+     * Elements with atomic number greater than 91 are considered radioactive,
+     * as well as specific elements known to be radioactive.
+     *
+     * @return true if the element is radioactive, false otherwise
+     */
     public boolean isRadioactive() {
         if (this.ordinal() > 91) {
             return true;
@@ -194,6 +228,11 @@ public enum ElementType {
         };
     }
 
+    /**
+     * Checks if this element is a gas at standard temperature and pressure.
+     *
+     * @return true if the element is a gas, false otherwise
+     */
     public boolean isGas() {
         return switch (this) {
             case H, N, O, F, Cl, He, Ne, Ar, Kr, Xe, Rn -> true;
@@ -201,10 +240,21 @@ public enum ElementType {
         };
     }
 
+    /**
+     * Gets the rounded relative atomic mass as an integer.
+     *
+     * @return the rounded relative atomic mass
+     */
     public int getRoundedRelativeAtomicMass() {
         return (int) Math.round(this.relativeAtomicMass);
     }
 
+    /**
+     * Calculates the mass based on the relative atomic mass and a given amount.
+     *
+     * @param amount the amount multiplier
+     * @return the calculated mass
+     */
     public int getMassByRelativeAtomicMass(double amount) {
         return (int) (getRoundedRelativeAtomicMass() * amount);
     }

@@ -6,6 +6,7 @@ import org.jetbrains.annotations.ApiStatus;
  * This interface is an abstract interface. DON'T use it directly.<br>
  * <br>
  *
+ * @author lijinhong11
  * @see BlockDropItem <br>
  * @see ChancedItem <br>
  * @see ItemDroppable <br>
