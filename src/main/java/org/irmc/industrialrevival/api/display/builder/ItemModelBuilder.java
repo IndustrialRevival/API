@@ -31,6 +31,17 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 /**
+ * Builder class for creating ItemDisplay entities with comprehensive configuration options.
+ * <p>
+ * This class provides a fluent API for building ItemDisplay entities with various
+ * properties including item stack, transformation, visibility, physics, and metadata.
+ * It extends AbstractModelBuilder and implements Cloneable for easy copying.
+ * </p>
+ * <p>
+ * The builder supports all major ItemDisplay properties and provides convenient
+ * methods for setting item stacks and display properties.
+ * </p>
+ *
  * @author balugaq
  */
 @Getter
@@ -75,15 +86,31 @@ public class ItemModelBuilder extends AbstractModelBuilder implements Cloneable 
     private Map<String, List<MetadataValue>> metadata;
     private Component customName;
 
+    /**
+     * Constructs a new ItemModelBuilder with default settings.
+     */
     public ItemModelBuilder() {
     }
 
+    /**
+     * Executes the given runnable if the object is not null.
+     * This is a utility method used internally for conditional property setting.
+     *
+     * @param object the object to check for null
+     * @param runnable the runnable to execute if object is not null
+     */
     public void ifPresent(@Nullable Object object, @NotNull Runnable runnable) {
         if (object != null) {
             runnable.run();
         }
     }
 
+    /**
+     * Creates a deep copy of this ItemModelBuilder.
+     * All properties are copied to the new instance.
+     *
+     * @return a new ItemModelBuilder with the same properties
+     */
     public @NotNull ItemModelBuilder clone() {
         ItemModelBuilder clone = new ItemModelBuilder();
         clone.itemStack = this.itemStack;
@@ -128,10 +155,22 @@ public class ItemModelBuilder extends AbstractModelBuilder implements Cloneable 
         return clone;
     }
 
+    /**
+     * Creates a copy of this builder.
+     *
+     * @return a copy of this ItemModelBuilder
+     */
     public @NotNull ItemModelBuilder build() {
         return clone();
     }
 
+    /**
+     * Builds an ItemDisplay entity at the specified location with all configured properties.
+     * This method runs synchronously on the main thread to ensure thread safety.
+     *
+     * @param location the location to spawn the ItemDisplay at
+     * @return the created ItemDisplay entity, or null if creation failed
+     */
     public @NotNull ItemDisplay buildAt(@NotNull Location location) {
         try {
             return Bukkit.getScheduler().callSyncMethod(IRDock.getPlugin(), () ->
@@ -184,17 +223,35 @@ public class ItemModelBuilder extends AbstractModelBuilder implements Cloneable 
     }
 
     // Item Display methods
+    /**
+     * Sets the item stack for this ItemDisplay.
+     *
+     * @param itemStack the item stack to set
+     * @return this builder instance
+     */
     public @NotNull ItemModelBuilder itemStack(ItemStack itemStack) {
         this.itemStack = itemStack;
         return this;
     }
 
     // Display methods
+    /**
+     * Sets the interpolation duration for smooth transitions.
+     *
+     * @param duration the interpolation duration in ticks
+     * @return this builder instance
+     */
     public @NotNull ItemModelBuilder interpolationDuration(int duration) {
         this.interpolationDuration = duration;
         return this;
     }
 
+    /**
+     * Sets the teleport duration for smooth teleportation.
+     *
+     * @param duration the teleport duration in ticks
+     * @return this builder instance
+     */
     public @NotNull ItemModelBuilder teleportDuration(int duration) {
         this.teleportDuration = duration;
         return this;

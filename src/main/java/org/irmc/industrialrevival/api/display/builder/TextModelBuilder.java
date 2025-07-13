@@ -32,6 +32,17 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 /**
+ * Builder class for creating TextDisplay entities with comprehensive configuration options.
+ * <p>
+ * This class provides a fluent API for building TextDisplay entities with various
+ * properties including text content, formatting, background, alignment, and display properties.
+ * It extends AbstractModelBuilder and implements Cloneable for easy copying.
+ * </p>
+ * <p>
+ * The builder supports all major TextDisplay properties and provides convenient
+ * methods for setting text content, formatting, and display properties.
+ * </p>
+ *
  * @author balugaq
  */
 @Getter
@@ -84,15 +95,31 @@ public class TextModelBuilder extends AbstractModelBuilder implements Cloneable 
     private Map<String, List<MetadataValue>> metadata;
     private Component customName;
 
+    /**
+     * Constructs a new TextModelBuilder with default settings.
+     */
     public TextModelBuilder() {
     }
 
+    /**
+     * Executes the given runnable if the object is not null.
+     * This is a utility method used internally for conditional property setting.
+     *
+     * @param object the object to check for null
+     * @param runnable the runnable to execute if object is not null
+     */
     public void ifPresent(@Nullable Object object, @NotNull Runnable runnable) {
         if (object != null) {
             runnable.run();
         }
     }
 
+    /**
+     * Creates a deep copy of this TextModelBuilder.
+     * All properties are copied to the new instance.
+     *
+     * @return a new TextModelBuilder with the same properties
+     */
     public @NotNull TextModelBuilder clone() {
         TextModelBuilder clone = new TextModelBuilder();
         clone.transformationBuilder = this.transformationBuilder;
@@ -145,10 +172,22 @@ public class TextModelBuilder extends AbstractModelBuilder implements Cloneable 
         return clone;
     }
 
+    /**
+     * Creates a copy of this builder.
+     *
+     * @return a copy of this TextModelBuilder
+     */
     public @NotNull TextModelBuilder build() {
         return clone();
     }
 
+    /**
+     * Builds a TextDisplay entity at the specified location with all configured properties.
+     * This method runs synchronously on the main thread to ensure thread safety.
+     *
+     * @param location the location to spawn the TextDisplay at
+     * @return the created TextDisplay entity, or null if creation failed
+     */
     public @NotNull TextDisplay buildAt(@NotNull Location location) {
         try {
             return Bukkit.getScheduler().callSyncMethod(IRDock.getPlugin(), () ->
@@ -200,7 +239,7 @@ public class TextModelBuilder extends AbstractModelBuilder implements Cloneable 
                         ifPresent(this.metadata, () -> this.metadata.forEach((key, values) -> values.forEach(value -> display.setMetadata(key, value))));
                         ifPresent(this.customName, () -> display.customName(this.customName));
                         ifPresent(this.transformationBuilder, () -> display.setTransformation(this.transformationBuilder.build()));
-                        //</editor-fold>
+                        //<editor-fold>
                     })).get();
         } catch (InterruptedException | ExecutionException e) {
             Debug.error(e);
@@ -209,49 +248,113 @@ public class TextModelBuilder extends AbstractModelBuilder implements Cloneable 
     }
 
     // Text Display methods
+    /**
+     * Sets the text content for this TextDisplay.
+     *
+     * @param text the text component to display
+     * @return this builder instance
+     */
     public @NotNull TextModelBuilder text(Component text) {
         this.text = text;
         return this;
     }
 
+    /**
+     * Sets the line width for text wrapping.
+     *
+     * @param width the line width in pixels
+     * @return this builder instance
+     */
     public @NotNull TextModelBuilder lineWidth(int width) {
         this.lineWidth = width;
         return this;
     }
 
+    /**
+     * Sets the background color for the text display.
+     *
+     * @param color the background color
+     * @return this builder instance
+     */
     public @NotNull TextModelBuilder backgroundColor(Color color) {
         this.backgroundColor = color;
         return this;
     }
 
+    /**
+     * Sets the background color using an RGB integer value.
+     *
+     * @param color the background color as RGB integer
+     * @return this builder instance
+     */
     public @NotNull TextModelBuilder backgroundColor(int color) {
-        return backgroundColor(Color.fromRGB(color));
+        this.backgroundColor = Color.fromRGB(color);
+        return this;
     }
 
+    /**
+     * Sets the background color using RGB components.
+     *
+     * @param r the red component (0-255)
+     * @param g the green component (0-255)
+     * @param b the blue component (0-255)
+     * @return this builder instance
+     */
     public @NotNull TextModelBuilder backgroundColor(int r, int g, int b) {
-        return backgroundColor(Color.fromRGB(r, g, b));
+        this.backgroundColor = Color.fromRGB(r, g, b);
+        return this;
     }
 
+    /**
+     * Sets the text opacity.
+     *
+     * @param opacity the text opacity (0-255)
+     * @return this builder instance
+     */
     public @NotNull TextModelBuilder textOpacity(byte opacity) {
         this.textOpacity = opacity;
         return this;
     }
 
+    /**
+     * Sets whether the text should have a shadow.
+     *
+     * @param shadowed true to enable shadow, false to disable
+     * @return this builder instance
+     */
     public @NotNull TextModelBuilder shadowed(boolean shadowed) {
         this.shadowed = shadowed;
         return this;
     }
 
+    /**
+     * Sets whether the text should be see-through.
+     *
+     * @param seeThrough true to enable see-through, false to disable
+     * @return this builder instance
+     */
     public @NotNull TextModelBuilder seeThrough(boolean seeThrough) {
         this.seeThrough = seeThrough;
         return this;
     }
 
+    /**
+     * Sets whether to use the default background.
+     *
+     * @param defaultBackground true to use default background, false to use custom
+     * @return this builder instance
+     */
     public @NotNull TextModelBuilder defaultBackground(boolean defaultBackground) {
         this.defaultBackground = defaultBackground;
         return this;
     }
 
+    /**
+     * Sets the text alignment.
+     *
+     * @param alignment the text alignment
+     * @return this builder instance
+     */
     public @NotNull TextModelBuilder alignment(TextDisplay.@NotNull TextAlignment alignment) {
         this.alignment = alignment;
         return this;

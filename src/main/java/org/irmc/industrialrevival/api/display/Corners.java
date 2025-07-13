@@ -72,10 +72,22 @@ public class Corners {
         this.maxZ = maxZ;
     }
 
+    /**
+     * Creates a Corners instance representing a single block.
+     *
+     * @param block the block to create corners for
+     * @return a Corners instance representing the block's boundaries
+     */
     public static Corners of(Block block) {
         return of(block.getLocation()).merge(of(block.getLocation().clone().add(1, 1, 1)));
     }
 
+    /**
+     * Creates a Corners instance representing a single location point.
+     *
+     * @param location the location to create corners for
+     * @return a Corners instance representing the location as a point
+     */
     public static Corners of(Location location) {
         return Corners.builder()
                 .world(new WeakReference<>(location.getWorld()))
@@ -88,14 +100,35 @@ public class Corners {
                 .build();
     }
 
+    /**
+     * Creates a Corners instance representing the area between two blocks.
+     *
+     * @param block1 the first block
+     * @param block2 the second block
+     * @return a Corners instance representing the area between the two blocks
+     */
     public static Corners of(Block block1, Block block2) {
         return of(block1).merge(of(block2));
     }
 
+    /**
+     * Creates a Corners instance representing the area between two locations.
+     *
+     * @param location1 the first location
+     * @param location2 the second location
+     * @return a Corners instance representing the area between the two locations
+     */
     public static Corners of(Location location1, Location location2) {
         return of(location1).merge(of(location2));
     }
 
+    /**
+     * Merges this Corners instance with another to create a new instance
+     * that encompasses both areas.
+     *
+     * @param corners the Corners instance to merge with
+     * @return a new Corners instance representing the combined area
+     */
     public Corners merge(Corners corners) {
         return Corners.builder()
                 .world(world)
@@ -108,18 +141,38 @@ public class Corners {
                 .build();
     }
 
+    /**
+     * Gets the world reference, which may be null if the world has been garbage collected.
+     *
+     * @return the world reference, or null if the world is no longer available
+     */
     public @Nullable World getWorld() {
         return world.get();
     }
 
+    /**
+     * Calculates the distance between the minimum and maximum X coordinates.
+     *
+     * @return the absolute difference between maxX and minX
+     */
     public float getDistanceX() {
         return Math.abs(maxX - minX);
     }
 
+    /**
+     * Calculates the distance between the minimum and maximum Y coordinates.
+     *
+     * @return the absolute difference between maxY and minY
+     */
     public float getDistanceY() {
         return Math.abs(maxY - minY);
     }
 
+    /**
+     * Calculates the distance between the minimum and maximum Z coordinates.
+     *
+     * @return the absolute difference between maxZ and minZ
+     */
     public float getDistanceZ() {
         return Math.abs(maxZ - minZ);
     }

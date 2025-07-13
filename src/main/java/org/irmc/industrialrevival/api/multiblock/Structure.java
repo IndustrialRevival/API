@@ -13,7 +13,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Used to represent a multi-block structure.
+ * Represents a multi-block structure in the IndustrialRevival system.
+ * <p>
+ * This class encapsulates the definition, validation, and manipulation of complex structures
+ * composed of multiple blocks or items arranged in a 3D grid. It supports validation with rotation,
+ * center specification, and conversion from materials or items.
+ * </p>
  *
  * @author balugaq
  */
@@ -29,10 +34,10 @@ public class Structure {
     final int[] size;
 
     /**
-     * Used to create a multi-block structure.
+     * Constructs a multi-block structure with the specified pieces and center.
      *
-     * @param structure all the pieces of the structure
-     * @param center    the center of the structure
+     * @param structure all the pieces of the structure (3D array)
+     * @param center    the center of the structure (array of 3 coordinates)
      */
     public Structure(@NotNull StructurePiece[][][] structure, int[] center) {
         Preconditions.checkArgument(structure != null, "Structure cannot be null");
@@ -62,16 +67,16 @@ public class Structure {
     }
 
     /**
-     * Used to create a multi-block structure.
+     * Constructs a multi-block structure with the specified pieces and default center (0,0,0).
      *
-     * @param structure all the pieces of the structure
+     * @param structure all the pieces of the structure (3D array)
      */
     public Structure(@NotNull StructurePiece[][][] structure) {
         this(structure, new int[]{0, 0, 0});
     }
 
     /**
-     * Used to create a multi-block structure from a 3D array of materials.
+     * Creates a structure from a 3D array of materials.
      *
      * @param materials all {@link Material} of the structure
      * @return the created structure
@@ -81,7 +86,7 @@ public class Structure {
     }
 
     /**
-     * Used to create a multi-block structure from a 3D array of materials.
+     * Creates a structure from a 3D array of materials and a specified center.
      *
      * @param materials all {@link Material} of the structure
      * @param center    the center of the structure
@@ -100,7 +105,7 @@ public class Structure {
     }
 
     /**
-     * Used to create a multi-block structure from a 3D array of items.
+     * Creates a structure from a 3D array of items.
      *
      * @param items all {@link IndustrialRevivalItem} of the structure
      * @return the created structure
@@ -110,7 +115,7 @@ public class Structure {
     }
 
     /**
-     * Used to create a multi-block structure from a 3D array of items.
+     * Creates a structure from a 3D array of items and a specified center.
      *
      * @param items  all {@link IndustrialRevivalItem} of the structure
      * @param center the center of the structure
@@ -129,7 +134,7 @@ public class Structure {
     }
 
     /**
-     * Used to get the centerpiece of the structure.
+     * Gets the centerpiece of the structure.
      *
      * @return the centerpiece of the structure
      */
@@ -139,7 +144,7 @@ public class Structure {
     }
 
     /**
-     * Used to check if the structure is valid.
+     * Checks if the structure at the given location is valid (matches this structure definition).
      * Will try all possible rotations.
      *
      * @param center the center of the structure
@@ -155,7 +160,7 @@ public class Structure {
     }
 
     /**
-     * Used to check if the structure is valid for a specific rotation.
+     * Checks if the structure at the given location is valid for a specific rotation.
      *
      * @param center   the center of the structure
      * @param rotation the rotation to check
@@ -171,7 +176,7 @@ public class Structure {
     }
 
     /**
-     * Used to get the incorrect location of the structure for a specific rotation.
+     * Gets the incorrect location of the structure for a specific rotation.
      *
      * @param center   the center of the structure
      * @param rotation the rotation to check
@@ -188,7 +193,7 @@ public class Structure {
     }
 
     /**
-     * Used to validate a specific layer of the structure for a specific rotation.
+     * Validates a specific layer of the structure for a specific rotation.
      *
      * @param centerLocation the center of the structure
      * @param layerLevel     the layer to check

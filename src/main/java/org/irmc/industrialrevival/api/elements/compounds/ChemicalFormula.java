@@ -27,9 +27,20 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * Regards it as a formula decoder for chemical reactions.
+ * Represents a chemical formula for chemical reactions.
+ * <p>
+ * This class serves as a formula decoder for chemical reactions, parsing chemical formulas
+ * in the format "reactants===products" and managing the input and output compounds along
+ * with their stoichiometric coefficients.
+ * </p>
+ * <p>
+ * The formula format supports complex chemical reactions with multiple reactants and products,
+ * and can include reaction conditions that affect the reaction process.
+ * </p>
  *
  * @author balugaq
+ * @see ChemicalCompound
+ * @see ReactCondition
  */
 @EqualsAndHashCode(exclude = {"id"})
 @ToString(exclude = {"input", "output"})
@@ -44,48 +55,67 @@ public class ChemicalFormula {
     private @NotNull Map<ChemicalCompound, Integer> output; // molar mass of each compound
     private @NotNull Set<ReactCondition> conditions;
 
+    /**
+     * Creates a new ChemicalFormula with the specified ID and formula.
+     *
+     * @param id the unique identifier for this formula
+     * @param formula the chemical formula string
+     */
     public ChemicalFormula(int id, @NotNull String formula) {
         this(id, formula, new HashSet<>());
     }
 
     /**
-     * Constructor.
+     * Creates a new ChemicalFormula with the specified ID, formula, and single condition.
      *
-     * @param id      the id of the formula
+     * @param id the unique identifier for this formula
      * @param formula the chemical formula string
+     * @param condition the reaction condition
      */
     public ChemicalFormula(int id, @NotNull String formula, @NotNull ReactCondition condition) {
         this(id, formula, Set.of(condition), null);
     }
 
     /**
-     * Constructor.
+     * Creates a new ChemicalFormula with the specified ID, formula, and multiple conditions.
      *
-     * @param id      the id of the formula
+     * @param id the unique identifier for this formula
      * @param formula the chemical formula string
+     * @param conditions the reaction conditions
      */
     public ChemicalFormula(int id, @NotNull String formula, @NotNull ReactCondition... conditions) {
         this(id, formula, Arrays.stream(conditions).collect(Collectors.toSet()), null);
     }
 
     /**
-     * Constructor.
+     * Creates a new ChemicalFormula with the specified ID, formula, and set of conditions.
      *
-     * @param id      the id of the formula
+     * @param id the unique identifier for this formula
      * @param formula the chemical formula string
+     * @param conditions the set of reaction conditions
      */
     public ChemicalFormula(int id, @NotNull String formula, @NotNull Set<ReactCondition> conditions) {
         this(id, formula, conditions, null);
     }
 
     /**
-     * Constructor.
+     * Creates a new ChemicalFormula with the specified ID, formula, conditions, and condition sensor.
+     * <p>
+     * The formula should be in the format "reactants===products" where reactants and products
+     * are separated by "===". Multiple compounds on each side should be separated by "+".
+     * </p>
+     * <p>
+     * Examples:
+     * <ul>
+     *   <li>"Zn+H2SO4===ZnSO4+H2"</li>
+     *   <li>"Fe2O3+3H2SO4===Fe2(SO4)_3+3H2O"</li>
+     * </ul>
+     * </p>
      *
-     * @param id         the key of the formula
-     * @param formula    the chemical formula string
-     * @param conditions the conditions for the reaction
-     * @apiNote The conditions are optional and can be null.
-     * @apiNote formula example: "Zn+H2SO4===ZnSO4+H2", "Fe2O3+3H2SO4===Fe2(SO4)_3+3H2O"
+     * @param id the unique identifier for this formula
+     * @param formula the chemical formula string
+     * @param conditions the set of reaction conditions
+     * @param conditionSensor the condition sensor for dynamic condition evaluation
      */
     public ChemicalFormula(int id, @NotNull String formula, @NotNull Set<ReactCondition> conditions, @Nullable ConditionSensor conditionSensor) {
         Preconditions.checkNotNull(formula, "formula cannot be null");
@@ -131,9 +161,14 @@ public class ChemicalFormula {
 
     /**
      * Parses a list of chemical compounds from a list of strings.
+     * <p>
+     * Each string can optionally start with a number representing the stoichiometric coefficient.
+     * If no number is provided, the coefficient defaults to 1.
+     * </p>
      *
-     * @param parts the list of strings
-     * @return the map of chemical compounds and their counts
+     * @param parts the list of strings representing compounds
+     * @return the map of chemical compounds and their stoichiometric coefficients
+     * @throws UnknownChemicalCompoundException if any compound cannot be parsed
      */
     @NotNull
     public static Map<ChemicalCompound, Integer> parseCompounds(@NotNull String[] parts) {
@@ -165,15 +200,31 @@ public class ChemicalFormula {
         return compounds;
     }
 
+    /**
+     * Registers this chemical formula in the global registry.
+     *
+     * @return this ChemicalFormula instance for method chaining
+     */
     public ChemicalFormula register() {
         IRDock.getPlugin().getRegistry().registerChemicalFormula(this);
         return this;
     }
 
+    /**
+     * Creates a human-readable representation of this chemical formula.
+     *
+     * @return a TextComponent representing the formula in human-readable format
+     */
     public TextComponent humanize() {
         return humanize(false);
     }
 
+    /**
+     * Creates a human-readable representation of this chemical formula.
+     *
+     * @param hoverable whether the conditions should be hoverable in the display
+     * @return a TextComponent representing the formula in human-readable format
+     */
     public TextComponent humanize(boolean hoverable) {
         var builder = Component.text();
         builder.append(humanizePart(input));
@@ -182,6 +233,16 @@ public class ChemicalFormula {
         return builder.build();
     }
 
+    /**
+     * Creates a human-readable representation of a part of the chemical formula.
+     * <p>
+     * This method formats the compounds with proper stoichiometric coefficients
+     * and subscript formatting for chemical formulas.
+     * </p>
+     *
+     * @param compounds the map of compounds and their coefficients to format
+     * @return a TextComponent representing the compounds in human-readable format
+     */
     public TextComponent humanizePart(Map<ChemicalCompound, Integer> compounds) {
         var builder = Component.text();
         int index = 1;
@@ -224,13 +285,24 @@ public class ChemicalFormula {
         }
     }
 
+    /**
+     * Functional interface for sensing reaction conditions based on the environment.
+     * <p>
+     * This interface allows for dynamic evaluation of reaction conditions based on
+     * the current environment and existing conditions.
+     * </p>
+     *
+     * @author balugaq
+     */
     @FunctionalInterface
     public interface ConditionSensor extends CiFunction<Environment, Set<ReactCondition>, Double, Double> {
         /**
-         * Returns the max producing proportion
+         * Returns the maximum producing proportion based on the environment and conditions.
          *
-         * @param conditions the function
-         * @return the max producing proportion
+         * @param environment the current environment
+         * @param conditions the set of reaction conditions
+         * @param current the current value
+         * @return the maximum producing proportion
          */
         @Override
         Double apply(@NotNull Environment environment, @NotNull Set<ReactCondition> conditions, @NotNull Double current);

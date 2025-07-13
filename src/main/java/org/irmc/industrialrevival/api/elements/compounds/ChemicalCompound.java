@@ -76,10 +76,28 @@ public class ChemicalCompound {
         return IRDock.getRegistry().getChemicalCompounds().get(name);
     }
 
+    /**
+     * Converts the compound name to a key format suitable for use in NamespacedKey.
+     * <p>
+     * This method replaces parentheses with hyphens and periods, and converts the result to lowercase.
+     * For example, "Ca(OH)2" becomes "ca-oh.2".
+     * </p>
+     *
+     * @return the compound name converted to a key format
+     */
     public String asKey() {
         return name.replaceAll("\\(", "-").replaceAll("\\)", ".").toLowerCase();
     }
 
+    /**
+     * Calculates the molar mass of this chemical compound.
+     * <p>
+     * The molar mass is calculated by summing the molar masses of all constituent compounds,
+     * weighted by their stoichiometric coefficients.
+     * </p>
+     *
+     * @return the molar mass of the compound in g/mol
+     */
     public double getMolarMass() {
         double mass = 0;
         for (var entry : compounds.entrySet()) {
@@ -89,6 +107,16 @@ public class ChemicalCompound {
         return mass;
     }
 
+    /**
+     * Converts this chemical compound to its atomic composition.
+     * <p>
+     * Returns a map where the keys are element types and the values are
+     * the total number of atoms of each element in the compound, taking into account
+     * the stoichiometric coefficients of all constituent compounds.
+     * </p>
+     *
+     * @return a map representing the atomic composition of the compound
+     */
     public Map<ElementType, Double> toAtomic() {
         Map<ElementType, Double> atomic = new HashMap<>();
         for (var entry : compounds.entrySet()) {
@@ -100,10 +128,27 @@ public class ChemicalCompound {
         return atomic;
     }
 
+    /**
+     * Gets a human-readable name for this chemical compound.
+     * <p>
+     * This method removes underscores from the compound name to make it more readable.
+     * </p>
+     *
+     * @return a human-readable name for the compound
+     */
     public String getHumanizedName() {
         return name.replaceAll("_", "");
     }
 
+    /**
+     * Gets a human-readable name as a Component for this chemical compound.
+     * <p>
+     * This method returns the humanized name wrapped in a Component for use in
+     * user interfaces and displays.
+     * </p>
+     *
+     * @return a Component containing the human-readable name
+     */
     public Component humanizedName() {
         return Component.text(getHumanizedName());
     }

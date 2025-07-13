@@ -25,6 +25,17 @@ public class KeyUtil {
         return new NamespacedKey(IRDock.getPlugin(), key.toLowerCase());
     }
 
+    /**
+     * Creates a new {@link NamespacedKey} by appending a suffix to an existing key.
+     * <p>
+     * This method takes an existing NamespacedKey and appends the specified string to its key part,
+     * creating a new NamespacedKey with the same namespace but a modified key.
+     * </p>
+     *
+     * @param key the existing NamespacedKey to append to
+     * @param append the string to append to the key
+     * @return a new NamespacedKey with the appended string
+     */
     public static @NotNull NamespacedKey appendOnKey(@NotNull NamespacedKey key, @NotNull String append) {
         return new NamespacedKey(key.getNamespace(), key.getKey() + "_" + append.toLowerCase());
     }

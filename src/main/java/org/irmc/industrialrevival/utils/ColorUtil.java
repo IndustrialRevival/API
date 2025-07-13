@@ -87,6 +87,14 @@ public class ColorUtil {
         return (red << 16) | (green << 8) | blue;
     }
 
+    /**
+     * Generates a color for a chemical formula based on its constituent compounds.
+     * The color is calculated as a weighted average of the colors of all compounds
+     * in both input and output of the formula.
+     *
+     * @param formula the chemical formula to generate a color for
+     * @return the generated color as an RGB integer
+     */
     public static int generateFormulaColor(@NotNull ChemicalFormula formula) {
         Integer cached = formulaColors.get(formula);
         if (cached != null) {
@@ -128,6 +136,14 @@ public class ColorUtil {
         return value;
     }
 
+    /**
+     * Generates a color for a chemical compound based on its atomic composition.
+     * The color is calculated by mixing the colors of constituent elements
+     * proportionally to their atomic counts.
+     *
+     * @param compound the chemical compound to generate a color for
+     * @return the generated color as an RGB integer
+     */
     public static int generateMoleColor(@NotNull ChemicalCompound compound) {
         Integer cached = moleColors.get(compound);
         if (cached != null) {
@@ -200,12 +216,13 @@ public class ColorUtil {
     }
 
     /**
-     * Gets the base HSV values for an element based on its properties.
+     * Generates base HSV values for an element based on its position in the periodic table.
+     * The color is influenced by the element's atomic number, group, and whether it's a metal.
      *
-     * @param n       the atomic number
-     * @param group   the group
-     * @param isMetal whether the element is metallic or not
-     * @return the base HSV values as an array of floats
+     * @param n the atomic number of the element
+     * @param group the group number of the element
+     * @param isMetal whether the element is a metal
+     * @return an array containing [hue, saturation, value] in that order
      */
     public static float[] getBaseHsv(int n, int group, boolean isMetal) {
         if (n == 1) {

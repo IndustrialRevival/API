@@ -431,7 +431,8 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
         }
 
         if (saveToConfig) {
-            IRDock.getPlugin().getItemSettings().disableItem(getId());
+            IRDock.getPlugin().getItemSettings().setEnable(this, !disabled);
+            IRDock.getPlugin().getItemSettings().saveSettings();
         }
         return this;
     }
