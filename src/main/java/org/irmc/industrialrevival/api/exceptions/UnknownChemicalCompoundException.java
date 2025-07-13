@@ -1,5 +1,8 @@
 package org.irmc.industrialrevival.api.exceptions;
 
+/**
+ * @author balugaq
+ */
 public class UnknownChemicalCompoundException extends IllegalArgumentException {
     public String compound = null;
 

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class ElectricConsumableGenerator extends BasicMachine implements EnergyNetProvider {
     @Override
-    public GeneratorType getGeneratorType() {
+    public @NotNull GeneratorType getGeneratorType() {
         return GeneratorType.CONSUMABLE;
     }
 

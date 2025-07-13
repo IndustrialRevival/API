@@ -30,6 +30,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * @author balugaq
+ */
 @Getter
 public class ItemModelBuilder extends AbstractModelBuilder implements Cloneable {
     private TransformationBuilder transformationBuilder;

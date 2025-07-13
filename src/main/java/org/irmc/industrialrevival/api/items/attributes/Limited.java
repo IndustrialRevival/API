@@ -8,6 +8,9 @@ import org.irmc.industrialrevival.api.items.LimitedItem;
  * This interface defines an item that has durability.<br>
  * <br>
  * <b>Note: </b> use {@link LimitedItem}.
+ *
+ * @author lijinhong11
+ * @author balugaq
  */
 public interface Limited extends ItemAttribute {
     int getLimit();

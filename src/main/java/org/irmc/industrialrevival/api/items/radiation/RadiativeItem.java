@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
 import org.irmc.industrialrevival.api.items.attributes.Radiation;
 
+/**
+ * @author lijinhong11
+ */
 @Getter
 public class RadiativeItem extends IndustrialRevivalItem implements Radiation {
     private RadiationLevel radiationLevel = RadiationLevel.LOW;

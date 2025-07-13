@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.irmc.industrialrevival.api.items.attributes.EnergyNetProvider;
 import org.irmc.industrialrevival.api.items.handlers.BlockTicker;
 import org.irmc.industrialrevival.api.events.ir.BlockTickEvent;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
@@ -23,7 +24,7 @@ public abstract class AbstractElectricGenerator extends AbstractMachine implemen
     }
 
     @Override
-    public EnergyNetComponentType getComponentType() {
+    public @NotNull EnergyNetComponentType getComponentType() {
         return EnergyNetProvider.super.getComponentType();
     }
 

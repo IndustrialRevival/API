@@ -3,6 +3,10 @@ package org.irmc.industrialrevival.api.items.attributes;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * @author balugaq
+ */
+@Deprecated
 public interface SimpleDataContainer<Result> extends ItemAttribute {
     /**
      * Get the data stored in the item

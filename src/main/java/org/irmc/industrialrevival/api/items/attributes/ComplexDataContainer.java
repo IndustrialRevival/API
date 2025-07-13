@@ -2,6 +2,10 @@ package org.irmc.industrialrevival.api.items.attributes;
 
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * @author balugaq
+ */
+@Deprecated
 public interface ComplexDataContainer {
     interface DataContainer2<T1, T2> {
         T1 getData1(ItemStack itemStack);

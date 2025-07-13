@@ -22,4 +22,7 @@ public record ReactResult(
         @Nullable Map<ChemicalCompound, Double> getProduce
 ) {
     public static final ReactResult FAILED = new ReactResult(null, null, null);
+    public boolean isFailed() {
+        return formula == null && getConsume == null && getProduce == null;
+    }
 }

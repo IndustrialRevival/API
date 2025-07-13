@@ -10,6 +10,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author balugaq
+ */
 public interface EnvironmentHolder extends ItemAttribute {
     double AIR_PRESSURE = 101300;
     Map<Location, Environment> ENVIRONMENT_CONTAINER = new HashMap<>();

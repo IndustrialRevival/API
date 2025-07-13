@@ -9,6 +9,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author lijinhong11
+ */
 @Getter
 public class DropFromBlockItem extends IndustrialRevivalItem implements BlockDropItem {
     private final Set<BlockDropMethod> blockDropMethods = new HashSet<>();

@@ -3,11 +3,15 @@ package org.irmc.industrialrevival.api.items.attributes;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerType;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
+import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author balugaq
+ */
 public interface TinkerProduct extends ItemAttribute {
-    TinkerType getTinkerType();
+    @NotNull TinkerType getTinkerType();
 
-    ItemStack getProduct();
+    @NotNull ItemStack getProduct();
 
-    IndustrialRevivalItem getIRItem();
+    @NotNull IndustrialRevivalItem getIRItem();
 }

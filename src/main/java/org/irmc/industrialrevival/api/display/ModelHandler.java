@@ -12,9 +12,7 @@ import java.util.Optional;
  */
 @Getter
 public class ModelHandler {
-    @Getter
     private final Map<Location, DisplayGroup> models;
-    @Getter
     private boolean removeOldWhenRenderNew = true;
 
     public ModelHandler() {

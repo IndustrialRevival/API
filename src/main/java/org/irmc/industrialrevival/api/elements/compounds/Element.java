@@ -26,7 +26,7 @@ public class Element implements Compound {
     private final @NotNull ElementType element;
     private final @NotNull NamespacedKey key;
 
-    public Element(ElementType elementType) {
+    public Element(@NotNull ElementType elementType) {
         this(elementType, new NamespacedKey(Element.ELEMENT_NAMESPACE, elementType.name().toLowerCase()));
     }
 
@@ -34,7 +34,7 @@ public class Element implements Compound {
         return element.getRelativeAtomicMass();
     }
 
-    public Map<ElementType, Double> toAtomic() {
+    public @NotNull Map<ElementType, Double> toAtomic() {
         return Map.of(element, 1D);
     }
 

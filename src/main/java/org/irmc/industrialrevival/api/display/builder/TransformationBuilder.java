@@ -6,6 +6,9 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+/**
+ * @author balugaq
+ */
 @Getter
 public class TransformationBuilder {
     private final Vector3f translation = new Vector3f();

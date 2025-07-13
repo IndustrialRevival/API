@@ -39,6 +39,7 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class ChemicalCompounds {
     public static final List<Runnable> onLoad = new ArrayList<>();
+    //@formatter:off
     //<editor-fold desc="Compounds ions">
     public static final @NotNull IonCompound SO4 = new IonCompound("SO4", Map.of(
             asCompound(ElementType.S), 1D,
@@ -604,6 +605,7 @@ public class ChemicalCompounds {
     //<editor-fold desc="Unsorted"
 
     //</editor-fold>
+    //@formatter:on
 
     @Contract("null -> null; !null -> new")
     public static Compound asCompound(@Nullable ElementType elementType) {

@@ -6,6 +6,7 @@ import org.irmc.industrialrevival.api.items.UnusableItem;
  * This interface defines an item which cannot be used in any way.
  * <br>
  *
+ * @author balugaq
  * @see UnusableItem
  */
 public interface Unusable extends ItemAttribute {

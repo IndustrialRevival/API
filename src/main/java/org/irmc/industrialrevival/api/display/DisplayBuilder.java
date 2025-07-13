@@ -13,6 +13,9 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author balugaq
+ */
 @Getter
 public class DisplayBuilder {
     private final @NotNull List<Pair<Display, Vector>> displays;

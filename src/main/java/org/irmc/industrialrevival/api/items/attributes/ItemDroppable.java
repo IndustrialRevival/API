@@ -10,6 +10,8 @@ import java.util.List;
  * <br>
  * <b>Note: </b> this is not {@link BlockDropItem},
  * this is for specific items that can be dropped by specific block when it is destroyed.
+ *
+ * @author lijinhong11
  */
 public interface ItemDroppable extends ItemAttribute {
     /**

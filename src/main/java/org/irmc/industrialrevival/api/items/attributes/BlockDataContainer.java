@@ -3,6 +3,10 @@ package org.irmc.industrialrevival.api.items.attributes;
 import org.bukkit.Location;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * @author balugaq
+ */
+@Deprecated
 public interface BlockDataContainer<Result> extends ItemAttribute {
     /**
      * Get the data stored in the item

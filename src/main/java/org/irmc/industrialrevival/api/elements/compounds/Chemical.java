@@ -35,7 +35,7 @@ public class Chemical implements Compound {
         return compound.getMolarMass();
     }
 
-    public Map<ElementType, Double> toAtomic() {
+    public @NotNull Map<ElementType, Double> toAtomic() {
         return compound.toAtomic();
     }
 

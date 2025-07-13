@@ -2,13 +2,16 @@ package org.irmc.industrialrevival.api.items.attributes;
 
 import org.irmc.industrialrevival.api.recipes.methods.MobDropMethod;
 import org.irmc.industrialrevival.core.services.impl.IRRegistry;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This interface defines an item that can be dropped by an entity.<br>
  * <br>
  *
+ * @author lijinhong11
+ * @author balugaq
  * @see IRRegistry
  */
 public interface MobDropItem {
-    MobDropMethod[] getDropMethods();
+    @NotNull MobDropMethod @NotNull [] getDropMethods();
 }

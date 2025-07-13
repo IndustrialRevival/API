@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @author balugaq
+ */
 @Getter
 public class DisplayGroup {
     private static final String DISPLAY_GROUP_METADATA_KEY = KeyUtil.customKey("display_group").toString();

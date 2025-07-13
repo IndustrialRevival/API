@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerType;
 import org.irmc.industrialrevival.api.items.attributes.TinkerModel;
 
+/**
+ * @author balugaq
+ */
 @Getter
 public class TinkerModelItem extends IndustrialRevivalItem implements TinkerModel {
     private TinkerType tinkerType;

@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @author lijinhong11
+ */
 public class ArmorSet {
     @Getter
     private final NamespacedKey key;

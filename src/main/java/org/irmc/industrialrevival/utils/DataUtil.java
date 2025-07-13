@@ -22,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author balugaq
  */
+@Deprecated
 @UtilityClass
 @SuppressWarnings("unused")
 public class DataUtil {

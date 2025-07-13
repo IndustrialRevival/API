@@ -3,6 +3,9 @@ package org.irmc.industrialrevival.api.exceptions;
 import lombok.Getter;
 import org.irmc.industrialrevival.api.IndustrialRevivalAddon;
 
+/**
+ * @author lijinhong11
+ */
 @Getter
 public class IdConflictException extends RuntimeException {
     private final IndustrialRevivalAddon originalAddon;

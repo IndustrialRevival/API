@@ -5,6 +5,9 @@ import org.irmc.industrialrevival.api.elements.reaction.ReactCondition;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * @author balugaq
+ */
 @SuppressWarnings("unused")
 public class ChemicalFormulas {
     @Nullable

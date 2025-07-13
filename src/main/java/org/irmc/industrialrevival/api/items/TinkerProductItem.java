@@ -6,7 +6,11 @@ import org.irmc.industrialrevival.api.elements.melt.MeltedType;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerType;
 import org.irmc.industrialrevival.api.items.attributes.TinkerProduct;
 import org.irmc.industrialrevival.dock.IRDock;
+import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author balugaq
+ */
 @Getter
 public class TinkerProductItem extends IndustrialRevivalItem implements TinkerProduct {
     private MeltedType meltedType;
@@ -40,12 +44,12 @@ public class TinkerProductItem extends IndustrialRevivalItem implements TinkerPr
     }
 
     @Override
-    public ItemStack getProduct() {
+    public @NotNull ItemStack getProduct() {
         return getItemStack();
     }
 
     @Override
-    public IndustrialRevivalItem getIRItem() {
+    public @NotNull IndustrialRevivalItem getIRItem() {
         return this;
     }
 }

@@ -11,6 +11,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.ref.WeakReference;
 
+/**
+ * Represents a rectangular area in 3D space with defined minimum and maximum coordinates.
+ * This class is used to describe the boundaries of objects in a Minecraft world.
+ *
+ * @author balugaq
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -24,6 +30,17 @@ public class Corners {
     private final float maxZ;
     public WeakReference<World> world;
 
+    /**
+     * Constructs a new Corners instance with specified boundaries.
+     *
+     * @param world reference to the Minecraft world
+     * @param minX minimum X coordinate
+     * @param maxX maximum X coordinate
+     * @param minY minimum Y coordinate
+     * @param maxY maximum Y coordinate
+     * @param minZ minimum Z coordinate
+     * @param maxZ maximum Z coordinate
+     */
     public Corners(WeakReference<World> world, float minX, float maxX, float minY, float maxY, float minZ, float maxZ) {
         this.world = world;
         this.minX = minX;
@@ -34,6 +51,17 @@ public class Corners {
         this.maxZ = maxZ;
     }
 
+    /**
+     * Constructs a new Corners instance with specified boundaries.
+     *
+     * @param world the Minecraft world
+     * @param minX minimum X coordinate
+     * @param maxX maximum X coordinate
+     * @param minY minimum Y coordinate
+     * @param maxY maximum Y coordinate
+     * @param minZ minimum Z coordinate
+     * @param maxZ maximum Z coordinate
+     */
     public Corners(World world, float minX, float maxX, float minY, float maxY, float minZ, float maxZ) {
         this.world = new WeakReference<>(world);
         this.minX = minX;
@@ -96,6 +124,11 @@ public class Corners {
         return Math.abs(maxZ - minZ);
     }
 
+    /**
+     * Calculates the center point of this area.
+     *
+     * @return a Location object representing the center of this area
+     */
     public Location center() {
         return new Location(getWorld(), (minX + maxX) / 2, (minY + maxY) / 2, (minZ + maxZ) / 2);
     }

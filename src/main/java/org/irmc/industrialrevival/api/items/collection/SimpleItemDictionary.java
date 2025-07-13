@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author lijinhong11
+ */
 public class SimpleItemDictionary extends ItemDictionary {
     private final List<IndustrialRevivalItem> items;
 

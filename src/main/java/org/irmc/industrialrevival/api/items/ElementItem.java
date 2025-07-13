@@ -8,8 +8,13 @@ import org.irmc.industrialrevival.api.elements.melt.MeltedType;
 import org.irmc.industrialrevival.api.elements.melt.OreMeltedType;
 import org.irmc.industrialrevival.api.elements.tinker.TinkerType;
 import org.irmc.industrialrevival.api.items.attributes.Meltable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 
+/**
+ * @author balugaq
+ */
 @Getter
 public class ElementItem extends IndustrialRevivalItem implements Meltable {
     private ElementType elementType;
@@ -30,7 +35,7 @@ public class ElementItem extends IndustrialRevivalItem implements Meltable {
     }
 
     @Override
-    public MeltedType getMeltedType(ItemStack itemStack) {
+    public MeltedType getMeltedType(@Nullable ItemStack itemStack) {
         return OreMeltedType.of(elementType);
     }
 

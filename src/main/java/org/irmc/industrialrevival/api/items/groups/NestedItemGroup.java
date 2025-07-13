@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * @author lijinhong11
+ */
 @Getter
 public class NestedItemGroup extends ItemGroup {
     private final List<ItemGroup> subItemGroups = new ArrayList<>();

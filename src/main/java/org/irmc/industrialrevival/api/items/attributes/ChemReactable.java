@@ -16,6 +16,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author lijinhong11
+ * @author balugaq
+ */
 public interface ChemReactable extends ItemAttribute, Keyed, ComplexDataContainer.DataContainer2<Double, ChemicalCompound> {
     NamespacedKey CHEMICAL_COMPOUND_KEY = KeyUtil.customKey("chemical_compound");
     NamespacedKey MASS_KEY = KeyUtil.customKey("mass");

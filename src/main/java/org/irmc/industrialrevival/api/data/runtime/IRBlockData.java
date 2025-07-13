@@ -23,7 +23,16 @@ import java.util.Map;
  * A block data object is used to store additional data about a block that is not
  * stored in the block itself. This data is stored in a YAML configuration file
  * and can be accessed using the {@link #config} field.
+ * </p>
+ *
  * <p>
+ * This class provides methods to:
+ * <ul>
+ *     <li>Access block metadata through {@link #getMapData()}</li>
+ *     <li>Create instances from database records via {@link #warp(BlockRecord)}</li>
+ *     <li>Store location-specific machine information</li>
+ * </ul>
+ * </p>
  *
  * @author lijinhong11
  * @see IndustrialRevivalItem

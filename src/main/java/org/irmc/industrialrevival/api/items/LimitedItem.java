@@ -5,17 +5,20 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.items.attributes.Limited;
+import org.irmc.industrialrevival.utils.KeyUtil;
 import org.irmc.pigeonlib.pdc.PersistentDataAPI;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
 import java.util.function.BiConsumer;
 
+/**
+ * @author balugaq
+ */
+@Getter
 public class LimitedItem extends IndustrialRevivalItem implements Limited {
-    private NamespacedKey LIMITED_COUNT_LEFT;
-    @Getter
+    private static final NamespacedKey LIMITED_COUNT_LEFT = KeyUtil.customKey("limited_count_left");
     private BiConsumer<Player, ItemStack> onUseHandler;
-    @Getter
     private int limit = 0;
 
     public LimitedItem() {

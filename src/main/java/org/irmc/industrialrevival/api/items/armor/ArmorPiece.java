@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author balugaq
+ */
 @Getter
 public class ArmorPiece extends IndustrialRevivalItem {
     private final Set<PotionEffect> potionEffects = new HashSet<>();

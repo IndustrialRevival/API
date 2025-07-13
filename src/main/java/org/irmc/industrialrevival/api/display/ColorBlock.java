@@ -25,7 +25,10 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
- * @author baluagq
+ * Represents different colored blocks that can be displayed in the game, each with specific orientation and positioning.
+ * These blocks are used to visualize various surfaces and connections in the industrial system.
+ *
+ * @author balugaq
  */
 @Getter
 public enum ColorBlock {
@@ -98,10 +101,25 @@ public enum ColorBlock {
         this(baseString, leftRotation, right_rotation, translationHandler, scale -> scale);
     }
 
+    /**
+     * Creates text displays for all default surfaces within the given corners using the specified color.
+     *
+     * @param corners the area to display
+     * @param color the color to use
+     * @return list of TextDisplay objects created
+     */
     public static List<TextDisplay> makeSurface(@NotNull Corners corners, @NotNull Color color) {
         return makeSurface(corners, color, null);
     }
 
+    /**
+     * Creates text displays for all default surfaces within the given corners using the specified color and texture handler.
+     *
+     * @param corners the area to display
+     * @param color the color to use
+     * @param textureHandler optional texture handler for additional styling
+     * @return list of TextDisplay objects created
+     */
     public static List<TextDisplay> makeSurface(@NotNull Corners corners, @NotNull Color color, @Nullable TextureHandler textureHandler) {
         List<TextDisplay> displays = new ArrayList<>();
         for (ColorBlock value : DEFAULT_SURFACE) {
@@ -228,6 +246,13 @@ public enum ColorBlock {
         };
     }
 
+    /**
+     * Generates a TextDisplay at the appropriate location based on the block's position and type.
+     *
+     * @param corners defines the area where the display should be placed
+     * @param builder the TextModelBuilder to use for creating the display
+     * @return the created TextDisplay object
+     */
     private TextDisplay generate(@NotNull Corners corners, @NotNull TextModelBuilder builder) {
         Location location = null;
         switch (this) {

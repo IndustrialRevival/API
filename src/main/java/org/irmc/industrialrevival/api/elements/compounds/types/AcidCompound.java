@@ -5,6 +5,9 @@ import org.irmc.industrialrevival.api.elements.compounds.Compound;
 
 import java.util.Map;
 
+/**
+ * @author lijinhong11
+ */
 public class AcidCompound extends ChemicalCompound {
     public AcidCompound(String name, Map<Compound, Double> properties) {
         super(name, properties);

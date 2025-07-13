@@ -2,6 +2,9 @@ package org.irmc.industrialrevival.api.exceptions;
 
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalFormula;
 
+/**
+ * @author balugaq
+ */
 public class FormulaConflictException extends RuntimeException {
     public FormulaConflictException(String message) {
         super(message);

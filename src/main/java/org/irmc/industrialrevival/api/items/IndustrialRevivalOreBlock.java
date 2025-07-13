@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * An ore block that drops itself when mined.
+ *
+ * @author lijinhong11
  */
 public class IndustrialRevivalOreBlock extends IndustrialRevivalItem implements VanillaSmeltingItem {
     @Getter

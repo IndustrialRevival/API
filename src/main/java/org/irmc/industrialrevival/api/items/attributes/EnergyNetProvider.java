@@ -15,9 +15,11 @@ import org.jetbrains.annotations.Nullable;
  * This interface defines a generator can provide energy to an energy network.<br>
  * <br>
  * <b>Note: </b> use {@link EnergyNetComponent} if the machine not provides energy to the network.
+ *
+ * @author balugaq
  */
 public interface EnergyNetProvider extends EnergyNetComponent {
-    GeneratorType getGeneratorType();
+    @NotNull GeneratorType getGeneratorType();
 
     /**
      * This method should return the type of the energy net component.
@@ -25,7 +27,7 @@ public interface EnergyNetProvider extends EnergyNetComponent {
      * @return the type of the energy net component
      */
     @Override
-    default EnergyNetComponentType getComponentType() {
+    default @NotNull EnergyNetComponentType getComponentType() {
         return EnergyNetComponentType.GENERATOR;
     }
 
