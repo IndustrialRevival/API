@@ -716,6 +716,6 @@ public interface IIRRegistry {
     @NotNull ItemStack getGuideIcon(@NotNull GuideMode guide);
     void registerGuide(@NotNull GuideMode guideMode, @NotNull GuideImplementation guide);
 
-    @NotNull ContainerType getContainerType(@NotNull NamespacedKey key);
+    @Nullable ContainerType getContainerType(@NotNull NamespacedKey key);
     void registerContainerType(@NotNull ContainerType containerType);
 }

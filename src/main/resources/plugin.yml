@@ -1,9 +1,9 @@
-name: IndustrialRevival
+name: IndustrialRevivalAPI
 version: '${project.version}'
-main: org.irmc.industrialrevival.implementation.IndustrialRevival
+main: org.irmc.industrialrevival.dock.IRDock
 api-version: '1.21.4'
 authors: [ mmmjjkx, balugaq, the IndustrialRevival community ]
-website: "https://github.com/IndustrialRevival/IndustrialRevival"
+website: "https://github.com/IndustrialRevival/API"
 permissions:
   industrialrevival.cmd.guide:
     description: get the guide of IndustrialRevival
