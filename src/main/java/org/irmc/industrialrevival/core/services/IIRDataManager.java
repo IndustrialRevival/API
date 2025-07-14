@@ -123,4 +123,6 @@ public interface IIRDataManager {
      * @param player the player to request a profile for
      */
     void requestPlayerProfile(@NotNull Player player);
+
+    void close();
 }
