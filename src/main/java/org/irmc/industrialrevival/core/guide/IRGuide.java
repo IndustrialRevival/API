@@ -10,11 +10,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * @author balugaq
  */
-public abstract class IRGuide implements IRGuideImplementation {
+public abstract class IRGuide implements GuideImplementation {
     @Override
     @ParametersAreNonnullByDefault
     public void openMainPage(Player player, int page) {
-        GuideUtil.openMainMenu(player, page);
+        GuideUtil.openMainMenu(player, this, page);
     }
 
     @Override

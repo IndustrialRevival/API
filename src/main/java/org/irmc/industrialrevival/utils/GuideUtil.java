@@ -25,10 +25,15 @@ import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
 import org.irmc.industrialrevival.core.guide.GuideHistory;
 import org.irmc.industrialrevival.core.guide.GuideMode;
+import org.irmc.industrialrevival.core.guide.GuideImplementation;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.pigeonlib.items.CustomItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author balugaq
@@ -37,12 +42,12 @@ import org.jetbrains.annotations.Nullable;
 public class GuideUtil {
     public static final NamespacedKey WIKI_KEY = KeyUtil.customKey("wiki");
 
-    public static void openMainMenu(@NotNull Player player) {
-        openMainMenu(player, 1);
+    public static void openMainMenu(@NotNull Player player, @NotNull GuideImplementation guide) {
+        openMainMenu(player, guide, 1);
     }
 
-    public static void openMainMenu(@NotNull Player player, int page) {
-        new MainMenu(player, page).open(player);
+    public static void openMainMenu(@NotNull Player player, @NotNull GuideImplementation guide, int page) {
+        new MainMenu(player, guide, page).open(player);
     }
 
     public static void openItemGroup(@NotNull Player player, @NotNull ItemGroup itemGroup) {
@@ -264,20 +269,21 @@ public class GuideUtil {
         // todo
     }
 
-    public static final ItemStack SURVIVAL_GUIDE_ICON = new CustomItemStack(
-            Material.BOOK,
-            "&6工业复兴指南书 &7- &a生存模式"
-    ).getBukkit();
-
-    public static final ItemStack CHEAT_GUIDE_ICON = new CustomItemStack(
-            Material.BOOK,
-            "&6工业复兴指南书 &7- &c作弊模式"
-    ).getBukkit();
-
     public static @NotNull ItemStack getGuideIcon(@NotNull GuideMode mode) {
-        return switch (mode) {
-            case SURVIVAL -> SURVIVAL_GUIDE_ICON;
-            case CHEAT -> CHEAT_GUIDE_ICON;
-        };
+        return IRDock.getRegistry().getGuideIcon(mode);
+    }
+
+    private static final @NotNull Map<UUID, GuideMode> guideModes = new ConcurrentHashMap<>();
+
+    public static void setCurrentGuideMode(@NotNull Player player, @NotNull GuideMode guideMode) {
+        guideModes.put(player.getUniqueId(), guideMode);
+    }
+
+    public static @NotNull GuideImplementation getCurrentGuide(@Nullable Player player) {
+        if (player == null) {
+            return IRDock.getRegistry().getGuide(GuideMode.SURVIVAL);
+        }
+
+        return IRDock.getRegistry().getGuide(guideModes.get(player.getUniqueId()));
     }
 }

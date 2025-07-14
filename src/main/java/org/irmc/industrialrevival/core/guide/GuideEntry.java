@@ -13,13 +13,13 @@ import org.jetbrains.annotations.NotNull;
 @Data
 @RequiredArgsConstructor
 public class GuideEntry {
-    private final @NotNull IRGuideImplementation guide;
+    private final @NotNull GuideImplementation guide;
     private final @NotNull SimpleMenu content;
 
     @Setter
     private int page;
 
-    public static @NotNull GuideEntry warp(IRGuideImplementation guide, SimpleMenu value) {
+    public static @NotNull GuideEntry warp(GuideImplementation guide, SimpleMenu value) {
         var e = new GuideEntry(guide, value);
         e.setPage(1);
         return e;
