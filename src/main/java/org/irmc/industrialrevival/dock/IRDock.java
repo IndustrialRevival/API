@@ -1,9 +1,9 @@
 package org.irmc.industrialrevival.dock;
 
 import com.google.common.base.Preconditions;
-import org.bukkit.entity.Player;
+import com.tcoded.folialib.FoliaLib;
+import org.irmc.industrialrevival.api.IndustrialRevivalAddon;
 import org.irmc.industrialrevival.core.services.IItemSettings;
-import org.irmc.industrialrevival.core.guide.IRGuideImplementation;
 import org.irmc.industrialrevival.core.services.IGitHubService;
 import org.irmc.industrialrevival.core.services.IIRDataManager;
 import org.irmc.industrialrevival.core.services.IIRRegistry;
@@ -14,13 +14,10 @@ import org.irmc.industrialrevival.core.services.ISQLDataManager;
 import org.irmc.pigeonlib.language.LanguageManager;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 
 public class IRDock {
     private static final String PLUGIN_CLASS = "org.irmc.industrialrevival.implementation.IndustrialRevival";
-    private static final Map<UUID, IRGuideImplementation> guides = new ConcurrentHashMap<>();
     private static IIndustrialRevivalPlugin plugin;
 
     public static IIndustrialRevivalPlugin getPlugin() {
@@ -33,17 +30,6 @@ public class IRDock {
         Preconditions.checkArgument(plugin != null, "Plugin cannot be null");
         Preconditions.checkArgument(plugin.getClass().getName().equals(PLUGIN_CLASS), "Not an valid plugin instance");
         IRDock.plugin = plugin;
-    }
-
-    public static IRGuideImplementation getGuide(Player player) {
-        return guides.get(player.getUniqueId());
-    }
-
-    /**
-     * Called when a player interact a guide book
-     */
-    public static void setGuide(Player player, IRGuideImplementation guide) {
-        guides.put(player.getUniqueId(), guide);
     }
 
     public static @NotNull LanguageManager getLanguageManager() {
@@ -88,5 +74,20 @@ public class IRDock {
 
     public static void runAsync(@NotNull Runnable runnable) {
         getPlugin().runAsync(runnable);
+    }
+
+    public static FoliaLib getFoliaLibImpl() {
+        return getPlugin().getFoliaLibImpl();
+    }
+
+    public static void reloadConfig() {
+        getPlugin().reloadConfig();
+    }
+    public static String getVersion() {
+        return getPlugin().getVersion();
+    }
+
+    public static List<IndustrialRevivalAddon> getAddons() {
+        return getPlugin().getAddons();
     }
 }

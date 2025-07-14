@@ -26,7 +26,7 @@ public class GuideHistory {
     }
 
     public void addMenu(@NotNull SimpleMenu menu) {
-        entries.add(GuideEntry.warp(IRDock.getGuide(Bukkit.getPlayer(getPlayerName())), menu));
+        entries.add(GuideEntry.warp(GuideUtil.getCurrentGuide(Bukkit.getPlayer(playerName)), menu));
     }
 
     public void removeLast() {
@@ -44,7 +44,7 @@ public class GuideHistory {
         }
 
         entries.clear();
-        GuideUtil.openMainMenu(player);
+        GuideUtil.openMainMenu(player, GuideUtil.getCurrentGuide(player));
     }
 
     public void goBack() {

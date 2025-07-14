@@ -1,6 +1,7 @@
 package org.irmc.industrialrevival.dock;
 
 import com.comphenix.protocol.ProtocolManager;
+import com.tcoded.folialib.FoliaLib;
 import org.irmc.industrialrevival.api.IndustrialRevivalAddon;
 import org.irmc.industrialrevival.core.services.IItemSettings;
 import org.irmc.industrialrevival.core.services.IGitHubService;
@@ -115,5 +116,8 @@ public interface IIndustrialRevivalPlugin extends IndustrialRevivalAddon {
      *
      * @return a list of IndustrialRevivalAddon instances
      */
+    @NotNull
     List<IndustrialRevivalAddon> getAddons();
+
+    @NotNull FoliaLib getFoliaLibImpl();
 }

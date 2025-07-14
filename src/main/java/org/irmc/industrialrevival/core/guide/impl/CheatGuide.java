@@ -1,7 +1,9 @@
 package org.irmc.industrialrevival.core.guide.impl;
 
+import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.core.guide.GuideMode;
 import org.irmc.industrialrevival.core.guide.IRGuide;
+import org.irmc.industrialrevival.utils.Constants;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -12,6 +14,11 @@ public class CheatGuide extends IRGuide {
 
     public static CheatGuide instance() {
         return instance;
+    }
+
+    @Override
+    public @NotNull ItemStack getGuideIcon() {
+        return Constants.ItemStacks.CHEAT_GUIDE_BOOK_ITEM;
     }
 
     @Override

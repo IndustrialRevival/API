@@ -2,6 +2,7 @@ package org.irmc.industrialrevival.core.services;
 
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+import org.irmc.industrialrevival.api.timings.PerformanceSummary;
 import org.irmc.industrialrevival.api.timings.ProfiledBlock;
 import org.irmc.industrialrevival.api.objects.ChunkPosition;
 import org.irmc.industrialrevival.api.timings.TimingViewRequest;
@@ -128,5 +129,9 @@ public interface IRunningProfilerService {
      */
     void stopProfiling(@NotNull Location location);
 
+    @NotNull
     TickerTask getTask();
+
+    @NotNull
+    PerformanceSummary getSummary();
 }

@@ -21,6 +21,8 @@ import org.irmc.industrialrevival.api.recipes.RecipeType;
 import org.irmc.industrialrevival.api.recipes.methods.BlockDropMethod;
 import org.irmc.industrialrevival.api.recipes.methods.MobDropMethod;
 import org.irmc.industrialrevival.api.recipes.methods.ProduceMethod;
+import org.irmc.industrialrevival.core.guide.GuideMode;
+import org.irmc.industrialrevival.core.guide.GuideImplementation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -705,4 +707,12 @@ public interface IIRRegistry {
      */
     @CanIgnoreReturnValue
     @NotNull <T extends IndustrialRevivalItem & BlockDropItem> T registerBlockDrop(@NotNull T item);
+
+    @Nullable GuideMode getGuideMode(@NotNull String guideModeName);
+
+    @NotNull GuideImplementation getGuide(@NotNull GuideMode guideMode);
+
+    @NotNull ItemStack getGuideIcon(@NotNull GuideMode guide);
+
+    void registerGuide(@NotNull GuideMode guideMode, @NotNull GuideImplementation guide);
 }

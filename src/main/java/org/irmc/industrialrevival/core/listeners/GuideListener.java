@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.irmc.industrialrevival.core.guide.GuideImplementation;
 import org.irmc.industrialrevival.core.guide.GuideMode;
 import org.irmc.industrialrevival.core.guide.impl.CheatGuide;
 import org.irmc.industrialrevival.core.guide.impl.SurvivalGuide;
@@ -27,19 +28,13 @@ public class GuideListener implements Listener {
                 }
 
                 GuideMode mode = GuideMode.valueOf(smode);
-                Player player = e.getPlayer();
-                switch (mode) {
-                    case SURVIVAL -> {
-                        IRDock.setGuide(player, SurvivalGuide.instance());
-                        GuideUtil.openMainMenu(player, 1);
-                        e.setCancelled(true);
-                    }
-                    case CHEAT -> {
-                        IRDock.setGuide(player, CheatGuide.instance());
-                        GuideUtil.openMainMenu(player, 1);
-                        e.setCancelled(true);
-                    }
+                if (mode == null) {
+                    return;
                 }
+
+                Player player = e.getPlayer();
+                GuideImplementation guide = IRDock.getRegistry().getGuide(mode);
+                GuideUtil.openMainMenu(player, guide);
             }
         }
     }

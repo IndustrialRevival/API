@@ -81,8 +81,10 @@ public class GuideSetting<T> implements ClickHandler, Cloneable {
         }
 
         if (value instanceof GuideMode gm) {
-            if (player.isOp()) {
-                profile.getGuideSettings().setGuideSettings(this, (T) gm.next());
+            if (player.isOp() && gm == GuideMode.SURVIVAL) {
+                profile.getGuideSettings().setGuideSettings(this, (T) GuideMode.CHEAT);
+            } else {
+                profile.getGuideSettings().setGuideSettings(this, (T) GuideMode.SURVIVAL);
             }
         }
 

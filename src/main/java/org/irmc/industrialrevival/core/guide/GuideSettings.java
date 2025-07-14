@@ -32,8 +32,8 @@ public class GuideSettings {
             GuideMode.SURVIVAL,
             mode -> new CustomItemStack(
                     Material.BOOK,
-                    TextUtil.upperFirstLetterOnly(mode.name()) + " Guide",
-                    "Survival Guide"
+                    TextUtil.upperFirstLetterOnly(mode.key().value()) + " Guide",
+                    "Guide Mode"
             ).getBukkit());
 
     public static final GuideSetting<Boolean> FIREWORKS_ENABLED = GuideSetting.constof(

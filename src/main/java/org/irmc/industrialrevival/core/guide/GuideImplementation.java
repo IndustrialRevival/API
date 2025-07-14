@@ -3,6 +3,7 @@ package org.irmc.industrialrevival.core.guide;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.items.groups.ItemGroup;
+import org.irmc.industrialrevival.utils.GuideUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -13,7 +14,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
  *
  * @author balugaq
  */
-public interface IRGuideImplementation {
+public interface GuideImplementation {
+    @NotNull
+    ItemStack getGuideIcon();
+
     /**
      * Gets the current guide mode being used by this implementation.
      *
@@ -50,4 +54,8 @@ public interface IRGuideImplementation {
      */
     @ParametersAreNonnullByDefault
     void displayItem(Player player, ItemStack itemStack, int page);
+
+    default void open(@NotNull Player player) {
+        GuideUtil.openMainMenu(player, this);
+    }
 }

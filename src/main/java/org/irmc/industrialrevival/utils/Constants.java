@@ -7,9 +7,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.irmc.industrialrevival.core.guide.GuideMode;
-import org.irmc.industrialrevival.core.guide.IRGuideImplementation;
+import org.irmc.industrialrevival.core.guide.GuideImplementation;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.pigeonlib.items.CustomItemStack;
+import org.irmc.pigeonlib.pdc.types.PersistentDataTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -83,7 +84,7 @@ public class Constants {
                 Material.ENCHANTED_BOOK,
                 IRDock.getPlugin().getLanguageManager().getMsgComponent(null, "guide.book_item_name"))
                 .setCustomModel(19999)
-                .setPDCData(ItemStackKeys.GUIDE_ITEM_KEY, PersistentDataType.STRING, GuideMode.SURVIVAL.name())
+                .setPDCData(ItemStackKeys.GUIDE_ITEM_KEY, PersistentDataTypes.NAMESPACED_KEY, GuideMode.SURVIVAL.getKey())
                 .getBukkit();
 
         /**
@@ -95,7 +96,7 @@ public class Constants {
                         .getLanguageManager()
                         .getMsgComponent(null, "guide.cheat_book_item_name"))
                 .setCustomModel(20000)
-                .setPDCData(ItemStackKeys.GUIDE_ITEM_KEY, PersistentDataType.STRING, GuideMode.CHEAT.name())
+                .setPDCData(ItemStackKeys.GUIDE_ITEM_KEY, PersistentDataTypes.NAMESPACED_KEY, GuideMode.CHEAT.getKey())
                 .getBukkit();
     }
 
@@ -215,7 +216,7 @@ public class Constants {
         /**
          * Function to generate a guide mode switch button for the guide GUI.
          */
-        public static final BiFunction<Player, IRGuideImplementation, ItemStack> GUIDE_MODE_SWITCH_BUTTON = (p, impl) -> new CustomItemStack(
+        public static final BiFunction<Player, GuideImplementation, ItemStack> GUIDE_MODE_SWITCH_BUTTON = (p, impl) -> new CustomItemStack(
                 Material.COMPASS,
                 IRDock.getPlugin().getLanguageManager().getMsgComponent(p, impl.getGuideMode() == GuideMode.SURVIVAL ? "guide.guide_mode_survival_button" : "guide.guide_mode_cheat_button"))
                 .setCustomModel(19993)

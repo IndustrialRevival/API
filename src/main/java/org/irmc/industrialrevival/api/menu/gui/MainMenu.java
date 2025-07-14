@@ -10,6 +10,7 @@ import org.irmc.industrialrevival.api.items.groups.ItemGroup;
 import org.irmc.industrialrevival.api.menu.MatrixMenuDrawer;
 import org.irmc.industrialrevival.api.menu.handlers.ClickHandler;
 import org.irmc.industrialrevival.api.player.PlayerProfile;
+import org.irmc.industrialrevival.core.guide.GuideImplementation;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.DataUtil;
 import org.irmc.industrialrevival.utils.GuideUtil;
@@ -23,16 +24,19 @@ import java.util.List;
 import java.util.Map;
 
 public class MainMenu extends PageableMenu<ItemGroup> {
-    public MainMenu(@NotNull Player player) {
-        this(player, 1);
+    private final GuideImplementation guide;
+
+    public MainMenu(@NotNull Player player, @NotNull GuideImplementation guide) {
+        this(player, guide, 1);
     }
 
-    public MainMenu(@NotNull Player player, int page) {
-        this(Component.text("工业复兴指南书", TextColor.color(0xFF5700)), player, PlayerProfile.getProfile(player), page, getDisplayableItemGroups(player), new HashMap<>());
+    public MainMenu(@NotNull Player player, @NotNull GuideImplementation guide, int page) {
+        this(Component.text("工业复兴指南书", TextColor.color(0xFF5700)), player, PlayerProfile.getProfile(player), guide, page, getDisplayableItemGroups(player), new HashMap<>());
     }
 
-    public MainMenu(Component title, Player player, PlayerProfile playerProfile, int currentPage, List<ItemGroup> items, Map<Integer, PageableMenu<ItemGroup>> pages) {
+    public MainMenu(Component title, Player player, PlayerProfile playerProfile, @NotNull GuideImplementation guide, int currentPage, List<ItemGroup> items, Map<Integer, PageableMenu<ItemGroup>> pages) {
         super(title, player, playerProfile, currentPage, items, pages);
+        this.guide = guide;
         drawer.addExplain(objSymbol, "Item group");
 
         ClickHandler clickHandler = (p, i, s, m, t) -> {
@@ -80,7 +84,7 @@ public class MainMenu extends PageableMenu<ItemGroup> {
 
     @Override
     public PageableMenu<ItemGroup> newMenu(@NotNull PageableMenu<ItemGroup> menu, int newPage) {
-        return new MainMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), newPage, menu.getItems(), menu.getPages());
+        return new MainMenu(menu.getTitle(), menu.getPlayer(), menu.getPlayerProfile(), guide, newPage, menu.getItems(), menu.getPages());
     }
 
     public ItemStack getDisplayItem(@NotNull ItemGroup group) {
