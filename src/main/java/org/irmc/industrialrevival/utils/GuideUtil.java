@@ -264,7 +264,20 @@ public class GuideUtil {
         // todo
     }
 
+    public static final ItemStack SURVIVAL_GUIDE_ICON = new CustomItemStack(
+            Material.BOOK,
+            "&6工业复兴指南书 &7- &a生存模式"
+    ).getBukkit();
+
+    public static final ItemStack CHEAT_GUIDE_ICON = new CustomItemStack(
+            Material.BOOK,
+            "&6工业复兴指南书 &7- &c作弊模式"
+    ).getBukkit();
+
     public static @NotNull ItemStack getGuideIcon(@NotNull GuideMode mode) {
-        // todo
+        return switch (mode) {
+            case SURVIVAL -> SURVIVAL_GUIDE_ICON;
+            case CHEAT -> CHEAT_GUIDE_ICON;
+        };
     }
 }

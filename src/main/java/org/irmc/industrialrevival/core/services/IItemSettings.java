@@ -1,5 +1,6 @@
 package org.irmc.industrialrevival.core.services;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.irmc.industrialrevival.api.data.runtime.settings.ItemSetting;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
@@ -45,7 +46,7 @@ public interface IItemSettings {
      * @param item the item to get configuration for
      * @return the YAML configuration object for the specified item
      */
-    @NotNull YamlConfiguration getCfg(@NotNull IndustrialRevivalItem item);
+    @NotNull ConfigurationSection getCfg(@NotNull IndustrialRevivalItem item);
     
     /**
      * Creates default configuration for the specified item.
@@ -58,7 +59,7 @@ public interface IItemSettings {
      * @param item the item to create default configuration for
      * @return the updated YAML configuration object
      */
-    @NotNull YamlConfiguration createDefaultCfg(@NotNull IndustrialRevivalItem item);
+    @NotNull ConfigurationSection createDefaultCfg(@NotNull IndustrialRevivalItem item);
     
     /**
      * Gets the specific setting value for the specified item.
