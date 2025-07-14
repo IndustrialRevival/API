@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 /**
  * Interface representing an addon for the IndustrialRevival plugin.
  * Provides common functionality and metadata for addons.
+ *
+ * @author lijinhong11
  */
 public interface IndustrialRevivalAddon extends Plugin {
     /**

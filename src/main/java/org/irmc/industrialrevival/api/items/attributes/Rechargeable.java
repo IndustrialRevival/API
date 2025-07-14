@@ -11,6 +11,14 @@ import org.irmc.industrialrevival.utils.EnergyUtil;
 public interface Rechargeable extends ItemAttribute {
     double getEnergyCapacity();
 
+    default double getCurrentEnergy(ItemStack item) {
+        return EnergyUtil.getItemEnergy(item);
+    }
+
+    default void setCurrentEnergy(ItemStack item, double energy) {
+        EnergyUtil.setItemEnergy(item, energy);
+    }
+
     default void addItemEnergy(ItemStack item, double energy) {
         EnergyUtil.addItemEnergy(item, energy);
         onRecharge(item, energy);

@@ -2,12 +2,14 @@ package org.irmc.industrialrevival.dock;
 
 import com.comphenix.protocol.ProtocolManager;
 import com.tcoded.folialib.FoliaLib;
+import com.tcoded.folialib.wrapper.task.WrappedTask;
 import org.irmc.industrialrevival.api.IndustrialRevivalAddon;
 import org.irmc.industrialrevival.core.services.IItemSettings;
 import org.irmc.industrialrevival.core.services.IGitHubService;
 import org.irmc.industrialrevival.core.services.IIRDataManager;
 import org.irmc.industrialrevival.core.services.IIRRegistry;
 import org.irmc.industrialrevival.core.services.IItemDataService;
+import org.irmc.industrialrevival.core.services.IListenerManager;
 import org.irmc.industrialrevival.core.services.IMinecraftRecipeService;
 import org.irmc.industrialrevival.core.services.IRunningProfilerService;
 import org.irmc.industrialrevival.core.services.ISQLDataManager;
@@ -15,6 +17,7 @@ import org.irmc.pigeonlib.language.LanguageManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * This interface serves as the core plugin interface for the IndustrialRevival plugin.
@@ -111,6 +114,10 @@ public interface IIndustrialRevivalPlugin extends IndustrialRevivalAddon {
      */
     void runSync(@NotNull Runnable runnable);
 
+    void runAsync(@NotNull Consumer<WrappedTask> consumer);
+
+    void runSync(@NotNull Consumer<WrappedTask> consumer);
+
     /**
      * Gets the list of all addons loaded and registered with the plugin.
      *
@@ -120,4 +127,6 @@ public interface IIndustrialRevivalPlugin extends IndustrialRevivalAddon {
     List<IndustrialRevivalAddon> getAddons();
 
     @NotNull FoliaLib getFoliaLibImpl();
+
+    @NotNull IListenerManager getListenerManager();
 }
