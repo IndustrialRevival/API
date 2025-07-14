@@ -3,7 +3,7 @@ package org.irmc.industrialrevival.api.elements.reaction;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalCompound;
-import org.irmc.industrialrevival.api.items.attributes.ChemReactable;
+import org.irmc.industrialrevival.api.items.attributes.ChemicalCompoundContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author lijinhong11
  * @author balugaq
- * @see ChemReactable
+ * @see ChemicalCompoundContainer
  */
 public final class ReactCondition {
     /* Default react conditions */
@@ -46,7 +46,7 @@ public final class ReactCondition {
     }
 
     /**
-     * Null if the {@link ChemReactable} is not a catalyst.
+     * Null if the {@link ChemicalCompoundContainer} is not a catalyst.
      *
      * @return The chem reactable item that is catalyzing the reaction.
      */

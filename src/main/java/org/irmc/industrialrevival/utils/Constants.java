@@ -386,4 +386,17 @@ public class Constants {
             return new HashMap<>(textures);
         }
     }
+
+    public static final class Values {
+        public static final class ContainerCapacity {
+            public static final long Bottle = 1000;
+            public static final long Bucket = 10000;
+            public static final long SmallTank = 100000;
+            public static final long MediumTank = 400000;
+            public static final long LargeTank = 1600000;
+            public static final long SmallMachine = 40000;
+            public static final long MediumMachine = 160000;
+            public static final long LargeMachine = 640000;
+        }
+    }
 }
