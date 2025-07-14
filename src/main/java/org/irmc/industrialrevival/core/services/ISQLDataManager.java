@@ -44,4 +44,6 @@ public interface ISQLDataManager {
     void deleteBlockRecord(@NotNull Location loc);
 
     void close();
+
+    void init();
 }
