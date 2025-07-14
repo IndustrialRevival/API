@@ -1,7 +1,7 @@
 package org.irmc.industrialrevival.api.items.attributes;
 
 import org.irmc.industrialrevival.api.recipes.methods.MobDropMethod;
-import org.irmc.industrialrevival.core.services.impl.IRRegistry;
+import org.irmc.industrialrevival.core.services.IIRRegistry;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author lijinhong11
  * @author balugaq
- * @see IRRegistry
+ * @see IIRRegistry
  */
 public interface MobDropItem {
     @NotNull MobDropMethod @NotNull [] getDropMethods();
