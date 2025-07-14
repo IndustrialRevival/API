@@ -7,8 +7,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author lijinhong11
  */
-public interface GasStorage extends Container {
-    void insertGas(ItemStack item, Container storage);
+public interface GasStorage extends ChemicalCompoundContainer {
+    void insertGas(ItemStack item, ChemicalCompoundContainer storage);
 
     @Override
     default void setPhysicalState(@NotNull ItemStack itemStack, @NotNull PhysicalState state) {

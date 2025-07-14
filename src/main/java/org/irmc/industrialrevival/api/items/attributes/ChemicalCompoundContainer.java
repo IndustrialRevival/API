@@ -28,7 +28,7 @@ import java.util.Set;
  * @author lijinhong11
  * @author balugaq
  */
-public interface Container extends ItemAttribute, Keyed {
+public interface ChemicalCompoundContainer extends ItemAttribute, Keyed {
     default @NotNull ReactResult react(@NotNull Environment environment, @NotNull Set<ReactCondition> conditions, @NotNull List<ItemStack> reactItems) {
         return ReactHelper.react(environment, conditions, reactItems);
     }

@@ -8,18 +8,8 @@ import org.irmc.industrialrevival.utils.EnergyUtil;
  *
  * @author lijinhong11
  */
-public interface Rechargeable extends ItemAttribute, SimpleDataContainer<Double> {
+public interface Rechargeable extends ItemAttribute {
     double getEnergyCapacity();
-
-    @Override
-    default Double getData(ItemStack item) {
-        return EnergyUtil.getItemEnergy(item);
-    }
-
-    @Override
-    default void setData(ItemStack item, Double energy) {
-        EnergyUtil.setItemEnergy(item, energy);
-    }
 
     default void addItemEnergy(ItemStack item, double energy) {
         EnergyUtil.addItemEnergy(item, energy);
