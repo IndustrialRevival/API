@@ -766,7 +766,7 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
      */
     @NotNull
     protected ConfigurationSection getItemSetting() {
-        return IRDock.getPlugin().getItemSettings().getSetting(getId());
+        return IRDock.getPlugin().getItemSettings().getCfg(this);
     }
 
     public IndustrialRevivalItem setAddon(@NotNull IndustrialRevivalAddon addon) {
