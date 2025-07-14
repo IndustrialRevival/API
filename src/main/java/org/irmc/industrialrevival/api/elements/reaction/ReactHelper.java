@@ -4,7 +4,7 @@ import org.bukkit.inventory.ItemStack;
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalCompound;
 import org.irmc.industrialrevival.api.elements.compounds.ChemicalFormula;
 import org.irmc.industrialrevival.api.items.IndustrialRevivalItem;
-import org.irmc.industrialrevival.api.items.attributes.ChemReactable;
+import org.irmc.industrialrevival.api.items.attributes.Container;
 import org.irmc.industrialrevival.api.machines.process.Environment;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.JavaUtil;
@@ -41,9 +41,9 @@ public class ReactHelper {
      */
     @NotNull
     public static ReactResult react(@NotNull Environment environment, @NotNull Set<ReactCondition> conditions, @NotNull List<ItemStack> items) {
-        Map<ChemReactable, ItemStack> reactables = new HashMap<>();
+        Map<Container, ItemStack> reactables = new HashMap<>();
         for (ItemStack item : items) {
-            if (IndustrialRevivalItem.getByItem(item) instanceof ChemReactable cr) {
+            if (IndustrialRevivalItem.getByItem(item) instanceof Container cr) {
                 reactables.put(cr, item);
             }
         }
@@ -58,9 +58,9 @@ public class ReactHelper {
      * @param reactables the reactables to react
      * @return the getProduce of the reaction
      */
-    public static @NotNull ReactResult react(@NotNull Environment environment, @NotNull Set<ReactCondition> conditions, @NotNull Map<ChemReactable, ItemStack> reactables) {
+    public static @NotNull ReactResult react(@NotNull Environment environment, @NotNull Set<ReactCondition> conditions, @NotNull Map<Container, ItemStack> reactables) {
         Map<ChemicalCompound, Double> reactants = new HashMap<>();
-        for (ChemReactable reactable : reactables.keySet()) {
+        for (Container reactable : reactables.keySet()) {
             reactants.put(reactable.getChemicalCompound(reactables.get(reactable)), reactable.getMass(reactables.get(reactable)));
         }
         return react0(environment, conditions, reactants);

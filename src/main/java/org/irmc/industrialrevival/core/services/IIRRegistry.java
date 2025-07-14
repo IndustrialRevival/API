@@ -17,6 +17,7 @@ import org.irmc.industrialrevival.api.items.collection.ItemDictionary;
 import org.irmc.industrialrevival.api.items.groups.ItemGroup;
 import org.irmc.industrialrevival.api.menu.MachineMenuPreset;
 import org.irmc.industrialrevival.api.multiblock.MultiBlock;
+import org.irmc.industrialrevival.api.physics.ContainerType;
 import org.irmc.industrialrevival.api.recipes.RecipeType;
 import org.irmc.industrialrevival.api.recipes.methods.BlockDropMethod;
 import org.irmc.industrialrevival.api.recipes.methods.MobDropMethod;
@@ -709,10 +710,10 @@ public interface IIRRegistry {
     @NotNull <T extends IndustrialRevivalItem & BlockDropItem> T registerBlockDrop(@NotNull T item);
 
     @Nullable GuideMode getGuideMode(@NotNull String guideModeName);
-
     @NotNull GuideImplementation getGuide(@NotNull GuideMode guideMode);
-
     @NotNull ItemStack getGuideIcon(@NotNull GuideMode guide);
-
     void registerGuide(@NotNull GuideMode guideMode, @NotNull GuideImplementation guide);
+
+    @NotNull ContainerType getContainerType(@NotNull NamespacedKey key);
+    void registerContainerType(@NotNull ContainerType containerType);
 }
