@@ -534,6 +534,8 @@ public interface IIRRegistry {
     @CanIgnoreReturnValue
     @NotNull TinkerProduct unregisterTinkerRecipe(@NotNull TinkerProduct product);
 
+    @Nullable TinkerProduct getTinkerProduct(@NotNull MeltedType type, @NotNull TinkerType tinkerType);
+
     /**
      * Gets an unmodifiable map of all registered chemical formulas.
      *
