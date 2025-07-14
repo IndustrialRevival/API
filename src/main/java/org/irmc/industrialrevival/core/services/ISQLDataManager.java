@@ -42,4 +42,6 @@ public interface ISQLDataManager {
      * @param loc the location of the block record to delete
      */
     void deleteBlockRecord(@NotNull Location loc);
+
+    void close();
 }
