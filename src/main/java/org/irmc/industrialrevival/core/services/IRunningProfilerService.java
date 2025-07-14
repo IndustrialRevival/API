@@ -5,6 +5,7 @@ import org.bukkit.NamespacedKey;
 import org.irmc.industrialrevival.api.timings.ProfiledBlock;
 import org.irmc.industrialrevival.api.objects.ChunkPosition;
 import org.irmc.industrialrevival.api.timings.TimingViewRequest;
+import org.irmc.industrialrevival.core.task.TickerTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
@@ -126,4 +127,6 @@ public interface IRunningProfilerService {
      * @param location the location to stop profiling at
      */
     void stopProfiling(@NotNull Location location);
+
+    TickerTask getTask();
 }
