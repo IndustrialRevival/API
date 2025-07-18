@@ -34,7 +34,7 @@ import org.irmc.industrialrevival.api.recipes.RecipeContents;
 import org.irmc.industrialrevival.api.recipes.RecipeType;
 import org.irmc.industrialrevival.api.recipes.methods.CraftMethod;
 import org.irmc.industrialrevival.api.recipes.methods.ProduceMethod;
-import org.irmc.industrialrevival.core.translation.ItemTranslator;
+import org.irmc.industrialrevival.core.translation.TranslateContext;
 import org.irmc.industrialrevival.dock.IRDock;
 import org.irmc.industrialrevival.utils.Constants;
 import org.irmc.pigeonlib.items.ItemUtils;
@@ -111,6 +111,7 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
      * When it is true, item's name and lore will be auto-translated
      */
     private boolean autoTranslation = true;
+    private TranslateContext translateContext;
     /**
      * When it is true, item's addon will be auto-inferred from the {@link ItemGroup}'s addon or the {@link RecipeType}'s addon when registering the item.
      */
@@ -232,7 +233,7 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
 
     public void applyKeys(ItemStack icon) {
         ItemMeta meta = icon.getItemMeta();
-        meta.getPersistentDataContainer().set(ItemTranslator.TRANSLATE_KEY, PersistentDataType.STRING, getId().toString().replaceFirst(":", "-"));
+        //meta.getPersistentDataContainer().set(ItemTranslator.TRANSLATE_KEY, PersistentDataType.STRING, getId().toString().replaceFirst(":", "-"));
         meta.getPersistentDataContainer().set(Constants.ItemStackKeys.ITEM_ID_KEY, PersistentDataType.STRING, getId().toString());
         icon.setItemMeta(meta);
     }
@@ -318,6 +319,19 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
     public IndustrialRevivalItem disableAutoTranslation() {
         checkRegistered();
         this.autoTranslation = false;
+        return this;
+    }
+
+    /**
+     * Set the translation context for auto translation
+     * Default is null
+     *
+     * @param tc translate context
+     * @return this instance
+     */
+    public IndustrialRevivalItem setTranslateContext(TranslateContext tc) {
+        checkRegistered();
+        this.translateContext = tc;
         return this;
     }
 

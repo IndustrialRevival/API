@@ -6,11 +6,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.irmc.industrialrevival.core.translation.ItemTranslator;
 
 /**
  * @author baluagq
- * @see ItemTranslator
  */
 public class TranslateUpdater implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
