@@ -7,8 +7,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.irmc.industrialrevival.api.player.GuideSetting;
 import org.irmc.industrialrevival.utils.KeyUtil;
-import org.irmc.industrialrevival.utils.TextUtil;
 import org.irmc.pigeonlib.items.CustomItemStack;
+import org.irmc.pigeonlib.world.TextUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -20,6 +20,7 @@ import java.util.Map;
  */
 @Getter
 @Setter
+@SuppressWarnings("unchecked")
 public class GuideSettings {
     public static final NamespacedKey KEY_GUIDE_MODE = KeyUtil.customKey("guide_mode");
     public static final NamespacedKey KEY_FIREWORKS_ENABLED = KeyUtil.customKey("fireworks_enabled");

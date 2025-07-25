@@ -110,7 +110,9 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
     /**
      * When it is true, item's name and lore will be auto-translated
      */
+    @Getter
     private boolean autoTranslation = true;
+    @Getter
     private TranslateContext translateContext;
     /**
      * When it is true, item's addon will be auto-inferred from the {@link ItemGroup}'s addon or the {@link RecipeType}'s addon when registering the item.
