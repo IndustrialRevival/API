@@ -598,12 +598,12 @@ public class IndustrialRevivalItem implements Keyed, Displayable<IndustrialReviv
 
         if (autoTranslation) {
             LanguageManager lm = new LanguageManager(addon.getPlugin());
-            Component name = lm.getItemName(getId().getKey());
+            Component name = lm.getItemName(getId());
             if (name != null) {
                 getIcon().getItemMeta().displayName(name);
             }
 
-            List<Component> lore = lm.getItemLore(getId().getKey());
+            List<Component> lore = lm.getItemLore(getId());
             if (lore != null && !lore.isEmpty()) {
                 getIcon().getItemMeta().lore(lore);
             }
