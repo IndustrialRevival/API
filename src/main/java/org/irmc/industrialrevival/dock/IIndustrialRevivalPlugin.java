@@ -9,6 +9,7 @@ import org.irmc.industrialrevival.core.services.IGitHubService;
 import org.irmc.industrialrevival.core.services.IIRDataManager;
 import org.irmc.industrialrevival.core.services.IIRRegistry;
 import org.irmc.industrialrevival.core.services.IItemDataService;
+import org.irmc.industrialrevival.core.services.ILanguageManager;
 import org.irmc.industrialrevival.core.services.IListenerManager;
 import org.irmc.industrialrevival.core.services.IMinecraftRecipeService;
 import org.irmc.industrialrevival.core.services.IRunningProfilerService;
@@ -34,7 +35,7 @@ public interface IIndustrialRevivalPlugin extends IndustrialRevivalAddon {
      * @return the LanguageManager instance
      */
     @NotNull
-    LanguageManager getLanguageManager();
+    ILanguageManager getLanguageManager();
 
     /**
      * Gets the ProtocolManager instance used for handling ProtocolLib packet operations.

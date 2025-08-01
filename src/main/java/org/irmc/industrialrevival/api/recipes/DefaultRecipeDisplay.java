@@ -49,7 +49,7 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
                             Material.BARRIER,
                             IRDock.getPlugin()
                                     .getLanguageManager()
-                                    .getMsgComponent(p, "misc.recipe_not_found")).getBukkit());
+                                    .getComponent(p, "misc.recipe_not_found")).getBukkit());
 
             sm.setItem(Constants.ItemStacks.BACKGROUND_ITEM, ClickHandler.DEFAULT, 1, 2, 3, 4, 5, 6, 7, 8);
             sm.setItem(7, Constants.ItemStacks.BACKGROUND_ITEM, ClickHandler.DEFAULT);
@@ -184,7 +184,7 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
 
     private void showUsage(Player p, NamespacedKey itemId) {
         SimpleMenu sm = new SimpleMenu(
-                IRDock.getPlugin().getLanguageManager().getMsgComponent(p, Constants.Keys.GUIDE_TITLE_KEY));
+                IRDock.getPlugin().getLanguageManager().getComponent(p, Constants.Keys.GUIDE_TITLE_KEY));
         Collection<List<RecipeContent>> recipeContents =
                 RecipeContents.getRecipeContents().values();
         List<RecipeContent> allAvailableRecipeContents = new ArrayList<>();
@@ -213,7 +213,7 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
                             Material.BARRIER,
                             IRDock.getPlugin()
                                     .getLanguageManager()
-                                    .getMsgComponent(p, "misc.recipe_no_usage")).getBukkit());
+                                    .getComponent(p, "misc.recipe_no_usage")).getBukkit());
 
             return;
         }
@@ -300,7 +300,7 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
             String url = Constants.Misc.WIKI_URL + item.getWikiText();
             ClickEvent clickEvent = ClickEvent.openUrl(url);
             Component text =
-                    IRDock.getPlugin().getLanguageManager().getMsgComponent(p, "misc.wiki_page");
+                    IRDock.getPlugin().getLanguageManager().getComponent(p, "misc.wiki_page");
             text = text.clickEvent(clickEvent);
 
             Component finalText = text;
@@ -317,7 +317,7 @@ public class DefaultRecipeDisplay implements RecipeType.RecipeDisplay {
         ItemStack resultItem = rc.result().getItemStack().clone();
         ItemUtils.addLore(
                 resultItem,
-                IRDock.getPlugin().getLanguageManager().getMsgComponent(p, "misc.recipe_show_usage"),
+                IRDock.getPlugin().getLanguageManager().getComponent(p, "misc.recipe_show_usage"),
                 true);
 
         sm.setItem(25, resultItem, (player, _, _, _, clickType) -> {

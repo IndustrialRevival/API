@@ -25,6 +25,6 @@ public enum RadiationLevel {
     }
 
     public Component getTranslation() {
-        return IRDock.getPlugin().getLanguageManager().getMsgComponent(null, translationKey);
+        return IRDock.getPlugin().getLanguageManager().getComponent(null, translationKey);
     }
 }
