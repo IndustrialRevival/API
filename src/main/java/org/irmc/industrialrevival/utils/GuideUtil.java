@@ -108,7 +108,7 @@ public class GuideUtil {
     public static boolean openWiki(@NotNull Player player, @NotNull ItemStack itemStack) {
         String url = Constants.Misc.WIKI_URL + DataUtil.getPDC(itemStack.getItemMeta(), WIKI_KEY, PersistentDataType.STRING);
         ClickEvent clickEvent = ClickEvent.openUrl(url);
-        Component text = IRDock.getPlugin().getLanguageManager().getMsgComponent(player, "misc.wiki_page");
+        Component text = IRDock.getPlugin().getLanguageManager().getComponent(player, "misc.wiki_page");
         text = text.clickEvent(clickEvent);
 
         Component finalText = text;

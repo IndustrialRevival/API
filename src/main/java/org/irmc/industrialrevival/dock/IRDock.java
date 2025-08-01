@@ -27,11 +27,11 @@ import org.irmc.industrialrevival.core.services.IGitHubService;
 import org.irmc.industrialrevival.core.services.IIRDataManager;
 import org.irmc.industrialrevival.core.services.IIRRegistry;
 import org.irmc.industrialrevival.core.services.IItemDataService;
+import org.irmc.industrialrevival.core.services.ILanguageManager;
 import org.irmc.industrialrevival.core.services.IListenerManager;
 import org.irmc.industrialrevival.core.services.IMinecraftRecipeService;
 import org.irmc.industrialrevival.core.services.IRunningProfilerService;
 import org.irmc.industrialrevival.core.services.ISQLDataManager;
-import org.irmc.pigeonlib.language.LanguageManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -87,7 +87,7 @@ public class IRDock extends JavaPlugin {
         IRDock.plugin = plugin;
     }
 
-    public static @NotNull LanguageManager getLanguageManager() {
+    public static @NotNull ILanguageManager getLanguageManager() {
         return getPlugin().getLanguageManager();
     }
 
